@@ -151,12 +151,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="class\Scene\BaseScene.cpp" />
+    <ClCompile Include="class\Scene\GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="class\Scene\TitleScene.cpp" />
     <ClCompile Include="class\Scene\SceneMng.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class\Scene\BaseScene.h" />
+    <ClInclude Include="class\Scene\GameScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="class\Scene\TitleScene.h" />
     <ClInclude Include="class\Scene\SceneMng.h" />

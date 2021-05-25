@@ -1,11 +1,13 @@
 #pragma once
 #include "BaseScene.h"
-class TitleScene :
+
+class GameScene:
 	public BaseScene
 {
 public:
-	TitleScene();
-	~TitleScene();
+	GameScene();
+	~GameScene();
+
 	bool Init(void)override;
 	void Update(double delta)override;
 	void Draw(double delta)override;
