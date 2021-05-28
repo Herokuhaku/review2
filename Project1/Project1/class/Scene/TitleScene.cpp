@@ -1,5 +1,9 @@
 #include "TitleScene.h"
 #include <DxLib.h>
+#include "GameScene.h"
+#include "Transition/CrossOverScene.h"
+#include "Transition/GaussianblurScene.h"
+#include "Transition/BlackAndWhiteScene.h"
 
 TitleScene::TitleScene()
 {
@@ -16,9 +20,15 @@ bool TitleScene::Init(void)
 	return true;
 }
 
-void TitleScene::Update(double delta)
+UniqueScene TitleScene::Update(double delta, UniqueScene own)
 {
-	int bgm_ = LoadSoundMem(L"a.mp3");
+	click_[1] = click_[0];
+	click_[0] = GetMouseInput();
+	if (!click_[0] && (click_[1] & MOUSE_INPUT_LEFT))
+	{
+		return std::make_unique<BlackAndWhiteScene>(3.0,std::move(own),std::make_unique<GameScene>());
+	}
+	return std::move(own);
 }
 
 void TitleScene::Draw(double delta)

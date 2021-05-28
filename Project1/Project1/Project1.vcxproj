@@ -150,18 +150,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="class\Scene\Transition\BlackAndWhiteScene.cpp" />
     <ClCompile Include="class\Scene\BaseScene.cpp" />
     <ClCompile Include="class\Scene\GameScene.cpp" />
+    <ClCompile Include="class\Scene\Transition\CrossOverScene.cpp" />
+    <ClCompile Include="class\Scene\Transition\GaussianblurScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="class\Scene\TitleScene.cpp" />
     <ClCompile Include="class\Scene\SceneMng.cpp" />
+    <ClCompile Include="class\Scene\Transition\TransitionScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="class\Scene\Transition\BlackAndWhiteScene.h" />
     <ClInclude Include="class\Scene\BaseScene.h" />
     <ClInclude Include="class\Scene\GameScene.h" />
+    <ClInclude Include="class\Scene\Transition\CrossOverScene.h" />
+    <ClInclude Include="class\Scene\Transition\GaussianblurScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="class\Scene\TitleScene.h" />
     <ClInclude Include="class\Scene\SceneMng.h" />
+    <ClInclude Include="class\Scene\Transition\TransitionScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

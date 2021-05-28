@@ -216,19 +216,19 @@ Vector2Template<T> Vector2Template<T>::operator--(int)
 template <class T>
 Vector2Template<T> operator+(const Vector2Template<T>& vec, const int& num)
 {
-	return Vector2Template(vec.x + num,vec.y + num);
+	return Vector2Template<T>(vec.x + num,vec.y + num);
 }
 
 template <class T>
 Vector2Template<T> operator-(const Vector2Template<T>& vec, const int& num)
 {
-	return Vector2Template(vec.x - num, vec.y - num);
+	return Vector2Template<T>(vec.x - num, vec.y - num);
 }
 
 template <class T>
 Vector2Template<T> operator*(const Vector2Template<T>& vec, const int& num)
 {
-	return Vector2Template(vec.x * num, vec.y * num);
+	return Vector2Template<T>(vec.x * num, vec.y * num);
 }
 
 template <class T>
@@ -238,49 +238,49 @@ Vector2Template<T> operator/(const Vector2Template<T>&vec, const int& num)
 	{
 		return Vector2Template<T>(1000000000, 1000000000);
 	}
-	return Vector2Template(vec.x / num, vec.y / num);
+	return Vector2Template<T>(vec.x / num, vec.y / num);
 }
 
 template <class T>
 Vector2Template<T> operator+(const int& num, const Vector2Template<T>& vec)
 {
-	return Vector2Template(num + vec.x,num + vec.y);
+	return Vector2Template<T>(num + vec.x,num + vec.y);
 }
 
 template <class T>
 Vector2Template<T> operator-(const int& num, const Vector2Template<T>& vec)
 {
-	return Vector2Template(num - vec.x, num - vec.y);
+	return Vector2Template<T>(num - vec.x, num - vec.y);
 }
 
 template <class T>
 Vector2Template<T> operator*(const int& num, const Vector2Template<T>& vec)
 {
-	return Vector2Template(num * vec.x,num * vec.y);
+	return Vector2Template<T>(num * vec.x,num * vec.y);
 }
 
 template <class T>
 Vector2Template<T> operator/(const int& num, const Vector2Template<T>& vec)
 {
-	return Vector2Template(num / vec.x,num/vec.y);
+	return Vector2Template<T>(num / vec.x,num/vec.y);
 }
 
 template <class T>
 Vector2Template<T> operator+(const Vector2Template<T>& vec, const float& num)
 {
-	return Vector2Template(vec.x + num,vec.y + num);
+	return Vector2Template<T>(vec.x + num,vec.y + num);
 }
 
 template <class T>
 Vector2Template<T> operator-(const Vector2Template<T>& vec, const float& num)
 {
-	return Vector2Template(vec.x - num, vec.y - num);
+	return Vector2Template<T>(vec.x - num, vec.y - num);
 }
 
 template <class T>
 Vector2Template<T> operator*(const Vector2Template<T>& vec, const float& num)
 {
-	return Vector2Template(vec.x * num, vec.y * num);
+	return Vector2Template<T>(vec.x * num, vec.y * num);
 }
 
 template <class T>
@@ -288,7 +288,7 @@ Vector2Template<T> operator/(const Vector2Template<T>& vec, const float& num)
 {
 	if (!num)
 	{
-		return Vector2Template(1000000000, 1000000000);
+		return Vector2Template<T>(1000000000, 1000000000);
 	}
-	return Vector2Template(vec.x / num, vec.y / num);
+	return Vector2Template<T>(vec.x / num, vec.y / num);
 }

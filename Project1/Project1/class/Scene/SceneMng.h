@@ -1,10 +1,11 @@
 #pragma once
 #include <chrono>
 #include <memory>
+#include <array>
+#include "BaseScene.h"
+#include "../common/Vector2.h"
 
 #define lpSceneMng SceneMng::GetInstance()
-
-class BaseScene;
 
 class SceneMng
 {
@@ -17,11 +18,13 @@ public:
 	void Run(void);
 	void Update(void);
 	void Draw(void);
+	const Int2 GetScreenSize(void)const;
 private:
 	SceneMng();
 	~SceneMng();
 	bool SysInit(void);
 	bool initflag_;
-	std::unique_ptr<BaseScene> scene;
-	std::chrono::system_clock::time_point now, old;
+	UniqueScene scene_;
+	std::chrono::system_clock::time_point now_, old_;
+	const Int2 screenSize_;
 };

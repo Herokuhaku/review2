@@ -7,7 +7,7 @@ public:
 	TitleScene();
 	~TitleScene();
 	bool Init(void)override;
-	void Update(double delta)override;
+	UniqueScene Update(double delta, UniqueScene own)override;
 	void Draw(double delta)override;
 private:
 	int image_;
