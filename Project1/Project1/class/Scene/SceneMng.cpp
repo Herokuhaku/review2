@@ -13,16 +13,17 @@ void SceneMng::Run(void)
 	now_ = std::chrono::system_clock::now();
 
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE)) {
-		
-		ClsDrawScreen();
 		// deltatimeÇÃê›íË
 		old_ = now_;
 		now_ = std::chrono::system_clock::now();
 		auto delta = std::chrono::duration_cast<std::chrono::microseconds>(now_ - old_).count() / 1000000.0;
 		// 	
 
-		scene_->Draw(delta);
+		//scene_->Draw(delta);
 		scene_ = scene_->Update(delta, std::move(scene_));
+		SetDrawScreen(DX_SCREEN_BACK);
+		ClsDrawScreen();
+		scene_->Draw(delta);
 
 		ScreenFlip();
 	}
@@ -58,5 +59,6 @@ bool SceneMng::SysInit(void)
 	if (DxLib_Init() == -1) {
 		return false;
 	}
+	SetDrawScreen(DX_SCREEN_BACK);
 	return true;
 }

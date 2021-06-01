@@ -23,6 +23,8 @@ private:
 	// •`‰æ
 	//virtual void Draw(double delta)override;
 
+	Scene GetSceneID(void)override final{ return Scene::Transition; };
+	void DrawOwnScreen(double delta)override = 0;
 protected:
 	// limit‚Å”»’è‚ğæ‚é
 	virtual bool LimitCheck(double delta);
@@ -38,7 +40,5 @@ protected:
 	double drawmax_;
 	// ƒV[ƒ“‚ÌŒp‘±ŠÔ(•b)
 	double limit_;
-	// ƒXƒNƒŠ[ƒ“Ši”[—p
-	int screen_;
 };
 

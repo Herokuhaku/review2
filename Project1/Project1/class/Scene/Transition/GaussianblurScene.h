@@ -8,7 +8,8 @@ public:
 	~GaussianblurScene();
 	// XV
 	bool UpdateTransition(double delta)override;
-	void Draw(double delta)final;
+	//void Draw(double delta)final;
+	void DrawOwnScreen(double delta)override;
 private:
 };
 

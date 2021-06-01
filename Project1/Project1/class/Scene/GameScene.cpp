@@ -4,6 +4,7 @@
 GameScene::GameScene()
 {
 	Init();
+	DrawOwnScreen(0.0f);
 }
 
 GameScene::~GameScene()
@@ -24,10 +25,17 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 	{
 		return std::make_unique<TitleScene>();
 	}
+	DrawOwnScreen(delta);
 	return std::move(own);
 }
+//
+//void GameScene::Draw(double delta)
+//{
+//}
 
-void GameScene::Draw(double delta)
+void GameScene::DrawOwnScreen(double delta)
 {
-	DrawGraph(0,0,image_,true);
+	SetDrawScreen(screen_);
+	ClsDrawScreen();
+	DrawGraph(0, 0, image_, true);
 }

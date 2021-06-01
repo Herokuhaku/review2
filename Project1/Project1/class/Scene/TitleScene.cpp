@@ -8,6 +8,7 @@
 TitleScene::TitleScene()
 {
 	Init();
+	DrawOwnScreen(0.0f);
 }
 
 TitleScene::~TitleScene()
@@ -28,10 +29,14 @@ UniqueScene TitleScene::Update(double delta, UniqueScene own)
 	{
 		return std::make_unique<BlackAndWhiteScene>(3.0,std::move(own),std::make_unique<GameScene>());
 	}
+	DrawOwnScreen(delta);
 	return std::move(own);
 }
 
-void TitleScene::Draw(double delta)
+void TitleScene::DrawOwnScreen(double delta)
 {
-	DrawGraph(0,0,image_,true);
+	SetDrawScreen(screen_);
+	ClearDrawScreen();
+	DrawGraph(0, 0, image_, true);
+	//SetDrawScreen(DX_SCREEN_BACK);
 }
