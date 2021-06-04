@@ -1,9 +1,10 @@
 #ifdef _DEBUG
 #include <windows.h>
+#include <string>
 #include <DxLib.h>
 #include "_DebugDispOut.h"
 #include "_DebugConOut.h"
-#include "../Scene/SceneMng.h"
+#include "../class/Scene/SceneMng.h"
 
 std::unique_ptr<_DebugDispOut, _DebugDispOut::_DebugDispOutDeleter> _DebugDispOut::s_Instance(new _DebugDispOut);
 _DebugDispOut::_DebugDispOut()
@@ -80,7 +81,7 @@ void _DebugDispOut::WaitMode(void)
 
 	if (waitTime_)
 	{
-		startTime_ = lpSceneMng.GetNowTime();
+		startTime_ = std::chrono::system_clock::now();
 		do {
 			pouseKey_[1] = pouseKey_[0];
 			pouseKey_[0] = CheckHitKey(KEY_INPUT_PAUSE);
@@ -94,7 +95,7 @@ void _DebugDispOut::WaitMode(void)
 				TRACE("ÉXÉçÅ[/àÍéûí‚é~Å@âèú\n");
 				pouseKey_[1] = pouseKey_[0];
 			}
-			endTime_ = lpSceneMng.GetNowTime();
+			endTime_ = std::chrono::system_clock::now();
 		} while (std::chrono::duration_cast<std::chrono::milliseconds>(endTime_ - startTime_).count() < waitTime_ || waitTime_ < 0.0);
 	}
 	if (pouseKey_[0] && !pouseKey_[1])
@@ -141,7 +142,8 @@ int _DebugDispOut::DrawBox(int x1, int y1, int x2, int y2, unsigned int Color, i
 int _DebugDispOut::DrawString(int x, int y, char* String, unsigned int Color)
 {
 	SetScreen();
-	int rtnFlag = DxLib::DrawString(x, y, String, Color);
+	
+	int rtnFlag = DxLib::DrawString(x, y,String, Color);
 	RevScreen();
 	return rtnFlag;
 }
@@ -185,7 +187,7 @@ int _DebugDispOut::DrawPixel(int x, int y, unsigned int Color)
 #define FPS_BOX_SIZE_Y 24
 void _DebugDispOut::DrawFPS(void)
 {
-	fpsEndTime_ = lpSceneMng.GetNowTime()/*std::chrono::system_clock::now()*/;
+	fpsEndTime_ = std::chrono::system_clock::now();/*std::chrono::system_clock::now()*/;
 	if (std::chrono::duration_cast<std::chrono::milliseconds>(fpsEndTime_ - fpsStartTime_).count() >= 1000)
 	{
 		fpsView_ = fpsCount_;

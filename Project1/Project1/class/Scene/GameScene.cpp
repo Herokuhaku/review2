@@ -1,6 +1,9 @@
 #include "GameScene.h"
 #include <DxLib.h>
 #include "TitleScene.h"
+#include "../../Tiled/TmxObj.h"
+#include "../common/ImageMng.h"
+
 GameScene::GameScene()
 {
 	Init();
@@ -13,7 +16,9 @@ GameScene::~GameScene()
 
 bool GameScene::Init(void)
 {
-	image_ = LoadGraph(L"image/no_002.png");
+	TmxObj().LoadTsx("Tiled/map.tsx");
+	TmxObj().LoadTmx("Tiled/stage001.tmx");
+	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }
 
@@ -37,5 +42,6 @@ void GameScene::DrawOwnScreen(double delta)
 {
 	SetDrawScreen(screen_);
 	ClsDrawScreen();
-	DrawGraph(0, 0, image_, true);
+	DrawGraph(0, 0, lpImageMng.GetID("Game")[0], true);
+	DrawGraph(0, 0,lpImageMng.GetID("map")[0], true);
 }

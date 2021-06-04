@@ -13,6 +13,5 @@ private:
 	Scene GetSceneID(void)override { return Scene::Title; };
 	void DrawOwnScreen(double delta);
 private:
-	int image_;
 };
 

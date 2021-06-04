@@ -2,6 +2,7 @@
 #include "SceneMng.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "../../_debug/_DebugDispOut.h"
 
 void SceneMng::Run(void)
 {
@@ -13,6 +14,7 @@ void SceneMng::Run(void)
 	now_ = std::chrono::system_clock::now();
 
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE)) {
+		_dbgAddDraw();
 		// deltatimeÇÃê›íË
 		old_ = now_;
 		now_ = std::chrono::system_clock::now();
@@ -55,7 +57,7 @@ bool SceneMng::SysInit(void)
 {
 	SetGraphMode(screenSize_.x,screenSize_.y, 32);
 	ChangeWindowMode(true);
-	SetWindowText(L"1916213_ç≤ì°çOìN");
+	SetWindowText("1916213_ç≤ì°çOìN");
 	if (DxLib_Init() == -1) {
 		return false;
 	}

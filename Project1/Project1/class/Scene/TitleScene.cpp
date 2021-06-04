@@ -1,6 +1,7 @@
 #include "TitleScene.h"
 #include <DxLib.h>
 #include "GameScene.h"
+#include "../common/ImageMng.h"
 #include "Transition/CrossOverScene.h"
 #include "Transition/GaussianblurScene.h"
 #include "Transition/BlackAndWhiteScene.h"
@@ -17,7 +18,8 @@ TitleScene::~TitleScene()
 
 bool TitleScene::Init(void)
 {
-	image_ = LoadGraph(L"image/no_001.png");
+	lpImageMng.GetID("image/no_001.png","Title");
+	//image_ = LoadGraph("image/no_001.png");
 	return true;
 }
 
@@ -37,6 +39,6 @@ void TitleScene::DrawOwnScreen(double delta)
 {
 	SetDrawScreen(screen_);
 	ClearDrawScreen();
-	DrawGraph(0, 0, image_, true);
+	DrawGraph(0, 0,lpImageMng.GetID("Title")[0], true);
 	//SetDrawScreen(DX_SCREEN_BACK);
 }

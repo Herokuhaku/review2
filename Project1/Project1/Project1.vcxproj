@@ -29,27 +29,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="class\common\ImageMng.cpp" />
     <ClCompile Include="class\Scene\Transition\BlackAndWhiteScene.cpp" />
     <ClCompile Include="class\Scene\BaseScene.cpp" />
     <ClCompile Include="class\Scene\GameScene.cpp" />
@@ -159,8 +160,12 @@
     <ClCompile Include="class\Scene\TitleScene.cpp" />
     <ClCompile Include="class\Scene\SceneMng.cpp" />
     <ClCompile Include="class\Scene\Transition\TransitionScene.cpp" />
+    <ClCompile Include="Tiled\TmxObj.cpp" />
+    <ClCompile Include="_debug\_DebugConOut.cpp" />
+    <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="class\common\ImageMng.h" />
     <ClInclude Include="class\Scene\Transition\BlackAndWhiteScene.h" />
     <ClInclude Include="class\Scene\BaseScene.h" />
     <ClInclude Include="class\Scene\GameScene.h" />
@@ -170,6 +175,13 @@
     <ClInclude Include="class\Scene\TitleScene.h" />
     <ClInclude Include="class\Scene\SceneMng.h" />
     <ClInclude Include="class\Scene\Transition\TransitionScene.h" />
+    <ClInclude Include="Tiled\rapidxml.hpp" />
+    <ClInclude Include="Tiled\rapidxml_iterators.hpp" />
+    <ClInclude Include="Tiled\rapidxml_print.hpp" />
+    <ClInclude Include="Tiled\rapidxml_utils.hpp" />
+    <ClInclude Include="Tiled\TmxObj.h" />
+    <ClInclude Include="_debug\_DebugConOut.h" />
+    <ClInclude Include="_debug\_DebugDispOut.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
