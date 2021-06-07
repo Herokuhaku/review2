@@ -26,12 +26,12 @@ void BlackAndWhiteScene::DrawOwnScreen(double delta)
 	//if (drawsum_ < limit_ / 2) {
 	if(saturation_ < static_cast<int>(drawmax_)/2+1){
 	before_->Draw(delta);
-		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, -(saturation_ % (static_cast<int>(drawmax_+1)/2)) * 2, (saturation_ % (static_cast<int>(drawmax_+1)/2)) * 2);
+		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, -(saturation_ % (static_cast<int>(drawmax_ + 1) / 2)) * 2, 0);
 	}
 	else {
 		after_->Draw(delta);		
 		int tmp = (saturation_ %  (static_cast<int>(drawmax_+1)/2)) * 2;
-		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, static_cast<int>(-drawmax_) + tmp,static_cast<int>(drawmax_) - tmp);
+		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, static_cast<int>(-drawmax_) + tmp,0);
 	}
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, count_);
 }

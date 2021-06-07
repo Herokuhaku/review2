@@ -1,7 +1,6 @@
 #include "GameScene.h"
 #include <DxLib.h>
 #include "TitleScene.h"
-#include "../../Tiled/TmxObj.h"
 #include "../common/ImageMng.h"
 
 GameScene::GameScene()
@@ -16,8 +15,7 @@ GameScene::~GameScene()
 
 bool GameScene::Init(void)
 {
-	TmxObj().LoadTsx("Tiled/map.tsx");
-	TmxObj().LoadTmx("Tiled/stage001.tmx");
+	tmxobj_.LoadTmx("Tiled/stage001.tmx");
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }
@@ -26,8 +24,7 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 {
 	click_[1] = click_[0];
 	click_[0] = GetMouseInput();
-	if (!click_[0] && (click_[1] & MOUSE_INPUT_LEFT))
-	{
+	if (!click_[0] && (click_[1] & MOUSE_INPUT_LEFT)){
 		return std::make_unique<TitleScene>();
 	}
 	DrawOwnScreen(delta);

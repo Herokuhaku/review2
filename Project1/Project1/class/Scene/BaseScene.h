@@ -21,8 +21,11 @@ public:
 	virtual bool Init(void) = 0;
 
 	virtual UniqueScene Update(double delta,UniqueScene own) = 0;
+	// Draw
 	virtual void Draw(double delta);
+	// 自分のスクリーンにDraw
 	virtual void DrawOwnScreen(double delta) = 0;
+	// 自分のシーンを返す
 	virtual Scene GetSceneID(void) = 0;
 private:
 protected:
