@@ -6,8 +6,6 @@
 
 #define lpImageMng ImageMng::GetInstance()
 
-using VecInt = std::vector<int>;
-
 class ImageMng
 {
 public:

@@ -6,7 +6,7 @@
 using rapid_node = rapidxml::xml_node<>*;
 using rapid_atr = rapidxml::xml_attribute<>*;
 
-TmxObj::TmxObj()
+TmxObj::TmxObj():firstGID_(0),layerSize_(0)
 {
 	version_["1.6.0"] = 1;
 }
@@ -114,35 +114,71 @@ bool TmxObj::SetMap(void)
 		return false;
 	}
 
-	std::pair<MapData::iterator, bool> layer = mapdata_.try_emplace(laynode->first_attribute("name")->value());
+	std::map<std::string, std::pair<MapData::iterator, bool>> layer;
+	auto name = [&]() { return laynode->first_attribute("name")->value(); };
+	//layer[laynode->first_attribute("name")->value()] = mapdata_.try_emplace(laynode->first_attribute("name")->value());
 	//auto layer = mapdata_.try_emplace(laynode->first_attribute("name")->value());
-	if (layer.second)
-	{
-		layer.first->second.resize(worldArea_.x * worldArea_.y);
-	}
-	//auto data = laynode->first_node("data")->value();
-	auto data = laynode->first_node("data")->value();
-	std::string str = data;
-	int strsize = str.size();
-	for (int i = 0,wpos = 0,old = 0;str.size() > i;i++) {
-		if (str[i] == '\r' || str[i] == '\n' || str[i] == '\r\n' || str[i] == ',') {
-		continue;
-		}
-		else {
-			std::string tmp;
-			tmp.resize(1);
-			tmp[0] = str[i];
-			if (str.size() > i + 1 && str[i + 1] != ',' && str[i + 1] != '\r' && str[i + 1] != '\n' && str[i + 1] != '\r\n')
-			{
-				tmp += str[i + 1];
-				i++;
-			}
-			layer.first->second[wpos] = std::atoi(tmp.c_str());
-			wpos++;
-		}
-	}
 
+	//auto data = laynode->first_node("data")->value();
+
+	do{
+		layer[name()] = mapdata_.try_emplace(laynode->first_attribute("name")->value());
+		if (layer[name()].second)
+		{
+			layer[name()].first->second.resize(static_cast<__int64>(worldArea_.x) * worldArea_.y);
+		}
+
+		auto data = laynode->first_node("data")->value();
+		std::string str = data;
+		int strsize = static_cast<int>(str.size());
+		for (int i = 0, wpos = 0, old = 0,nexti = 1; str.size() > i; i++,nexti=i+1) {
+			if (str[i] == '\r' || str[i] == '\n' || str[i] == '\r\n' || str[i] == ',') {
+				continue;
+			}
+			else {
+				std::string tmp;
+				tmp.resize(1);
+				tmp[0] = str[i];
+				if (str.size() > nexti && str[nexti] != ',' && str[nexti] != '\r' && str[nexti] != '\n' && str[nexti] != '\r\n')
+				{
+					tmp += str[nexti];
+					i++;
+				}
+				layer[name()].first->second[wpos] = std::atoi(tmp.c_str());
+				wpos++;
+			}
+		}
+		laynode = laynode->next_sibling();
+	} while (laynode);
 	return true;
+}
+
+const VecInt& TmxObj::GetMapData(std::string lay)
+{
+	return mapdata_[lay];
+}
+
+const int TmxObj::GetMapData(std::string lay,int x,int y)
+{
+	if (mapdata_.find(lay) == mapdata_.end()) {
+		return 0;
+	}
+	int point = x + (worldArea_.x * y);
+	if (point >= 0 && point < mapdata_[lay].size()) {
+		return mapdata_[lay][point];
+	}
+	else {
+		return 0;
+	}
+	return 0;
+}
+
+const int TmxObj::GetMapData(std::string lay, Int2 pos)
+{
+	Int2 chip = (pos / tileSize_);
+	int point = chip.x + (worldArea_.x * chip.y);
+	
+	return GetMapData(lay,chip.x,chip.y);	
 }
 
 bool TmxObj::CheckTiledVersion(rapidxml::xml_node<>* node)

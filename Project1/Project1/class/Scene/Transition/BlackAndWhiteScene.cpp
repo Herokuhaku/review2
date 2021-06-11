@@ -23,17 +23,19 @@ void BlackAndWhiteScene::DrawOwnScreen(double delta)
 	ClsDrawScreen();
 
 	int saturation_ = (static_cast<int>((drawsum_ / limit_) * static_cast<int>(drawmax_))) % static_cast<int>(drawmax_);
-	//if (drawsum_ < limit_ / 2) {
+
 	if(saturation_ < static_cast<int>(drawmax_)/2+1){
 	before_->Draw(delta);
-		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, -(saturation_ % (static_cast<int>(drawmax_ + 1) / 2)) * 2, 0);
+		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, -(saturation_ % (static_cast<int>(drawmax_ + 1) / 2)) * 2,(saturation_ % 128) *2);
 	}
 	else {
 		after_->Draw(delta);		
 		int tmp = (saturation_ %  (static_cast<int>(drawmax_+1)/2)) * 2;
-		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, static_cast<int>(-drawmax_) + tmp,0);
+		GraphFilter(screen_, DX_GRAPH_FILTER_HSB, 0, 0, static_cast<int>(-drawmax_) + tmp,static_cast<int>(drawmax_)-tmp);
 	}
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, count_);
+
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, static_cast<int>(count_));
 }
 //
 //void BlackAndWhiteScene::Draw(double delta)

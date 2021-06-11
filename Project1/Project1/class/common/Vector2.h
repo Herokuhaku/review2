@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 template <class T>
 class Vector2Template
@@ -87,5 +88,7 @@ Vector2Template<T> operator / (const Vector2Template<T>& vec, const float& num);
 using Int2 = Vector2Template<int>;
 using Float2 = Vector2Template<float>;
 using Double2 = Vector2Template<double>;
+
+using VecInt = std::vector<int>;
 
 #include "./detailes/Vector2.h"

@@ -44,7 +44,7 @@ void CrossOverScene::DrawOwnScreen(double delta)
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(count_));
 	after_->Draw(delta);
 
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, count_);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, static_cast<int>(count_));
 
 	//SetDrawScreen(DX_SCREEN_BACK);
 	//DrawGraph(0, 0, screen_, true);

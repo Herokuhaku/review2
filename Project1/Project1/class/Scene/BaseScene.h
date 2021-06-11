@@ -17,9 +17,9 @@ class BaseScene
 public:
 	BaseScene();
 	virtual ~BaseScene();
-	
+	// 初期化
 	virtual bool Init(void) = 0;
-
+	// 更新処理
 	virtual UniqueScene Update(double delta,UniqueScene own) = 0;
 	// Draw
 	virtual void Draw(double delta);
@@ -32,6 +32,7 @@ protected:
 	std::array<int,2> click_;
 	// スクリーン格納用
 	int screen_;
+	// スクリーンの縦横サイズ
 	Int2 screenSize_;
 };
 

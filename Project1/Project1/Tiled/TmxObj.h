@@ -19,6 +19,24 @@ public:
 	bool LoadTmx(std::string fileName);
 	// 読み込んだマップをmapdata_に格納する
 	bool SetMap(void);
+
+	// Get関数
+	// Mapdataをそのまま返す
+	const MapData& GetMapData(void)const { return mapdata_; };
+	// Mapdataの中から指定したlayerのdataを返す
+	const VecInt& GetMapData(std::string lay);
+	// mapdataの中から指定した位置のmapdataの中身を返す
+	const int GetMapData(std::string lay,int x,int y);
+	// posからmapdataの位置を計算してmapdataの中身を返す
+	const int GetMapData(std::string lay,Int2 pos);
+	// 縦横サイズ(チップ)を返す
+	const Int2& GetWorldArea(void)const {return worldArea_;};
+	// 縦横サイズ(チップ1つのサイズ)
+	const Int2& GetTileSize(void)const {return tileSize_;};
+	// マップチップの開始番号を返す
+	const unsigned int GetFirstGid(void)const { return firstGID_; };
+	// レイヤーの数を返す
+	const unsigned int GetLayerSize(void)const { return layerSize_; };
 private:
 	// versionを確認する
 	bool CheckTiledVersion(rapidxml::xml_node<>* node);
@@ -39,7 +57,7 @@ private:
 	Int2 worldArea_;
 	// タイル1枚の縦横サイズ
 	Int2 tileSize_;
-	// csvの読み込み
+	// マップデータの格納先
 	MapData mapdata_;
 
 	// TSX
