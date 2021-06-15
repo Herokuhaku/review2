@@ -151,11 +151,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="class\common\ImageMng.cpp" />
+    <ClCompile Include="class\input\Controller.cpp" />
+    <ClCompile Include="class\input\PadInput.cpp" />
+    <ClCompile Include="class\Obj\Object.cpp" />
     <ClCompile Include="class\Scene\Transition\BlackAndWhiteScene.cpp" />
     <ClCompile Include="class\Scene\BaseScene.cpp" />
     <ClCompile Include="class\Scene\GameScene.cpp" />
     <ClCompile Include="class\Scene\Transition\CrossOverScene.cpp" />
     <ClCompile Include="class\Scene\Transition\GaussianblurScene.cpp" />
+    <ClCompile Include="class\input\KeyInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="class\Scene\TitleScene.cpp" />
     <ClCompile Include="class\Scene\SceneMng.cpp" />
@@ -166,6 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class\common\ImageMng.h" />
+    <ClInclude Include="class\input\Controller.h" />
+    <ClInclude Include="class\input\inputID.h" />
+    <ClInclude Include="class\input\KeyInput.h" />
+    <ClInclude Include="class\input\PadInput.h" />
+    <ClInclude Include="class\Obj\Object.h" />
     <ClInclude Include="class\Scene\Transition\BlackAndWhiteScene.h" />
     <ClInclude Include="class\Scene\BaseScene.h" />
     <ClInclude Include="class\Scene\GameScene.h" />

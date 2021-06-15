@@ -17,6 +17,7 @@ GameScene::~GameScene()
 bool GameScene::Init(void)
 {
 	tmxobj_.LoadTmx("Tiled/stage001.tmx");
+	obj_ = new Object();
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }
@@ -29,6 +30,9 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 		return std::make_unique<CrossOverScene>(3.0, std::move(own), std::make_unique<TitleScene>());
 	}
 	DrawOwnScreen(delta);
+
+	obj_->Update();
+
 	return std::move(own);
 }
 //
@@ -68,4 +72,5 @@ void GameScene::DrawOwnScreen(double delta)
 			}
 		}
 	}
+	obj_->Draw();
 }

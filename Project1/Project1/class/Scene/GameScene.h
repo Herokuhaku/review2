@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseScene.h"
+#include <memory>
 #include "../../Tiled/TmxObj.h"
+#include "../Obj/Object.h"
 
 class GameScene:
 	public BaseScene
@@ -17,5 +19,6 @@ private:
 	void DrawOwnScreen(double delta);
 
 	TmxObj tmxobj_;
+	Object* obj_;
 };
 
