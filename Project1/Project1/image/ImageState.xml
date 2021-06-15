@@ -1,0 +1,17 @@
+<!--?xml version="1.0" encoding="Shift_JIS"?-->
+
+<imagelist>
+
+    <player>
+        <name>green.png</name>
+        <animation>3</animation>
+        <dir>4</dir>
+    </player>
+
+    <player>
+        <name>blue.png</name>
+        <animation>3</animation>
+        <dir>4</dir>
+    </player>
+
+</imagelist>

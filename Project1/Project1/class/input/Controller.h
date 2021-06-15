@@ -21,6 +21,12 @@ using CntData = std::map<InputID,TrgBool>;
 class Controller
 {
 public:
+	bool operator()() {
+		if (this != nullptr) {
+			Update();
+		}
+		return this != nullptr;
+	}
 	Controller() {};
 	virtual ~Controller() {};
 	virtual bool Init(void) = 0;

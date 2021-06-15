@@ -4,43 +4,58 @@
 #include "../input/KeyInput.h"
 #include "../input/PadInput.h"
 
-Object::Object()
+Object::Object():speed_(2),_animCount(0),_animFrames(0),_state(STATE::DOWN)
 {
-	Init();
 }
 
 Object::~Object()
 {
 }
 
-bool Object::Init(void)
-{
-	lpImageMng.GetID("image/green.png","GreenPlayer",
-		Int2(32,32),
-		Int2(3,4));
-	speed_ = 5;
-	controller_ = std::make_unique<KeyInput>();
-	return true;
-}
-
-void Object::Update(void)
-{
-	controller_->Update();
-	if (controller_->Press(InputID::Left)) {
-		pos_.x -= speed_;
-	}
-	if (controller_->Press(InputID::Right)) {
-		pos_.x += speed_;
-	}
-	if (controller_->Press(InputID::Up)) {
-		pos_.y -= speed_;
-	}
-	if (controller_->Press(InputID::Down)) {
-		pos_.y += speed_;
-	}
-}
-
 void Object::Draw(void)
 {
-	DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[0], true);
+	if (_animMap.find(_state) == _animMap.end())
+	{
+		return;
+	}
+	if (_animFrames < 0 || _animFrames >= _animMap[_state].size())
+	{
+		return;
+	}
+
+	if (_animCount >= _animMap[_state][_animFrames].second)
+	{
+		if (_animMap[_state][_animFrames].first >= 0)
+		{
+			_animFrames += 1;
+		}
+	}
+	_animCount++;		// 1FŒ©‚¦‚È‚­‚È‚é‚©‚ç^‚ñ’†‚É‚¨‚­
+	if (_animFrames >= _animMap[_state].size())
+	{
+		_animFrames = 0;
+		_animCount = 0;
+	}
+
+	DrawGraph(pos_.x, pos_.y, _animMap[_state][_animFrames].first, true);
+}
+
+bool Object::state(const STATE state)
+{
+	if (_animMap.find(state) != _animMap.end())	//‚ ‚Á‚½‚çB
+	{
+		if (state != _state)// “¯‚¶±ÆÒ°¼®İ‚Å¸Ø±‚µ‚½‚ç•Ï‚É‚È‚é‚©‚ç±ÆÒ°¼®İ‚ªˆá‚Á‚½ê‡0‚É‚·‚é
+		{
+			_animFrames = 0;
+			_animCount = 0;
+		}
+		_state = state;						// ¡‚Ìó‘Ô‚ğ“ü‚ê‚é
+		return true;
+	}
+	return false;
+}
+
+bool Object::SetAnim(const STATE state, AnimVector& data)
+{
+	return _animMap.try_emplace(state, std::move(data)).second;
 }

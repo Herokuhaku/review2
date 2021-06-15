@@ -1,5 +1,6 @@
-#include <DxLib.h>
 #include "SceneMng.h"
+
+#include <DxLib.h>
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "../../_debug/_DebugDispOut.h"

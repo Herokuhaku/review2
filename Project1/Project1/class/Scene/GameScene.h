@@ -1,5 +1,7 @@
 #pragma once
 #include "BaseScene.h"
+
+#include <list>
 #include <memory>
 #include "../../Tiled/TmxObj.h"
 #include "../Obj/Object.h"
@@ -19,6 +21,6 @@ private:
 	void DrawOwnScreen(double delta);
 
 	TmxObj tmxobj_;
-	Object* obj_;
+	std::list<std::unique_ptr<Object>> objlist_;
 };
 

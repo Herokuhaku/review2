@@ -1,4 +1,5 @@
 #include "BaseScene.h"
+
 #include <DxLib.h>
 
 BaseScene::BaseScene()
