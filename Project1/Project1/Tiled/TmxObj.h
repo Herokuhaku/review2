@@ -17,6 +17,8 @@ public:
 	bool LoadTsx(std::string fileName);
 	// Tmxを読み込む
 	bool LoadTmx(std::string fileName);
+	// xmlを読み込んでitemだけ返す
+	bool LoadXmlItem(std::string fileName);
 	// 読み込んだマップをmapdata_に格納する
 	bool SetMap(void);
 
@@ -42,6 +44,12 @@ private:
 	bool CheckTiledVersion(rapidxml::xml_node<>* node);
 	// バージョンが対応しているかどうか 0 : 対応していない　1 : 対応している
 	std::map<std::string,int> version_;
+
+	// アイテム
+	std::map<std::string, std::string> item_;
+	std::map<std::string,int> loop_;
+	std::map<std::string, std::vector<std::pair<int,int>>> data_;
+	std::pair<int, int> pairdata_;
 
 	// TMX
 	//

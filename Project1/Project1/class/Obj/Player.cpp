@@ -18,9 +18,6 @@ Player::~Player()
 
 bool Player::Init(CntType cntType)
 {
-	lpImageMng.GetID("image/green.png", "GreenPlayer",
-		Int2(32, 32),
-		Int2(3, 4));
 	speed_ = 5;
 	if (cntType == CntType::Key) {
 		controller_ = std::make_unique<KeyInput>();
@@ -59,6 +56,7 @@ bool Player::Init(CntType cntType)
 	SetAnim(STATE::UP, data);
 
 	state(STATE::UP);
+
 	return true;
 }
 

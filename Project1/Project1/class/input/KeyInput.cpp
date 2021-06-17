@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "../input/KeyInput.h"
 
 #define HEX_CH   6  //16êiï∂éöóÒÇÃóvëfêî
@@ -47,8 +48,17 @@ void KeyInput::Update(void)
 bool KeyInput::WriteConfig(void)
 {
 	std::ifstream ifs("class/input/Config.txt");
+	int count_ = 0;
+	std::vector<int> num;
 	if (ifs.fail()) {
-		
+		while (num.size() && !keyData_[KEY_INPUT_ESCAPE]) {
+			DrawFormatString(0, 0,0xffffff,"%d",num.size());
+			for (int key = 0; key < keyData_.size();key++) {
+				if (keyData_[key]) {
+					num.emplace_back(key);
+				}
+			}
+		}
 	}
 	return true;
 }

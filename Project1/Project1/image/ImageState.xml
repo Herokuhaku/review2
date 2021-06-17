@@ -3,13 +3,15 @@
 <imagelist>
 
     <player>
-        <name>green.png</name>
+        <image>green.png</image>
+        <name>GreenPlayer</name>
         <animation>3</animation>
         <dir>4</dir>
     </player>
 
     <player>
-        <name>blue.png</name>
+        <image>blue.png</image>
+        <name>BluePlayer</name>
         <animation>3</animation>
         <dir>4</dir>
     </player>
