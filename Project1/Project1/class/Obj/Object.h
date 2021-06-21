@@ -2,6 +2,7 @@
 #include <map>
 #include "../common/Vector2.h"
 #include "../input/Controller.h"
+#include "../../Tiled/TmxObj.h"
 
 using AnimVector = std::vector<std::pair<int, unsigned int>>;
 
@@ -23,8 +24,12 @@ public:
 	virtual void Update(void) = 0;
 	virtual void Draw(void);
 	bool state(const STATE state);	
+	bool SetItem(const STATE state,std::string str);
 	bool SetAnim(const STATE state, AnimVector& data);
 protected:
+	TmxObj tmx_;
+	XmlItem xmlitem_;
+
 	Int2 pos_;
 	int speed_;
 	STATE _state;

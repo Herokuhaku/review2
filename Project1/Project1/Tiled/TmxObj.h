@@ -7,6 +7,22 @@
 #include "../class/common/Vector2.h"
 
 using MapData = std::map<std::string,std::vector<int>>;
+// first : アニメーションの番号(画像において何番目か),
+//second : アニメーションのフレーム数(何フレーム描画するか)
+using AnimData = std::pair<int, int>;
+// AnimData を vectorで格納したデータ
+using AnimVecData = std::vector<AnimData>;
+
+// アニメーションするために必要なXmlから取り出したアイテム
+struct XmlItem
+{
+	// アイテムの名前 , 要素
+	std::map<std::string, std::string> item_;
+	// アニメーションの名前,ループするか -1 : しない 1 : する
+	std::map<std::string, int> loop_;
+	// key : アニメーションの名前
+	std::map<std::string, AnimVecData> data_;
+};
 
 class TmxObj
 {
@@ -18,7 +34,7 @@ public:
 	// Tmxを読み込む
 	bool LoadTmx(std::string fileName);
 	// xmlを読み込んでitemだけ返す
-	bool LoadXmlItem(std::string fileName);
+	XmlItem LoadXmlItem(std::string fileName);
 	// 読み込んだマップをmapdata_に格納する
 	bool SetMap(void);
 
@@ -46,10 +62,10 @@ private:
 	std::map<std::string,int> version_;
 
 	// アイテム
-	std::map<std::string, std::string> item_;
-	std::map<std::string,int> loop_;
-	std::map<std::string, std::vector<std::pair<int,int>>> data_;
-	std::pair<int, int> pairdata_;
+	XmlItem xml_;
+	//std::map<std::string, std::string> item_;
+	//std::map<std::string,int> loop_;
+	//std::map<std::string, std::vector<std::pair<int,int>>> data_;
 
 	// TMX
 	//

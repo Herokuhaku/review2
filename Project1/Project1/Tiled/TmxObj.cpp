@@ -95,59 +95,59 @@ bool TmxObj::LoadTmx(std::string fileName)
 	return true;
 }
 
-bool TmxObj::LoadXmlItem(std::string fileName)
+XmlItem TmxObj::LoadXmlItem(std::string fileName)
 {
 	rapidxml::file<> xmlFile = fileName.c_str();
 	tsxDoc_.parse<0>(xmlFile.data());
-	// tilesetノードの取り出し
+	// imageノードの取り出し
 	auto image = tsxDoc_.first_node();
 	// imageの情報
-	if (image) {
+	if (image != nullptr) {
 		for (auto atr = image->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
 			// mapのkeyに名前使って値を入れる
-			item_[atr->name()] = atr->value();
+			xml_.item_[atr->name()] = atr->value();
 		}
-	}
-	std::string dirname;
-	// アニメーション情報
-	for (auto animation = image->first_node("animation"); animation != nullptr; animation = animation->next_sibling()) {
-		if (animation) {
-			for (auto atr = animation->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
-				std::string name = atr->name();
-				if (name == "dirname") {
-					dirname = atr->value();
-				}
-				else if (name == "loop") {
-					loop_[dirname] = std::atoi(atr->value());
-				}
-			}
-		}
-		for (auto datasib = animation->first_node(); datasib != nullptr; datasib = datasib->next_sibling()) {
-			if (datasib) {
-				for (auto atr = datasib->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
+		std::string dirname;
+		// アニメーション情報
+		for (auto animation = image->first_node("animation"); animation != nullptr; animation = animation->next_sibling()) {
+			if (animation) {
+				for (auto atr = animation->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
 					std::string name = atr->name();
-					if (name == "count") {
-						pairdata_.first = std::atoi(atr->value());
+					if (name == "dirname") {
+						dirname = atr->value();
 					}
-					else if (name == "frame") {
-						pairdata_.second = std::atoi(atr->value());
+					else if (name == "loop") {
+						xml_.loop_[dirname] = std::atoi(atr->value());
 					}
 				}
-				data_[dirname].emplace_back(pairdata_);
+			}
+			std::pair<int, int> tmppair;
+			for (auto datasib = animation->first_node(); datasib != nullptr; datasib = datasib->next_sibling()) {
+				if (datasib) {
+					for (auto atr = datasib->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
+						std::string name = atr->name();
+						if (name == "count") {
+							tmppair.first = std::atoi(atr->value());
+						}
+						else if (name == "frame") {
+							tmppair.second = std::atoi(atr->value());
+						}
+					}
+					xml_.data_[dirname].emplace_back(tmppair);
+				}
 			}
 		}
 	}
-
 	// 全体のチップサイズ / 横のチップサイズ = 縦のチップサイズ
-	std::string source = item_["source"].substr(item_["source"].find_first_of("/") + 1);
+	std::string source = xml_.item_["source"].substr(xml_.item_["source"].find_first_of("/") + 1);
 
 	lpImageMng.GetID(
 		source,
-		item_["name"],
-		Int2(std::atoi(item_["tilewidth"].c_str()), std::atoi(item_["tileheight"].c_str())),
-		Int2(std::atoi(item_["width"].c_str()), std::atoi(item_["height"].c_str())));
+		xml_.item_["name"],
+		Int2(std::atoi(xml_.item_["width"].c_str()), std::atoi(xml_.item_["height"].c_str())),
+		Int2(std::atoi(xml_.item_["divwidth"].c_str()), std::atoi(xml_.item_["divheight"].c_str())));
 
-	return true;
+	return xml_;
 }
 
 bool TmxObj::SetMap(void)

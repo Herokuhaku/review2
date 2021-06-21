@@ -55,6 +55,18 @@ bool Object::state(const STATE state)
 	return false;
 }
 
+bool Object::SetItem(const STATE state, std::string dir)
+{
+	AnimVector data;
+	int frame = 0;
+	for (auto& item : xmlitem_.data_[dir]) {
+		frame += item.second;
+		data.emplace_back(lpImageMng.GetID(xmlitem_.item_["name"])[item.first],frame);
+	}
+	SetAnim(state, data);
+	return true;
+}
+
 bool Object::SetAnim(const STATE state, AnimVector& data)
 {
 	return _animMap.try_emplace(state, std::move(data)).second;

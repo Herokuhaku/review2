@@ -18,6 +18,8 @@ Player::~Player()
 
 bool Player::Init(CntType cntType)
 {
+	xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
+
 	speed_ = 5;
 	if (cntType == CntType::Key) {
 		controller_ = std::make_unique<KeyInput>();
@@ -25,35 +27,14 @@ bool Player::Init(CntType cntType)
 	else if (cntType == CntType::Pad) {
 		controller_ = std::make_unique<PadInput>();
 	}
-
-	AnimVector data;
 	// 正面のアニメーション
-	data.reserve(5);
-	for (int i = 1; i < 4; i++) {
-		data.emplace_back(lpImageMng.GetID("GreenPlayer")[i -1],i * 7);
-	}
-	SetAnim(STATE::DOWN,data);
-
+	SetItem(STATE::DOWN,"down");	
 	// 左向きのアニメーション
-	data.reserve(3);
-	for (int i = 1; i < 4; i++) {
-		data.emplace_back(lpImageMng.GetID("GreenPlayer")[i+ static_cast<__int64>(3) -1], i * 7);
-	}
-	SetAnim(STATE::LEFT, data);
-
+	SetItem(STATE::LEFT,"left");
+	// 上向きのアニメーション
+	SetItem(STATE::UP,"up");
 	// 右向きのアニメーション
-	data.reserve(3);
-	for (int i = 1; i < 4; i++) {
-		data.emplace_back(lpImageMng.GetID("GreenPlayer")[i+ static_cast<__int64>(6) -1], i * 7);
-	}
-	SetAnim(STATE::RIGHT, data);
-
-	// 後ろ向きのアニメーション
-	data.reserve(3);
-	for (int i = 1; i < 4; i++) {
-		data.emplace_back(lpImageMng.GetID("GreenPlayer")[i+ static_cast<__int64>(9) -1], i * 7);
-	}
-	SetAnim(STATE::UP, data);
+	SetItem(STATE::RIGHT,"right");
 
 	state(STATE::UP);
 

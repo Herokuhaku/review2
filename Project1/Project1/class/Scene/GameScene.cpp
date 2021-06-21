@@ -18,7 +18,6 @@ GameScene::~GameScene()
 bool GameScene::Init(void)
 {
 	tmxobj_.LoadTmx("Tiled/stage001.tmx");
-	tmxobj_.LoadXmlItem("Tiled/AnimImage.tsx");
 	objlist_.emplace_back(std::make_unique<Player>(CntType::Key));
 	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad));
 	lpImageMng.GetID("image/no_002.png", "Game");
