@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="class\Animation\Animation.cpp" />
     <ClCompile Include="class\common\ImageMng.cpp" />
     <ClCompile Include="class\input\Controller.cpp" />
     <ClCompile Include="class\input\PadInput.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="_debug\_DebugDispOut.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="class\Animation\Animation.h" />
     <ClInclude Include="class\common\ImageMng.h" />
     <ClInclude Include="class\input\Controller.h" />
     <ClInclude Include="class\input\inputID.h" />

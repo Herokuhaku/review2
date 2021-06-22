@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <list>
 #include <string>
 #include <map>
 #include "rapidxml.hpp"
@@ -11,7 +11,7 @@ using MapData = std::map<std::string,std::vector<int>>;
 //second : アニメーションのフレーム数(何フレーム描画するか)
 using AnimData = std::pair<int, int>;
 // AnimData を vectorで格納したデータ
-using AnimVecData = std::vector<AnimData>;
+using AnimVecData = std::list<AnimData>;
 
 // アニメーションするために必要なXmlから取り出したアイテム
 struct XmlItem

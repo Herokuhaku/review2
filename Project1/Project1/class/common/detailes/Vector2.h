@@ -213,6 +213,28 @@ Vector2Template<T> Vector2Template<T>::operator--(int)
 	// TODO: return ステートメントをここに挿入します
 }
 
+template<class T>
+float Vector2Template<T>::Magnitude() const
+{
+	return hypot(x, y);
+}
+
+template<class T>
+void Vector2Template<T>::Normalize()
+{
+	float mag = Magnitude();
+	x /= mag;
+	y /= mag;
+}
+
+template<class T>
+Vector2Template<T> Vector2Template<T>::Normalized() const
+{
+	Vector2Template<T> ret = { x,y };
+	ret.Normalize();
+	return ret;
+}
+
 template <class T>
 Vector2Template<T> operator+(const Vector2Template<T>& vec, const int& num)
 {

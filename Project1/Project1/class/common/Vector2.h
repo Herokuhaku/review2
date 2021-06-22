@@ -50,6 +50,11 @@ public:
 
 	Vector2Template& operator--();
 	Vector2Template operator--(int);
+
+	float Magnitude()const;	///³‹K‰»ƒxƒNƒgƒ‹‚ğ•Ô‚µ‚Ü‚·
+	///³‹K‰»(‘å‚«‚³‚ğ‚P‚É)‚µ‚Ü‚·
+	void Normalize();
+	Vector2Template Normalized()const;
 };
 
 // Vector2 ‚Æ int‚Ìl‘¥‰‰Z

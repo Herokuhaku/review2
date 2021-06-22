@@ -18,7 +18,11 @@ Player::~Player()
 
 bool Player::Init(CntType cntType)
 {
-	xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
+	//xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
+
+	//itr_ = xmlitem_.data_["right"].begin();
+
+	anim_ = std::make_unique<Animation>("GreenPlayer");
 
 	speed_ = 5;
 	if (cntType == CntType::Key) {
@@ -27,44 +31,67 @@ bool Player::Init(CntType cntType)
 	else if (cntType == CntType::Pad) {
 		controller_ = std::make_unique<PadInput>();
 	}
+
+	lpImageMng.SetXml("Tiled/AnimImage.tsx");
+
 	// 正面のアニメーション
-	SetItem(STATE::DOWN,"down");	
+	lpImageMng.SetItem(anim_->GetKey(),STATE::DOWN,"down");	
 	// 左向きのアニメーション
-	SetItem(STATE::LEFT,"left");
+	lpImageMng.SetItem(anim_->GetKey(), STATE::LEFT,"left");
 	// 上向きのアニメーション
-	SetItem(STATE::UP,"up");
+	lpImageMng.SetItem(anim_->GetKey(), STATE::UP,"up");
 	// 右向きのアニメーション
-	SetItem(STATE::RIGHT,"right");
+	lpImageMng.SetItem(anim_->GetKey(), STATE::RIGHT,"right");
 
-	state(STATE::UP);
-
+	anim_->state(STATE::UP);
 	return true;
 }
 
 void Player::Update(void)
 {
 	if ((*controller_)()) {
+		//Int2 vec(0,0);
 		if (controller_->Press(InputID::Left)) {
-			state(STATE::LEFT);
+			anim_->state(STATE::LEFT);
+			//pos_.x -= speed_;
 			pos_.x -= speed_;
 		}
 		if (controller_->Press(InputID::Right)) {
-			state(STATE::RIGHT);
+			anim_->state(STATE::RIGHT);
 			pos_.x += speed_;
 		}
 		if (controller_->Press(InputID::Up)) {
-			state(STATE::UP);
+			anim_->state(STATE::UP);
 			pos_.y -= speed_;
 		}
 		if (controller_->Press(InputID::Down)) {
-			state(STATE::DOWN);
+			anim_->state(STATE::DOWN);
 			pos_.y += speed_;
 		}
+		//pos_ += vec.Normalized()*speed_;
 	}
+
+	//auto data = (*itr_).second;
+	//if (animCount++ > data) {
+	//	animCount = 0;
+	//	++itr_;
+
+	//	if (itr_ == xmlitem_.data_["right"].end()) {
+	//		++animPlayCount;
+	//		if (xmlitem_.loop_["right"] != -1) {
+	//			itr_ = xmlitem_.data_["right"].begin();
+	//		}
+	//		else {
+	//			itr_ = xmlitem_.data_["right"].end();
+	//		}
+	//	}
+	//}
 }
 
 void Player::Draw(void)
 {
-	Object::Draw();
-	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[0], true);
+	anim_->Draw(pos_);
+	//Object::Draw();
+	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);
+	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[(*itr_).first], true);
 }
