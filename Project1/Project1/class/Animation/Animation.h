@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "../../Tiled/TmxObj.h"
+#include "../common/Vector2.h"
 
 using AnimVector = std::vector<std::pair<int, int>>;
 
@@ -22,15 +22,15 @@ public:
 	~Animation();
 	bool Init(void);
 	bool Update(void);
-	bool Draw(Int2 pos);
+	bool Draw(Int2 pos,Int2 size,float mag = 1.0f);
 	bool state(const STATE state);
 	std::string GetKey(void);
 private:
 	std::string key_;
 	STATE state_;
 
-	unsigned int animframe_;			// フレーム数
-	unsigned int animcount_;			// 何回まわったか
+	int animframe_;			// フレーム数
+	int animcount_;			// 何回まわったか
 	//std::map<STATE, AnimVector>animMap_;// アニメーションのマップ
 
 	//unsigned int animframe_;			// フレーム数

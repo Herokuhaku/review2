@@ -80,16 +80,17 @@ Vector2Template<T> operator /(const int& num, const Vector2Template<T>& vec);
 // Vector2 ‚Æ float‚ÌŽl‘¥‰‰ŽZ
 template <class T>
 Vector2Template<T> operator + (const Vector2Template<T>& vec,const float& num);
-
 template <class T>
 Vector2Template<T> operator - (const Vector2Template<T>& vec, const float& num);
-
 template <class T>
 Vector2Template<T> operator * (const Vector2Template<T>& vec,const float& num);
-
 template <class T>
 Vector2Template<T> operator / (const Vector2Template<T>& vec, const float& num);
-
+// float ‚Æ Vector2‚ÌŽl‘¥‰‰ŽZ
+template <class T>
+Vector2Template<T> operator + (const float& num,const Vector2Template<T>& vec);
+template <class T>
+Vector2Template<T> operator * (const float& num,const Vector2Template<T>& vec);
 using Int2 = Vector2Template<int>;
 using Float2 = Vector2Template<float>;
 using Double2 = Vector2Template<double>;

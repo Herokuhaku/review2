@@ -32,15 +32,10 @@ protected:
 	//XmlItem xmlitem_;
 
 	Int2 pos_;
+	Int2 size_;
 	int speed_;
 	std::unique_ptr<Controller>controller_;
 	// 
-	//std::map<STATE, AnimVector>animMap_;// アニメーションのマップ
 	std::unique_ptr<Animation> anim_;
-
-	//unsigned int animframe_;			// フレーム数
-	//unsigned int animcount_;			// 何回まわったか
-	//unsigned int animframe_;			// フレーム数
-	//unsigned int animcount_;			// 何回まわったか
 };
 

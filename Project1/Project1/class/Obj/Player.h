@@ -18,6 +18,9 @@ public:
 private:
 	bool Init(CntType cntType)override;
 
+	// アニメーションに使う画像を読み込む
+	bool LoadAnimation(void);
+	// 
 	//std::list<std::array<int, 2>> test_;
 	//std::list<std::pair<int,int>>::iterator itr_;
 	//std::array<int, 2> t;

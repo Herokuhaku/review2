@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../common/ImageMng.h"
+#include "../common/AnimationMng.h"
 #include "../input/KeyInput.h"
 #include "../input/PadInput.h"
 
@@ -18,13 +19,9 @@ Player::~Player()
 
 bool Player::Init(CntType cntType)
 {
-	//xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
-
-	//itr_ = xmlitem_.data_["right"].begin();
-
-	anim_ = std::make_unique<Animation>("GreenPlayer");
-
-	speed_ = 5;
+	if (!LoadAnimation()) {
+		return false;
+	}
 	if (cntType == CntType::Key) {
 		controller_ = std::make_unique<KeyInput>();
 	}
@@ -32,19 +29,34 @@ bool Player::Init(CntType cntType)
 		controller_ = std::make_unique<PadInput>();
 	}
 
-	lpImageMng.SetXml("Tiled/AnimImage.tsx");
+	speed_ = 5;
+
+	//xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
+	//itr_ = xmlitem_.data_["right"].begin();
+
+	return true;
+}
+
+bool Player::LoadAnimation(void)
+{
+	bool rtnflag = true;
+	anim_ = std::make_unique<Animation>("GreenPlayer");
+
+	rtnflag &= lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx");
 
 	// 正面のアニメーション
-	lpImageMng.SetItem(anim_->GetKey(),STATE::DOWN,"down");	
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::DOWN, "down");
 	// 左向きのアニメーション
-	lpImageMng.SetItem(anim_->GetKey(), STATE::LEFT,"left");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::LEFT, "left");
 	// 上向きのアニメーション
-	lpImageMng.SetItem(anim_->GetKey(), STATE::UP,"up");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::UP, "up");
 	// 右向きのアニメーション
-	lpImageMng.SetItem(anim_->GetKey(), STATE::RIGHT,"right");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::RIGHT, "right");
 
 	anim_->state(STATE::UP);
-	return true;
+	size_ = lpAnimationMng.GetImageSize(anim_->GetKey());
+
+	return rtnflag;
 }
 
 void Player::Update(void)
@@ -90,7 +102,7 @@ void Player::Update(void)
 
 void Player::Draw(void)
 {
-	anim_->Draw(pos_);
+	anim_->Draw(pos_,size_,2);
 	//Object::Draw();
 	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);
 	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[(*itr_).first], true);

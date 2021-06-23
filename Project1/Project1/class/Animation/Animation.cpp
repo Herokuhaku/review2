@@ -2,6 +2,7 @@
 
 #include <DxLib.h>
 #include "../common/ImageMng.h"
+#include "../common/AnimationMng.h"
 //Animation::Animation()
 //{
 //}
@@ -25,24 +26,24 @@ bool Animation::Init(void)
 
 bool Animation::Update(void)
 {
-	if (!lpImageMng.CheckAnim(key_,state_))
+	if (!lpAnimationMng.CheckAnim(key_,state_))
 	{
 		return false;
 	}
-	if (animframe_ < 0 || animframe_ >= lpImageMng.GetAnimSize(key_,state_))
+	if (animframe_ < 0 || animframe_ >= lpAnimationMng.GetAnimSize(key_,state_))
 	{
 		return false;
 	}
 
-	if (animcount_++ >= lpImageMng.GetAnimFrame(key_, state_, animframe_))
+	if (animcount_++ >= lpAnimationMng.GetAnimFrame(key_, state_, animframe_))
 	{
-		if (lpImageMng.GetAnimID(key_, state_, animframe_) >= 0)
+		if (lpAnimationMng.GetAnimID(key_, state_, animframe_) >= 0)
 		{
 			animframe_ += 1;
 		}
 	}
 
-	if (animframe_ >= lpImageMng.GetAnimSize(key_, state_))
+	if (animframe_ >= lpAnimationMng.GetAnimSize(key_, state_))
 	{
 		animframe_ = 0;
 		animcount_ = 0;
@@ -50,16 +51,18 @@ bool Animation::Update(void)
 	return true;
 }
 
-bool Animation::Draw(Int2 pos)
+bool Animation::Draw(Int2 pos,Int2 size,float mag)
 {
 	Update();
-	DrawGraph(pos.x, pos.y,lpImageMng.GetAnimID(key_, state_,animframe_), true);
+	size = size * mag;
+	DrawRotaGraph(pos.x + (size.x/2),pos.y + (size.y/2),mag,0.0f, lpAnimationMng.GetAnimID(key_, state_, animframe_),true);
+	//DrawGraph(pos.x, pos.y,lpImageMng.GetAnimID(key_, state_,animframe_), true);
 	return true;
 }
 
 bool Animation::state(const STATE state)
 {
-	if (lpImageMng.CheckAnim(key_, state))
+	if (lpAnimationMng.CheckAnim(key_, state))
 	{
 		if (state != state_)//±∆“∞ºÆ›Ç™à·Ç¡ÇΩèÍçá0Ç©ÇÁénÇﬂÇÈ
 		{

@@ -314,3 +314,15 @@ Vector2Template<T> operator/(const Vector2Template<T>& vec, const float& num)
 	}
 	return Vector2Template<T>(vec.x / num, vec.y / num);
 }
+
+template<class T>
+Vector2Template<T> operator+(const float& num, const Vector2Template<T>& vec)
+{
+	return Vector2Template<T>(vec.x + num, vec.y + num);
+}
+
+template<class T>
+Vector2Template<T> operator*(const float& num, const Vector2Template<T>& vec)
+{
+	return Vector2Template<T>(vec.x * num, vec.y * num);
+}
