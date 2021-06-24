@@ -14,7 +14,7 @@ void SceneMng::Run(void)
 	scene_ = std::make_unique<TitleScene>();
 	now_ = std::chrono::system_clock::now();
 
-	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE)) {
+	while (!ProcessMessage() && !finish_) {
 		_dbgAddDraw();
 		// deltatimeÇÃê›íË
 		old_ = now_;
@@ -63,5 +63,7 @@ bool SceneMng::SysInit(void)
 		return false;
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
+
+	finish_ = false;
 	return true;
 }

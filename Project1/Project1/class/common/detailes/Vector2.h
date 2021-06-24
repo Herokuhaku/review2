@@ -1,4 +1,5 @@
 #include "../Vector2.h"
+#include <cmath>
 
 template <class T>
 Vector2Template<T>::Vector2Template()
@@ -20,12 +21,29 @@ Vector2Template<T>::~Vector2Template()
 }
 
 template <class T>
-Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template& vec)
+Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<double>& vec)
 {
 	x = vec.x;
 	y = vec.y;
 	return *this;
 }
+
+template<class T>
+Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<float>& vec)
+{
+	x = vec.x;
+	y = vec.y;
+	return *this;
+}
+
+template<class T>
+Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<int>& vec)
+{
+	x = vec.x;
+	y = vec.y;
+	return *this;
+}
+
 
 template <class T>
 Vector2Template<T>& Vector2Template<T>::operator+=(const Vector2Template& vec)
@@ -223,8 +241,12 @@ template<class T>
 void Vector2Template<T>::Normalize()
 {
 	float mag = Magnitude();
-	x /= mag;
-	y /= mag;
+	if (x != 0) {
+		x /= mag;
+	}
+	if (y != 0) {
+		y /= mag;
+	}
 }
 
 template<class T>

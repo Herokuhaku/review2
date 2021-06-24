@@ -31,7 +31,7 @@ protected:
 	//TmxObj tmx_;
 	//XmlItem xmlitem_;
 
-	Int2 pos_;
+	Float2 pos_;
 	Int2 size_;
 	int speed_;
 	std::unique_ptr<Controller>controller_;

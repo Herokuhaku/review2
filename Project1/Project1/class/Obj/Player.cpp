@@ -30,10 +30,7 @@ bool Player::Init(CntType cntType)
 	}
 
 	speed_ = 5;
-
-	//xmlitem_ = tmx_.LoadXmlItem("Tiled/AnimImage.tsx");
-	//itr_ = xmlitem_.data_["right"].begin();
-
+	pos_ = Float2();
 	return true;
 }
 
@@ -45,15 +42,15 @@ bool Player::LoadAnimation(void)
 	rtnflag &= lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx");
 
 	// 正面のアニメーション
-	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::DOWN, "down");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(),"down");
 	// 左向きのアニメーション
-	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::LEFT, "left");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), "left");
 	// 上向きのアニメーション
-	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::UP, "up");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), "up");
 	// 右向きのアニメーション
-	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), STATE::RIGHT, "right");
+	rtnflag &= lpAnimationMng.SetItem(anim_->GetKey(), "right");
 
-	anim_->state(STATE::UP);
+	anim_->state("down");
 	size_ = lpAnimationMng.GetImageSize(anim_->GetKey());
 
 	return rtnflag;
@@ -62,25 +59,29 @@ bool Player::LoadAnimation(void)
 void Player::Update(void)
 {
 	if ((*controller_)()) {
-		//Int2 vec(0,0);
+		Float2 vec(0,0);
 		if (controller_->Press(InputID::Left)) {
-			anim_->state(STATE::LEFT);
+			anim_->state("left");
+			vec.x -= speed_;
 			//pos_.x -= speed_;
-			pos_.x -= speed_;
 		}
 		if (controller_->Press(InputID::Right)) {
-			anim_->state(STATE::RIGHT);
-			pos_.x += speed_;
+			anim_->state("right");
+			//pos_.x += speed_;
+			vec.x += speed_;
 		}
 		if (controller_->Press(InputID::Up)) {
-			anim_->state(STATE::UP);
-			pos_.y -= speed_;
+			anim_->state("up");
+			//pos_.y -= speed_;
+
+			vec.y -= speed_;
 		}
 		if (controller_->Press(InputID::Down)) {
-			anim_->state(STATE::DOWN);
-			pos_.y += speed_;
+			anim_->state("down");
+			//pos_.y += speed_;
+			vec.y += speed_;
 		}
-		//pos_ += vec.Normalized()*speed_;
+		pos_ = pos_ + (vec.Normalized()*speed_);
 	}
 
 	//auto data = (*itr_).second;

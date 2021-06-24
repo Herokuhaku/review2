@@ -8,10 +8,10 @@ using AnimVector = std::vector<std::pair<int, int>>;
 
 enum class STATE
 {
-	UP,	// ’Êí
-	LEFT,
-	RIGHT,
-	DOWN,
+	up,	// ’Êí
+	left,
+	right,
+	down,
 	MAX
 };
 
@@ -22,12 +22,12 @@ public:
 	~Animation();
 	bool Init(void);
 	bool Update(void);
-	bool Draw(Int2 pos,Int2 size,float mag = 1.0f);
-	bool state(const STATE state);
+	bool Draw(Float2 pos,Int2 size,float mag = 1.0f);
+	bool state(const std::string state);
 	std::string GetKey(void);
 private:
 	std::string key_;
-	STATE state_;
+	std::string state_;
 
 	int animframe_;			// ƒtƒŒ[ƒ€”
 	int animcount_;			// ‰½‰ñ‚Ü‚í‚Á‚½‚©

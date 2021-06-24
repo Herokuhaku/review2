@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+
+
 template <class T>
 class Vector2Template
 {
@@ -12,7 +14,10 @@ public:
 	T y;
 
 	// ‘ã“ü‰‰Zq
-	Vector2Template& operator = (const Vector2Template& vec);
+	//Vector2Template& operator = (const Vector2Template& vec);
+	Vector2Template<T>& operator = (const Vector2Template<double>& vec);
+	Vector2Template<T>& operator = (const Vector2Template<float>& vec);
+	Vector2Template<T>& operator = (const Vector2Template<int>& vec);
 
 	// ’P€‰‰Zq
 	Vector2Template& operator += (const Vector2Template& vec);
@@ -51,9 +56,11 @@ public:
 	Vector2Template& operator--();
 	Vector2Template operator--(int);
 
-	float Magnitude()const;	///³‹K‰»ƒxƒNƒgƒ‹‚ğ•Ô‚µ‚Ü‚·
-	///³‹K‰»(‘å‚«‚³‚ğ‚P‚É)‚µ‚Ü‚·
+	// •½•û˜a‚Ì•½•ûª‚ğ•Ô‚·
+	float Magnitude()const;	
+	// ³‹K‰»(‘å‚«‚³‚ğ‚P‚É)‚µ‚Ü‚·
 	void Normalize();
+	// ³‹K‰»‚µ‚½‚à‚Ì‚ğ•Ô‚·
 	Vector2Template Normalized()const;
 };
 
@@ -91,10 +98,14 @@ template <class T>
 Vector2Template<T> operator + (const float& num,const Vector2Template<T>& vec);
 template <class T>
 Vector2Template<T> operator * (const float& num,const Vector2Template<T>& vec);
+
 using Int2 = Vector2Template<int>;
 using Float2 = Vector2Template<float>;
 using Double2 = Vector2Template<double>;
 
 using VecInt = std::vector<int>;
 
+//Float2 operator - (Int2 vec1, Float2 vec2);
+//Float2 operator / (Int2 vec1, Float2 vec2);
+//Float2 operator * (Int2 vec1, Float2 vec2);
 #include "./detailes/Vector2.h"

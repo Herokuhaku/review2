@@ -1,7 +1,7 @@
 #include "AnimationMng.h"
 #include "ImageMng.h"
 
-bool AnimationMng::CheckAnim(std::string key, STATE state)
+bool AnimationMng::CheckAnim(std::string key, std::string state)
 {
 	if (animMap_[key].find(state) != animMap_[key].end()) {
 		return true;
@@ -25,15 +25,15 @@ bool AnimationMng::SetXml(std::string key, std::string f_name)
 	return true;
 }
 
-bool AnimationMng::SetItem(std::string key, const STATE state, std::string dir)
+bool AnimationMng::SetItem(std::string key, const std::string state)
 {
 	AnimVector data;
 	int frame = 0;
-	for (auto& item : xmlitem_[key].data_[dir]) {
+	for (auto& item : xmlitem_[key].data_[state]) {
 		frame += item.second;
 		data.emplace_back(lpImageMng.GetID(xmlitem_[key].item_["name"])[item.first], frame);
 	}
-	if (xmlitem_[key].loop_[dir] == -1) {
+	if (xmlitem_[key].loop_[state] == -1) {
 		data.emplace_back(-1, -1);
 	}
 	SetAnim(key, state, data);
@@ -41,22 +41,22 @@ bool AnimationMng::SetItem(std::string key, const STATE state, std::string dir)
 	return true;
 }
 
-bool AnimationMng::SetAnim(std::string key, const STATE state, AnimVector& data)
+bool AnimationMng::SetAnim(std::string key, const std::string state, AnimVector& data)
 {
 	return animMap_[key].try_emplace(state, std::move(data)).second;
 }
 
-int AnimationMng::GetAnimID(std::string key, STATE state, int animframe)
+int AnimationMng::GetAnimID(std::string key, std::string state, int animframe)
 {
 	return animMap_[key][state][animframe].first;
 }
 
-int AnimationMng::GetAnimFrame(std::string key, STATE state, int animframe)
+int AnimationMng::GetAnimFrame(std::string key, std::string state, int animframe)
 {
 	return animMap_[key][state][animframe].second;
 }
 
-int AnimationMng::GetAnimSize(std::string key, STATE state)
+int AnimationMng::GetAnimSize(std::string key, std::string state)
 {
 	return static_cast<int>(animMap_[key][state].size());
 }

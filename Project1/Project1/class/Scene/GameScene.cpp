@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <DxLib.h>
 #include "TitleScene.h"
+#include "SceneMng.h"
 #include "Transition/CrossOverScene.h"
 #include "../common/ImageMng.h"
 #include "../Obj/Player.h"
@@ -19,7 +20,7 @@ bool GameScene::Init(void)
 {
 	tmxobj_.LoadTmx("Tiled/stage001.tmx");
 	objlist_.emplace_back(std::make_unique<Player>(CntType::Key));
-	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad));
+	//objlist_.emplace_back(std::make_unique<Player>(CntType::Pad));
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }
@@ -35,6 +36,10 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 
 	for (const auto& obj : objlist_) {
 		obj->Update();
+	}
+
+	if (CheckHitKey(KEY_INPUT_ESCAPE)) {
+
 	}
 	return std::move(own);
 }

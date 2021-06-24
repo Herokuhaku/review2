@@ -18,9 +18,10 @@ Animation::~Animation()
 
 bool Animation::Init(void)
 {
-	state_ = STATE::DOWN;
 	animcount_ = 0;
 	animframe_ = 0;
+	
+	state_ = "up";
 	return true;
 }
 
@@ -51,7 +52,7 @@ bool Animation::Update(void)
 	return true;
 }
 
-bool Animation::Draw(Int2 pos,Int2 size,float mag)
+bool Animation::Draw(Float2 pos,Int2 size,float mag)
 {
 	Update();
 	size = size * mag;
@@ -60,7 +61,7 @@ bool Animation::Draw(Int2 pos,Int2 size,float mag)
 	return true;
 }
 
-bool Animation::state(const STATE state)
+bool Animation::state(const std::string state)
 {
 	if (lpAnimationMng.CheckAnim(key_, state))
 	{

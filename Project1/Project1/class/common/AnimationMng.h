@@ -16,18 +16,18 @@ public:
 	}
 
 	// Anim‚ğItem‚©‚çİ’è‚·‚é(XmlItem)
-	bool CheckAnim(std::string key, STATE state);
+	bool CheckAnim(std::string key, std::string state);
 	bool SetXml(std::string key, std::string f_name);
-	bool SetItem(std::string key, const STATE state, std::string dir);
-	bool SetAnim(std::string key, const STATE state, AnimVector& data);
+	bool SetItem(std::string key, const std::string state);
+	bool SetAnim(std::string key, const std::string state, AnimVector& data);
 
-	int GetAnimID(std::string key, STATE state, int animframe);
-	int GetAnimFrame(std::string key, STATE state, int animframe);
-	int GetAnimSize(std::string key, STATE state);
+	int GetAnimID(std::string key, std::string state, int animframe);
+	int GetAnimFrame(std::string key, std::string state, int animframe);
+	int GetAnimSize(std::string key, std::string state);
 
 	Int2 GetImageSize(std::string key);
 private:
-	std::map<std::string, std::map<STATE, AnimVector>> animMap_;
+	std::map<std::string, std::map<std::string, AnimVector>> animMap_;
 
 	TmxObj tmx_;
 	std::map<std::string, XmlItem> xmlitem_;

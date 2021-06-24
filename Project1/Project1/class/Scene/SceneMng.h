@@ -19,6 +19,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	const Int2 GetScreenSize(void)const;
+	void Finish(void) { finish_ = true; };
 private:
 	SceneMng();
 	~SceneMng();
@@ -27,4 +28,5 @@ private:
 	UniqueScene scene_;
 	std::chrono::system_clock::time_point now_, old_;
 	const Int2 screenSize_;
+	bool finish_;
 };
