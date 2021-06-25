@@ -9,15 +9,16 @@ class Vector2Template
 public:
 	Vector2Template();
 	~Vector2Template();
-	Vector2Template(T x_,T y_);
+	Vector2Template(T x_, T y_);
+	Vector2Template(Vector2Template<float>& vec);
 	T x;
 	T y;
 
+
 	// ‘ã“ü‰‰Zq
-	//Vector2Template& operator = (const Vector2Template& vec);
-	Vector2Template<T>& operator = (const Vector2Template<double>& vec);
-	Vector2Template<T>& operator = (const Vector2Template<float>& vec);
-	Vector2Template<T>& operator = (const Vector2Template<int>& vec);
+	Vector2Template& operator = (const Vector2Template<int>& vec);
+	Vector2Template& operator = (const Vector2Template<float>& vec);
+	Vector2Template& operator = (const Vector2Template<double>& vec);
 
 	// ’P€‰‰Zq
 	Vector2Template& operator += (const Vector2Template& vec);

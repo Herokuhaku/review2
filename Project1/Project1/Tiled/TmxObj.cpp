@@ -228,12 +228,29 @@ const int TmxObj::GetMapData(std::string lay,int x,int y)
 	return 0;
 }
 
-const int TmxObj::GetMapData(std::string lay, Int2 pos)
+const int TmxObj::GetMapData(std::string lay, Float2 pos)
 {
-	Int2 chip = (pos / tileSize_);
+	Int2 chip = (static_cast<Int2>(pos) / tileSize_);
+
+	return GetMapData(lay,chip.x,chip.y);
+}
+
+const bool TmxObj::GetMapDataCheck(Float2 pos)
+{
+	Int2 p;
+	p.x = pos.x;
+	p.y = pos.y;
+
+	Int2 chip = (p / tileSize_);
+	//Int2 chip = (pos / tileSize_);
 	int point = chip.x + (worldArea_.x * chip.y);
 	
-	return GetMapData(lay,chip.x,chip.y);	
+	for (auto map : mapdata_) {
+		if (mapdata_[map.first][point]) {
+			return true;
+		}
+	}
+	return false;
 }
 
 bool TmxObj::CheckTiledVersion(rapidxml::xml_node<>* node)

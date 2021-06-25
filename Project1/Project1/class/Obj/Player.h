@@ -11,7 +11,7 @@ class Player :
 {
 public:
 	Player();
-	Player(CntType cntType);
+	Player(CntType cntType, std::shared_ptr<TmxObj> tmx);
 	~Player();
 	void Update(void)override;
 	void Draw(void);

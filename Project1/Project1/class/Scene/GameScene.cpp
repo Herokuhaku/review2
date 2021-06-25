@@ -18,8 +18,9 @@ GameScene::~GameScene()
 
 bool GameScene::Init(void)
 {
-	tmxobj_.LoadTmx("Tiled/stage001.tmx");
-	objlist_.emplace_back(std::make_unique<Player>(CntType::Key));
+	tmxobj_ = std::make_shared<TmxObj>();
+	tmxobj_->LoadTmx("Tiled/stage001.tmx");
+	objlist_.emplace_back(std::make_unique<Player>(CntType::Key,tmxobj_));
 	//objlist_.emplace_back(std::make_unique<Player>(CntType::Pad));
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
@@ -53,9 +54,9 @@ void GameScene::DrawOwnScreen(double delta)
 	SetDrawScreen(screen_);
 	ClsDrawScreen();
 	//DrawGraph(0, 0, lpImageMng.GetID("Game")[0], true);
-	Int2 area = tmxobj_.GetWorldArea();
-	Int2 tilesize = tmxobj_.GetTileSize();
-	unsigned int firstgid = tmxobj_.GetFirstGid();
+	Int2 area = tmxobj_->GetWorldArea();
+	Int2 tilesize = tmxobj_->GetTileSize();
+	unsigned int firstgid = tmxobj_->GetFirstGid();
 
 	//for (auto& map : tmxobj_.GetMapData())
 	//{
@@ -70,10 +71,10 @@ void GameScene::DrawOwnScreen(double delta)
 	//	}
 	//}
 	
-	for (auto& map : tmxobj_.GetMapData()) {
+	for (auto& map : tmxobj_->GetMapData()) {
 		for (int y = 0; y < area.y; y++) {
 			for (int x = 0; x < area.x; x++) {
-				int id = tmxobj_.GetMapData(map.first, x, y) - firstgid;
+				int id = tmxobj_->GetMapData(map.first, x, y) - firstgid;
 				if (id >= 0) {
 					DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
 				}

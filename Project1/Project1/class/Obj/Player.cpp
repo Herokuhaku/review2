@@ -8,9 +8,10 @@ Player::Player()
 {
 }
 
-Player::Player(CntType cntType)
+Player::Player(CntType cntType,std::shared_ptr<TmxObj> tmx)
 {
 	Init(cntType);
+	tmx_ = tmx;
 }
 
 Player::~Player()
@@ -58,32 +59,38 @@ bool Player::LoadAnimation(void)
 
 void Player::Update(void)
 {
+// キー処理
 	if ((*controller_)()) {
 		Float2 vec(0,0);
+
+		// 移動測定処理 and アニメーションの変更
 		if (controller_->Press(InputID::Left)) {
 			anim_->state("left");
 			vec.x -= speed_;
-			//pos_.x -= speed_;
 		}
 		if (controller_->Press(InputID::Right)) {
 			anim_->state("right");
-			//pos_.x += speed_;
 			vec.x += speed_;
 		}
 		if (controller_->Press(InputID::Up)) {
 			anim_->state("up");
-			//pos_.y -= speed_;
 
 			vec.y -= speed_;
 		}
 		if (controller_->Press(InputID::Down)) {
 			anim_->state("down");
-			//pos_.y += speed_;
 			vec.y += speed_;
 		}
-		pos_ = pos_ + (vec.Normalized()*speed_);
+		vec = vec.Normalized() * speed_;
+		// 当たり判定処理
+		if (tmx_->GetMapDataCheck(pos_) >= pos_.x + vec.x) {
+
+		}
+		// 移動
+		pos_ = pos_ + vec;
 	}
 
+	anim_->Update();
 	//auto data = (*itr_).second;
 	//if (animCount++ > data) {
 	//	animCount = 0;

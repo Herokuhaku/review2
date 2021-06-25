@@ -20,7 +20,7 @@ private:
 	Scene GetSceneID(void)override { return Scene::Game; };
 	void DrawOwnScreen(double delta);
 
-	TmxObj tmxobj_;
+	std::shared_ptr<TmxObj> tmxobj_;
 	std::list<std::unique_ptr<Object>> objlist_;
 };
 

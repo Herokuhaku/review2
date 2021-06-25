@@ -15,27 +15,17 @@ Vector2Template<T>::Vector2Template(T x_, T y_)
 	y = y_;
 }
 
+template<class T>
+inline Vector2Template<T>::Vector2Template(Vector2Template<float>& vec)
+{
+	x = vec.x;
+	y = vec.y;
+}
+
 template <class T>
 Vector2Template<T>::~Vector2Template()
 {
 }
-
-template <class T>
-Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<double>& vec)
-{
-	x = vec.x;
-	y = vec.y;
-	return *this;
-}
-
-template<class T>
-Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<float>& vec)
-{
-	x = vec.x;
-	y = vec.y;
-	return *this;
-}
-
 template<class T>
 Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<int>& vec)
 {
@@ -43,6 +33,21 @@ Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<int>& ve
 	y = vec.y;
 	return *this;
 }
+template<class T>
+Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<float>& vec)
+{
+	x = vec.x;
+	y = vec.y;
+	return *this;
+}
+template<class T>
+Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<double>& vec)
+{
+	x = vec.x;
+	y = vec.y;
+	return *this;
+}
+
 
 
 template <class T>

@@ -6,6 +6,7 @@
 #include "rapidxml_utils.hpp"
 #include "../class/common/Vector2.h"
 
+// map<レイヤー名,格納しているブロックの配列>
 using MapData = std::map<std::string,std::vector<int>>;
 // first : アニメーションの番号(画像において何番目か),
 //second : アニメーションのフレーム数(何フレーム描画するか)
@@ -46,7 +47,9 @@ public:
 	// mapdataの中から指定した位置のmapdataの中身を返す
 	const int GetMapData(std::string lay,int x,int y);
 	// posからmapdataの位置を計算してmapdataの中身を返す
-	const int GetMapData(std::string lay,Int2 pos);
+	const int GetMapData(std::string lay,Float2 pos);
+	// posからmapdataの位置を計算してそこにblockがあるかを返す
+	const bool GetMapDataCheck(Float2 pos);
 	// 縦横サイズ(チップ)を返す
 	const Int2& GetWorldArea(void)const {return worldArea_;};
 	// 縦横サイズ(チップ1つのサイズ)

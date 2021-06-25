@@ -36,6 +36,7 @@ protected:
 	int speed_;
 	std::unique_ptr<Controller>controller_;
 	// 
+	std::shared_ptr<TmxObj> tmx_;
 	std::unique_ptr<Animation> anim_;
 };
 
