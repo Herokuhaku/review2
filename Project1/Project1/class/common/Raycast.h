@@ -17,7 +17,10 @@ public:
 			return end - p;
 		}
 	};
+
+	bool LineAndLine(Float2 A1, Float2 A2,Float2 B1,Float2 B2);
 	bool CheckCollision(Ray ray,Collision col);
 	bool CheckRay(Ray ray,Line line);
+
 };
 
