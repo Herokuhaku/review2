@@ -20,11 +20,4 @@ private:
 
 	// アニメーションに使う画像を読み込む
 	bool LoadAnimation(void);
-	// 
-	//std::list<std::array<int, 2>> test_;
-	//std::list<std::pair<int,int>>::iterator itr_;
-	//std::array<int, 2> t;
-	//std::map<std::string,std::pair<int,std::list<std::array<int, 2>>>> animTbl_;
-	//int animCount = 0;
-	//int animPlayCount = 0;
 };

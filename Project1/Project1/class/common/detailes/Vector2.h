@@ -1,6 +1,8 @@
 #include "../Vector2.h"
 #include <cmath>
 
+
+
 template <class T>
 Vector2Template<T>::Vector2Template()
 {
@@ -16,16 +18,35 @@ Vector2Template<T>::Vector2Template(T x_, T y_)
 }
 
 template<class T>
-inline Vector2Template<T>::Vector2Template(Vector2Template<float>& vec)
+Vector2Template<T>::Vector2Template(std::string x_, std::string y_)
 {
-	x = vec.x;
-	y = vec.y;
+	x = std::atoi(x_.c_str());
+	y = std::atoi(y_.c_str());
 }
+
+//template<class T>
+//inline Vector2Template<T>::Vector2Template(Vector2Template<T>* vec)
+//{
+//	//Vector2Template tmp(vec->x,vec->y);
+//	//x = tmp.x;
+//	//y = tmp.y;
+//	x = vec->x;
+//	y = vec->y;
+//}
+
+
+//template<class T>
+//inline Vector2Template<T>::Vector2Template(Vector2Template<float>& vec)
+//{
+//	x = vec.x;
+//	y = vec.y;
+//}
 
 template <class T>
 Vector2Template<T>::~Vector2Template()
 {
 }
+
 template<class T>
 Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<int>& vec)
 {
@@ -171,8 +192,8 @@ template <class T>
 Vector2Template<T> Vector2Template<T>::operator/(const Vector2Template& vec)const
 {
 	Vector2Template<T> tmp(0,0);
-	!vec.x ? tmp.x = 1000000000 : x / vec.x;
-	!vec.y ? tmp.y = 1000000000 : y / vec.y;
+	!vec.x ? tmp.x = 1000000000 : tmp.x = x / vec.x;
+	!vec.y ? tmp.y = 1000000000 : tmp.y = y / vec.y;
 
 	return tmp;
 }
@@ -181,8 +202,8 @@ template <class T>
 Vector2Template<T> Vector2Template<T>::operator%(const Vector2Template& vec) const
 {
 	Vector2Template<T> tmp(0,0);
-	!vec.x ? tmp.x = 1000000000 : x % vec.x;
-	!vec.y ? tmp.y = 1000000000 : y % vec.y;
+	!vec.x ? tmp.x = 1000000000 : tmp.x = x % vec.x;
+	!vec.y ? tmp.y = 1000000000 : tmp.y = y % vec.y;
 	return tmp;
 }
 
@@ -260,6 +281,30 @@ Vector2Template<T> Vector2Template<T>::Normalized() const
 	Vector2Template<T> ret = { x,y };
 	ret.Normalize();
 	return ret;
+}
+
+template<class T>
+float Dot(const Vector2Template<T>& va, const Vector2Template<T>& vb)
+{
+	return va.x * vb.x + va.y * vb.y;
+}
+
+template<class T>
+float Cross(const Vector2Template<T>& va, const Vector2Template<T>& vb)
+{
+	return va.x * vb.y - vb.x * va.y;
+}
+
+template<class T>
+float operator*(const Vector2Template<T>& va, const Vector2Template<T>& vb)
+{
+	return Dot(va, vb);
+}
+
+template<class T>
+float operator%(const Vector2Template<T>& va, const Vector2Template<T>& vb)
+{
+	return Cross(va, vb);
 }
 
 template <class T>

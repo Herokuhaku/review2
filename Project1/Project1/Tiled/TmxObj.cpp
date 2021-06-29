@@ -138,6 +138,7 @@ XmlItem TmxObj::LoadXmlItem(std::string fileName)
 			}
 		}
 	}
+
 	// 全体のチップサイズ / 横のチップサイズ = 縦のチップサイズ
 	std::string source = xml_.item_["source"].substr(xml_.item_["source"].find_first_of("/") + 1);
 
@@ -170,19 +171,29 @@ bool TmxObj::SetMap(void)
 	}
 
 	std::map<std::string, std::pair<MapData::iterator, bool>> layer;
-	auto name = [&]() { return laynode->first_attribute("name")->value(); };
+	auto name = [&]() { 
+		std::string node = laynode->first_attribute("name")->value();
+		return node; };
 	//layer[laynode->first_attribute("name")->value()] = mapdata_.try_emplace(laynode->first_attribute("name")->value());
 	//auto layer = mapdata_.try_emplace(laynode->first_attribute("name")->value());
 
 	//auto data = laynode->first_node("data")->value();
 
 	do{
+		std::string node = laynode->first_attribute("name")->value();
+		// 子リジョンだったら別処理
+		if (node == "Col") {
+			laynode = laynode->next_sibling();
+			continue;
+		}
+		// csvを取り出す
 		layer[name()] = mapdata_.try_emplace(laynode->first_attribute("name")->value());
 		if (layer[name()].second)
 		{
 			layer[name()].first->second.resize(static_cast<__int64>(worldArea_.x) * worldArea_.y);
 		}
 
+		// csvをintに変えて格納する
 		auto data = laynode->first_node("data")->value();
 		std::string str = data;
 		int strsize = static_cast<int>(str.size());
@@ -205,6 +216,15 @@ bool TmxObj::SetMap(void)
 		}
 		laynode = laynode->next_sibling();
 	} while (laynode);
+
+	auto colnode = mapnode->first_node("objectgroup");
+	for (auto objnode = colnode->first_node("object"); objnode != nullptr;objnode = objnode->next_sibling()) {
+		collist_.push_back(
+			std::pair<Float2,Float2>(
+			Float2(objnode->first_attribute("x")->value(), objnode->first_attribute("y")->value()),
+			Float2(objnode->first_attribute("width")->value(), objnode->first_attribute("height")->value()))
+		);
+	}
 	return true;
 }
 
@@ -230,7 +250,7 @@ const int TmxObj::GetMapData(std::string lay,int x,int y)
 
 const int TmxObj::GetMapData(std::string lay, Float2 pos)
 {
-	Int2 chip = (static_cast<Int2>(pos) / tileSize_);
+	Int2 chip = (Int2(pos.x,pos.y) / tileSize_);
 
 	return GetMapData(lay,chip.x,chip.y);
 }
@@ -251,6 +271,11 @@ const bool TmxObj::GetMapDataCheck(Float2 pos)
 		}
 	}
 	return false;
+}
+
+const ColList& TmxObj::GetColList(void)
+{
+	return collist_;
 }
 
 bool TmxObj::CheckTiledVersion(rapidxml::xml_node<>* node)

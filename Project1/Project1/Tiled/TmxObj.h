@@ -5,7 +5,10 @@
 #include "rapidxml.hpp"
 #include "rapidxml_utils.hpp"
 #include "../class/common/Vector2.h"
-
+#include "../class/common/Collision.h"
+//
+//// 左上頂点 , Float2(幅,高さ)
+//using ColList = std::list<std::pair<Float2, Float2>>;
 // map<レイヤー名,格納しているブロックの配列>
 using MapData = std::map<std::string,std::vector<int>>;
 // first : アニメーションの番号(画像において何番目か),
@@ -58,6 +61,8 @@ public:
 	const unsigned int GetFirstGid(void)const { return firstGID_; };
 	// レイヤーの数を返す
 	const unsigned int GetLayerSize(void)const { return layerSize_; };
+	// コリジョンリストを返す
+	const ColList& GetColList(void);
 private:
 	// versionを確認する
 	bool CheckTiledVersion(rapidxml::xml_node<>* node);
@@ -86,6 +91,8 @@ private:
 	Int2 tileSize_;
 	// マップデータの格納先
 	MapData mapdata_;
+	// コリジョンを格納したリスト
+	ColList collist_;
 
 	// TSX
 	//

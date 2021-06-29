@@ -157,6 +157,7 @@
     <ClCompile Include="class\Animation\Animation.cpp" />
     <ClCompile Include="class\common\AnimationMng.cpp" />
     <ClCompile Include="class\common\ImageMng.cpp" />
+    <ClCompile Include="class\common\Raycast.cpp" />
     <ClCompile Include="class\input\Controller.cpp" />
     <ClCompile Include="class\input\PadInput.cpp" />
     <ClCompile Include="class\Obj\Object.cpp" />
@@ -179,7 +180,11 @@
   <ItemGroup>
     <ClInclude Include="class\Animation\Animation.h" />
     <ClInclude Include="class\common\AnimationMng.h" />
+    <ClInclude Include="class\common\Collision.h" />
+    <ClInclude Include="class\common\detailes\Vector2.h" />
     <ClInclude Include="class\common\ImageMng.h" />
+    <ClInclude Include="class\common\Raycast.h" />
+    <ClInclude Include="class\common\Vector2.h" />
     <ClInclude Include="class\input\Controller.h" />
     <ClInclude Include="class\input\inputID.h" />
     <ClInclude Include="class\input\KeyInput.h" />

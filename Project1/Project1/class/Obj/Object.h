@@ -4,6 +4,7 @@
 #include "../input/Controller.h"
 #include "../../Tiled/TmxObj.h"
 #include "../Animation/Animation.h"
+#include "../common/Raycast.h"
 
 //using AnimVector = std::vector<std::pair<int,int>>;
 //
@@ -30,10 +31,16 @@ public:
 protected:
 	//TmxObj tmx_;
 	//XmlItem xmlitem_;
-
+	Raycast raycast_;
+	// À•W
 	Float2 pos_;
+	// “–‚½‚è”»’è‚Ì’†SÀ•W
+	Float2 colpos_;
+	std::map<std::string,std::list<Float2>> colvec_;
 	Int2 size_;
-	int speed_;
+	// Draw‚Ì”{—¦
+	float mag_;
+	float speed_;
 	std::unique_ptr<Controller>controller_;
 	// 
 	std::shared_ptr<TmxObj> tmx_;
