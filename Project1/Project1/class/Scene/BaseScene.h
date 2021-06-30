@@ -9,6 +9,7 @@ enum class Scene {
 	Transition,
 	Title,
 	Game,
+	Menu,
 	Max
 };
 

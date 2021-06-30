@@ -9,6 +9,7 @@ enum class InputID {
 	Btn1,
 	Btn2,
 	Btn3,
+	Escape,
 	Max
 };
 

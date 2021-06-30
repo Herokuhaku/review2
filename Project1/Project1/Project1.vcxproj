@@ -158,6 +158,7 @@
     <ClCompile Include="class\common\AnimationMng.cpp" />
     <ClCompile Include="class\common\ImageMng.cpp" />
     <ClCompile Include="class\common\Raycast.cpp" />
+    <ClCompile Include="class\EndGame.cpp" />
     <ClCompile Include="class\input\Controller.cpp" />
     <ClCompile Include="class\input\PadInput.cpp" />
     <ClCompile Include="class\Obj\Object.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="class\common\ImageMng.h" />
     <ClInclude Include="class\common\Raycast.h" />
     <ClInclude Include="class\common\Vector2.h" />
+    <ClInclude Include="class\EndGame.h" />
     <ClInclude Include="class\input\Controller.h" />
     <ClInclude Include="class\input\inputID.h" />
     <ClInclude Include="class\input\KeyInput.h" />

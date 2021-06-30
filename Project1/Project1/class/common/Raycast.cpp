@@ -10,8 +10,7 @@ bool Raycast::LineAndLine(Float2 A1, Float2 A2,Float2 B1, Float2 B2)
 	float bs2 = Cross(base,sub2);
 	float re = bs1 * bs2;
 
-	if (re > 0) 
-	{
+	if (re > 0){
 		return false;
 	}
 
@@ -23,7 +22,7 @@ bool Raycast::LineAndLine(Float2 A1, Float2 A2,Float2 B1, Float2 B2)
 	bs2 = Cross(base, sub2);
 
 	re = bs1 * bs2;
-	if (re > 0) {
+	if (re > 0){
 		return false;
 	}
 	return true;
@@ -51,10 +50,12 @@ bool Raycast::CheckCollision(Ray ray, Collision col)
 	line[3].end.y = line[3].p.y - col.second.y;
 	
 	bool flag = false;
-	for (int i = 0; i < 4; i++) {
-		flag |= CheckRay(ray,line[i]);
+	//for (int i = 0; i < 4; i++) {
+	//	flag |= CheckRay(ray,line[i]);
+	//}
+	for (auto l : line) {
+		flag |= CheckRay(ray,l);
 	}
-
 	return flag;
 }
 

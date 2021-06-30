@@ -104,10 +104,6 @@ void Player::Update(void)
 		return true;
 	};
 
-
-
-
-
 	Float2 vec(0,0);
 
 	// 移動測定処理 and アニメーションの変更
@@ -148,7 +144,7 @@ void Player::Update(void)
 		if (0 < vec.x) {
 			for (auto list : colvec_["right"]) {
 				check = colpos_ + list + vec;
-				if (!window(check) /*|| tmx_->GetMapDataCheck(check)*/) {
+				if (!window(check) || tmx_->GetMapDataCheck(check)) {
 					plus = false;
 				}
 			}
@@ -157,7 +153,7 @@ void Player::Update(void)
 		if (0 < vec.y) {
 			for (auto list : colvec_["down"]) {
 				check = colpos_ + list + vec;
-				if (!window(check)/* || tmx_->GetMapDataCheck(check)*/) {
+				if (!window(check) || tmx_->GetMapDataCheck(check)) {
 					plus = false;
 				}
 			}
@@ -166,7 +162,7 @@ void Player::Update(void)
 		if (0 > vec.x) {
 			for (auto list : colvec_["left"]) {
 				check = colpos_ + list + vec;
-				if (!window(check) /*|| tmx_->GetMapDataCheck(check)*/) {
+				if (!window(check) || tmx_->GetMapDataCheck(check)) {
 					plus = false;
 				}
 			}
@@ -175,7 +171,7 @@ void Player::Update(void)
 		if (0 > vec.y) {
 			for (auto list : colvec_["up"]) {
 				check = colpos_ + list + vec;
-				if (!window(check) /*|| tmx_->GetMapDataCheck(check)*/) {
+				if (!window(check) || tmx_->GetMapDataCheck(check)) {
 					plus = false;
 				}
 			}

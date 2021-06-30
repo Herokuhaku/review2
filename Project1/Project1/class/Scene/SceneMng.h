@@ -4,6 +4,7 @@
 #include <array>
 #include "BaseScene.h"
 #include "../common/Vector2.h"
+#include "../input/KeyInput.h"
 
 #define lpSceneMng SceneMng::GetInstance()
 
@@ -20,6 +21,7 @@ public:
 	void Draw(void);
 	const Int2 GetScreenSize(void)const;
 	void Finish(void) { finish_ = true; };
+	std::shared_ptr<Controller> GetController(void);
 private:
 	SceneMng();
 	~SceneMng();
@@ -29,4 +31,6 @@ private:
 	std::chrono::system_clock::time_point now_, old_;
 	const Int2 screenSize_;
 	bool finish_;
+
+	std::shared_ptr<Controller> controller_;
 };

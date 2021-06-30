@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <DxLib.h>
 #include "TitleScene.h"
+#include "MenuScene.h"
 #include "SceneMng.h"
 #include "Transition/CrossOverScene.h"
 #include "../common/ImageMng.h"
@@ -30,17 +31,14 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 {
 	click_[1] = click_[0];
 	click_[0] = GetMouseInput();
-	if (!click_[0] && (click_[1] & MOUSE_INPUT_LEFT)){
-		return std::make_unique<CrossOverScene>(3.0, std::move(own), std::make_unique<TitleScene>());
-	}
 	DrawOwnScreen(delta);
 
 	for (const auto& obj : objlist_) {
 		obj->Update();
 	}
 
-	if (CheckHitKey(KEY_INPUT_ESCAPE)) {
-
+	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {
+		return std::make_unique<MenuScene>(std::move(own));
 	}
 	return std::move(own);
 }

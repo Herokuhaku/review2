@@ -27,6 +27,7 @@ bool KeyInput::Init(void)
 		keyList_.try_emplace(InputID::Btn1, KEY_INPUT_Z);
 		keyList_.try_emplace(InputID::Btn2, KEY_INPUT_X);
 		keyList_.try_emplace(InputID::Btn3, KEY_INPUT_C);
+		keyList_.try_emplace(InputID::Escape, KEY_INPUT_ESCAPE);
 	}
 	for (auto id : InputID()) {
 		cntData_[id].fill(false);

@@ -15,6 +15,9 @@ void SceneMng::Run(void)
 	now_ = std::chrono::system_clock::now();
 
 	while (!ProcessMessage() && !finish_) {
+
+		(*controller_)();
+
 		_dbgAddDraw();
 		// deltatimeÇÃê›íË
 		old_ = now_;
@@ -45,6 +48,14 @@ const Int2 SceneMng::GetScreenSize(void)const
 	return screenSize_;
 }
 
+std::shared_ptr<Controller> SceneMng::GetController(void)
+{
+	if (controller_ == nullptr) {
+		controller_ = std::make_shared<KeyInput>();
+	}
+	return controller_;
+}
+
 SceneMng::SceneMng():screenSize_(1024,768)
 {
 	initflag_ = SysInit();
@@ -64,6 +75,7 @@ bool SceneMng::SysInit(void)
 	}
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	controller_ = std::make_shared<KeyInput>();
 	finish_ = false;
 	return true;
 }
