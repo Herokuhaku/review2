@@ -20,13 +20,12 @@ MenuScene::~MenuScene()
 
 bool MenuScene::Init(void)
 {
-    end_ = new EndGame(Int2(lpSceneMng.GetScreenSize()/2));
+    end_ = new EndGame(Float2(lpSceneMng.GetScreenSize()/2),Float2(200,100));
     return true;
 }
 
 UniqueScene MenuScene::Update(double delta, UniqueScene own)
 {   
-    end_->Update();
     DrawOwnScreen(delta);
 
     //click_[1] = click_[0];
@@ -49,5 +48,6 @@ void MenuScene::DrawOwnScreen(double delta)
     ClearDrawScreen();
 
     oldScene_->Draw(delta);
+    end_->Update();
     //DrawCircle(0,0,15,0xffffff,true);
 }

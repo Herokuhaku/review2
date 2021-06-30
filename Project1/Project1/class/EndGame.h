@@ -4,7 +4,7 @@
 class EndGame
 {
 public:
-	EndGame(Float2 pos);
+	EndGame(Float2 pos,Float2 size);
 	~EndGame();
 	bool Update(void);
 	bool Draw(void);
