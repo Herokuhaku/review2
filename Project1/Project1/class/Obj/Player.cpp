@@ -35,7 +35,7 @@ bool Player::Init(CntType cntType)
 
 	mag_ = 2;
 	speed_ = 5;
-	pos_ = Float2();
+	pos_ = Float2(1,0);
 	colpos_ = Float2();
 	std::list<Float2> flist;
 	//size/2
@@ -87,12 +87,17 @@ bool Player::LoadAnimation(void)
 
 void Player::Update(void)
 {
-// キー処理
+	// キー処理
 	if (!(*controller_)()) {
 		return;
 	}
+
+
+	Float2 vec(0, 0);
+	Float2 size = size_ / 2;
+
 	auto checkMove = [&](Float2&& moveVec) {
-		Raycast::Ray ray = {{ pos_ + size_ }, moveVec};
+		Raycast::Ray ray = { { pos_ + size_ }, moveVec };
 		_dbgDrawLine(ray.p.x, ray.p.y, ray.p.x + ray.v.x, ray.p.y + ray.v.y, 0x00ff00);
 		for (auto col : tmx_->GetColList()) {
 			_dbgDrawBox(col.first.x, col.first.y,
@@ -104,36 +109,41 @@ void Player::Update(void)
 		return true;
 	};
 
-	Float2 vec(0,0);
-
 	// 移動測定処理 and アニメーションの変更
-	if (controller_->Press(InputID::Left)) {
-		if (checkMove(Float2{-(speed_ + size_.x),0})) {
-			anim_->state("left");
-			vec.x -= speed_;
+	{
+		if (controller_->Press(InputID::Left)) {
+			if (checkMove(Float2{ -(speed_ + size.x),0 })) {
+				anim_->state("left");
+				vec.x -= speed_;
+			}
 		}
-	}
-	if (controller_->Press(InputID::Right)) {
-		if (checkMove(Float2{ speed_ + size_.x,0 })) {
-			anim_->state("right");
-			vec.x += speed_;
+		if (controller_->Press(InputID::Right)) {
+			if (checkMove(Float2{ speed_ + size.x,0 })) {
+				anim_->state("right");
+				vec.x += speed_;
+			}
 		}
-	}
-	if (controller_->Press(InputID::Up)) {
-		if (checkMove(Float2{ 0,-(speed_+size_.y) })) {
-			anim_->state("up");
-			vec.y -= speed_;
+		if (controller_->Press(InputID::Up)) {
+			if (checkMove(Float2{ 0,-(speed_ + size.y) })) {
+				anim_->state("up");
+				vec.y -= speed_;
+			}
 		}
-	}
-	if (controller_->Press(InputID::Down)) {
-		if (checkMove(Float2{ 0.0,(speed_ + size_.y) })) {
-			anim_->state("down");
-			vec.y += speed_;
+		if (controller_->Press(InputID::Down)) {
+			if (checkMove(Float2{ 0.0,(speed_ + size.y) })) {
+				anim_->state("down");
+				vec.y += speed_;
+			}
+		}
+		if (controller_->Pressed(InputID::Jump)) {
+			if (!jump_) { 
+				jump_ = true;
+			}
 		}
 	}
 	vec = vec.Normalized() * speed_;
 	// 当たり判定処理
-	auto window = [&](Float2 v) {
+	auto window = [&](Float2& v) {
 		return (v >= Float2(0, 0) && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
 	};
 	// ベクトルが0ではないとき　&& 当たり判定を見る
@@ -199,6 +209,7 @@ void Player::Update(void)
 	//		}
 	//	}
 	//}
+	Object::GravityUpdate();
 }
 
 void Player::Draw(void)

@@ -6,6 +6,7 @@ enum class InputID {
 	Down,
 	Left,
 	Right,
+	Jump,
 	Btn1,
 	Btn2,
 	Btn3,

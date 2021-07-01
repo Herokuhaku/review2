@@ -24,24 +24,6 @@ Vector2Template<T>::Vector2Template(std::string x_, std::string y_)
 	y = std::atoi(y_.c_str());
 }
 
-//template<class T>
-//inline Vector2Template<T>::Vector2Template(Vector2Template<T>* vec)
-//{
-//	//Vector2Template tmp(vec->x,vec->y);
-//	//x = tmp.x;
-//	//y = tmp.y;
-//	x = vec->x;
-//	y = vec->y;
-//}
-
-
-//template<class T>
-//inline Vector2Template<T>::Vector2Template(Vector2Template<float>& vec)
-//{
-//	x = vec.x;
-//	y = vec.y;
-//}
-
 template <class T>
 Vector2Template<T>::~Vector2Template()
 {

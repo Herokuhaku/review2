@@ -28,6 +28,7 @@ public:
 	virtual void Update(void) = 0;
 	// •`‰æ
 	virtual void Draw(void);
+	virtual void GravityUpdate(void);
 protected:
 	//TmxObj tmx_;
 	//XmlItem xmlitem_;
@@ -45,5 +46,9 @@ protected:
 	// 
 	std::shared_ptr<TmxObj> tmx_;
 	std::unique_ptr<Animation> anim_;
+	float gravity_;
+	bool jump_;
+	bool gravitybool_;
+	float jumppow_;
 };
 

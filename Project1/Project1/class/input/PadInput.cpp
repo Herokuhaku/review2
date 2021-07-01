@@ -25,6 +25,7 @@ bool PadInput::Init(void)
 	keyList_.try_emplace(InputID::Btn2, XINPUT_BUTTON_RIGHT_SHOULDER);
 	keyList_.try_emplace(InputID::Btn3, XINPUT_BUTTON_A);
 	keyList_.try_emplace(InputID::Escape, XINPUT_BUTTON_BACK);
+	keyList_.try_emplace(InputID::Jump,XINPUT_BUTTON_B);
 
 	for (auto id : InputID()) {
 		cntData_.try_emplace(id, TrgBool{ 0, 0 });
