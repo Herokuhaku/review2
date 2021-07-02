@@ -92,6 +92,8 @@ void Player::Update(void)
 		return;
 	}
 
+	// 当たり判定の座標位置
+	colpos_ = pos_ + size_;
 
 	Float2 vec(0, 0);
 	Float2 size = size_ / 2;
@@ -138,6 +140,7 @@ void Player::Update(void)
 		if (controller_->Pressed(InputID::Jump)) {
 			if (!jump_) { 
 				jump_ = true;
+				jumppow_ = -25;
 			}
 		}
 	}
@@ -191,8 +194,6 @@ void Player::Update(void)
 			pos_ = pos_ + vec;
 		}
 	}
-	// 当たり判定の座標位置
-	colpos_ = pos_ + size_;
 	anim_->Update();
 	//auto data = (*itr_).second;
 	//if (animCount++ > data) {

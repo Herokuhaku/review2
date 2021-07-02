@@ -50,5 +50,6 @@ protected:
 	bool jump_;
 	bool gravitybool_;
 	float jumppow_;
+	int count_;
 };
 
