@@ -25,10 +25,10 @@ public:
 	// ‰Šú‰»
 	virtual bool Init(CntType cntType) = 0;
 	// XV
-	virtual void Update(void) = 0;
+	virtual void Update(double delta) = 0;
 	// •`‰æ
 	virtual void Draw(void);
-	virtual void GravityUpdate(void);
+	virtual void GravityUpdate(double delta);
 protected:
 	//TmxObj tmx_;
 	//XmlItem xmlitem_;
@@ -47,9 +47,14 @@ protected:
 	std::shared_ptr<TmxObj> tmx_;
 	std::unique_ptr<Animation> anim_;
 	float gravity_;
+	float grav_;
 	bool jump_;
+	bool upflag_;
 	bool gravitybool_;
 	float jumppow_;
-	int count_;
+	float count_;
+	float v0;
+	float v1;
+	double time_;
 };
 

@@ -34,7 +34,7 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 	DrawOwnScreen(delta);
 
 	for (const auto& obj : objlist_) {
-		obj->Update();
+		obj->Update(delta);
 	}
 
 	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {

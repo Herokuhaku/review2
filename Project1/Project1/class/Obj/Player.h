@@ -13,7 +13,7 @@ public:
 	Player();
 	Player(CntType cntType, std::shared_ptr<TmxObj> tmx);
 	~Player();
-	void Update(void)override;
+	void Update(double delta)override;
 	void Draw(void);
 private:
 	bool Init(CntType cntType)override;

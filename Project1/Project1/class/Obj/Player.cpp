@@ -85,8 +85,9 @@ bool Player::LoadAnimation(void)
 	return rtnflag;
 }
 
-void Player::Update(void)
+void Player::Update(double delta)
 {
+	delta = 0.05;
 	// ƒL[ˆ—
 	if (!(*controller_)()) {
 		return;
@@ -140,7 +141,10 @@ void Player::Update(void)
 		if (controller_->Pressed(InputID::Jump)) {
 			if (!jump_) { 
 				jump_ = true;
-				jumppow_ = -25;
+				//jumppow_ = -25;
+				time_ = 0.1;
+				count_ = 0;
+				upflag_ = true;
 			}
 		}
 	}
@@ -210,7 +214,7 @@ void Player::Update(void)
 	//		}
 	//	}
 	//}
-	Object::GravityUpdate();
+	Object::GravityUpdate(delta);
 }
 
 void Player::Draw(void)

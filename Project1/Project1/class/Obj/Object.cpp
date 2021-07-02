@@ -7,10 +7,14 @@
 
 Object::Object():speed_(2)
 {
-	gravity_ = 2.0f;
+	gravity_ = 9.8f;
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
+	count_ = 0;
+	v0 = 13;
+	v1 = v0*3;
+	grav_ = 0.9;
 }
 
 Object::~Object()
@@ -22,7 +26,7 @@ void Object::Draw(void)
 	//(pos_.x, pos_.y,lpImageMng.GetAnimID(state_,animframe_), true);
 }
 
-void Object::GravityUpdate(void)
+void Object::GravityUpdate(double delta)
 {
 	auto window = [&](Float2& v) {
 		return (v >= Float2(0, 0) && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
@@ -56,10 +60,15 @@ void Object::GravityUpdate(void)
 	bool plus = true;
 	// ƒWƒƒƒ“ƒv’†
 	if (jump_) {
-		if (jumppow_ < 15) {
-			jumppow_ += gravity_;
+		if (jumppow_ < 0) {
+			jumppow_ = (time_ * log(time_)) * v1;
 		}
-
+		else {
+			jumppow_ = (time_ * log(time_))*5;
+		}
+		//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
+		
+		time_ += delta;
 		vec.y += jumppow_;
 		// “ª‚ð‚Ô‚Â‚¯‚½‚ç
 		bool flag_ = false;
@@ -75,8 +84,13 @@ void Object::GravityUpdate(void)
 		}
 		// ”»’è
 		if (flag_) {
-			jumppow_ = 2;
+			//time_ = v0 / gravity_ * 2;
+			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
+			//jumppow_ = (time_ * log(time_))*5;
+
+			jumppow_ = (time_ * log(time_)) * 2;
 			vec.y = 0;
+			upflag_ = false;
 		}
 		// ’n–Ê‚É‚Â‚¢‚½‚ç
 		flag_ = false;
@@ -86,7 +100,10 @@ void Object::GravityUpdate(void)
 		}
 		// ”»’è
 		if (flag_) {
+			pos_.y = ((static_cast<int>(pos_.y) / static_cast<int>(tmx_->GetTileSize().y))+1) * static_cast<int>(tmx_->GetTileSize().y);
 			jumppow_ = 0;
+			count_ = 0;
+			time_ = 0;
 			jump_ = false;
 		}
 		flag_ = false;
@@ -104,13 +121,15 @@ void Object::GravityUpdate(void)
 		flag_ = true;
 		for (auto list : colvec_["down"]) {
 			check_ = colpos_ + list;
-			check_.y+=speed_;
+			check_.y+=speed_ *2;
 			flag_ &= !tmx_->GetMapDataCheck(check_);
 		}
 		if (flag_) {
- 			jumppow_ = 0;
+			//time_ = v0 / gravity_  *2;
+			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
+			time_ = 1;
+			jumppow_ = (time_ * log(time_));
 			jump_ = true;
 		}
 	}
-
 }
