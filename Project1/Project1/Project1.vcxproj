@@ -191,8 +191,11 @@
     <ClInclude Include="class\input\inputID.h" />
     <ClInclude Include="class\input\KeyInput.h" />
     <ClInclude Include="class\input\PadInput.h" />
+    <ClInclude Include="class\Obj\Move.h" />
     <ClInclude Include="class\Obj\Object.h" />
     <ClInclude Include="class\Obj\Player.h" />
+    <ClInclude Include="class\Obj\state.h" />
+    <ClInclude Include="class\Obj\CheckKey.h" />
     <ClInclude Include="class\Scene\Transition\BlackAndWhiteScene.h" />
     <ClInclude Include="class\Scene\BaseScene.h" />
     <ClInclude Include="class\Scene\GameScene.h" />

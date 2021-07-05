@@ -5,6 +5,8 @@
 #include "../../Tiled/TmxObj.h"
 #include "../Animation/Animation.h"
 #include "../common/Raycast.h"
+//#include "Move.h"
+//#include "CheckKey.h"
 
 //using AnimVector = std::vector<std::pair<int,int>>;
 //
@@ -16,6 +18,8 @@
 //	DOWN,
 //	MAX
 //};
+struct CheckKey;
+struct Move;
 
 class Object
 {
@@ -47,14 +51,13 @@ protected:
 	std::shared_ptr<TmxObj> tmx_;
 	std::unique_ptr<Animation> anim_;
 	float gravity_;
-	float grav_;
 	bool jump_;
-	bool upflag_;
 	bool gravitybool_;
 	float jumppow_;
-	float count_;
-	float v0;
 	float v1;
 	double time_;
+
+	friend Move;
+	friend CheckKey;
 };
 

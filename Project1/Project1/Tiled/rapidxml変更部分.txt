@@ -1,0 +1,4 @@
+rapidxml_utils.hpp
+
+70行目に
+m_dataをそのまま返す関数を追加

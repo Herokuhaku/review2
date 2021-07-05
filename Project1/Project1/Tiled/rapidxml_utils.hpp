@@ -67,6 +67,10 @@ namespace rapidxml
             return &m_data.front();
         }
 
+        std::vector<Ch> vecData()const {
+            return m_data;
+        }
+
         //! Gets file data.
         //! \return Pointer to data of file.
         const Ch *data() const
@@ -86,6 +90,7 @@ namespace rapidxml
         std::vector<Ch> m_data;   // File data
 
     };
+
 
     //! Counts children of node. Time complexity is O(n).
     //! \return Number of children of node

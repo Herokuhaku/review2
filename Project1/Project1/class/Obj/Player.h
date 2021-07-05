@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 
+#include "state.h"
 #include <list>
 
 constexpr int GraphHd = 0;
@@ -20,4 +21,9 @@ private:
 
 	// アニメーションに使う画像を読み込む
 	bool LoadAnimation(void);
+
+	std::vector<char> statevec_;
+	rapidxml::xml_document<> stateDoc;
+	rapidxml::xml_node<>* statenode_;
+	AttachMent* attach_;
 };

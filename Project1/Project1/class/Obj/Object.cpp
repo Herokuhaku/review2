@@ -11,10 +11,10 @@ Object::Object():speed_(2)
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
-	count_ = 0;
-	v0 = 13;
-	v1 = v0*3;
-	grav_ = 0.9;
+	//count_ = 0;
+	//v0 = 13;
+	//v1 = v0*3;
+	//grav_ = 0.9;
 }
 
 Object::~Object()
@@ -60,10 +60,12 @@ void Object::GravityUpdate(double delta)
 	bool plus = true;
 	// ジャンプ中
 	if (jump_) {
+		// ジャンプ上りは速く(-は上方向　( < 0))
 		if (jumppow_ < 0) {
 			jumppow_ = (time_ * log(time_)) * v1;
 		}
 		else {
+			// 下りはゆっくり
 			jumppow_ = (time_ * log(time_))*5;
 		}
 		//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
@@ -90,7 +92,6 @@ void Object::GravityUpdate(double delta)
 
 			jumppow_ = (time_ * log(time_)) * 2;
 			vec.y = 0;
-			upflag_ = false;
 		}
 		// 地面についたら
 		flag_ = false;
@@ -102,7 +103,6 @@ void Object::GravityUpdate(double delta)
 		if (flag_) {
 			pos_.y = ((static_cast<int>(pos_.y) / static_cast<int>(tmx_->GetTileSize().y))+1) * static_cast<int>(tmx_->GetTileSize().y);
 			jumppow_ = 0;
-			count_ = 0;
 			time_ = 0;
 			jump_ = false;
 		}
