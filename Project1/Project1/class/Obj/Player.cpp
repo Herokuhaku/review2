@@ -43,6 +43,7 @@ bool Player::Init(CntType cntType)
 	mag_ = 2;
 	speed_ = 5;
 	pos_ = Float2(1,0);
+	pos_.y += 20;
 	colpos_ = Float2();
 	// 当たり判定をとるときに上下左右で使う点のオフセット
 	std::list<Float2> flist;
@@ -219,10 +220,9 @@ void Player::Update(double delta)
 	//		pos_ = pos_ + vec;
 	//	}
 	//}
-	//anim_->Update();
 
-
-	//Object::GravityUpdate(delta);
+	anim_->Update();
+	Object::GravityUpdate(delta);
 }
 
 void Player::Draw(void)

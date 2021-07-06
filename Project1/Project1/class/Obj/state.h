@@ -9,6 +9,11 @@
 #include <map>
 #include "Move.h"
 #include "CheckKey.h"
+#include "SetAnime.h"
+#include "Jump.h"
+#include "ColisionCheck.h"
+#include "../common/AnimationMng.h"
+#include "../../_debug/_DebugConOut.h"
 
 struct AttachMent {
 	bool operator()(Object* obj,rapidxml::xml_node<>* node) {
@@ -18,22 +23,16 @@ struct AttachMent {
 			std::string attachName = attach->first_attribute("name")->value();
 			// “®‚«‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚ç
 			if (attach_.find(attachName) != attach_.end()) {
+				TRACE("%s \n",attachName.c_str());
 				// ³‚µ‚­“®ì‚µ‚È‚©‚Á‚½‚çŽŸ‚É‰ñ‚é
 				if (!attach_[attachName](obj, attach)) {
 					continue;
 				}
 
-				//
-				auto attachment = attach->first_node();
-				if (attachment != nullptr) {
-					std::string name = attachment->first_attribute("name")->value();
-					if (attach_.count(name)) {
-						attach_[name](obj, attachment);
-						if (!(*this)(obj,attachment)) {
-							return false;
-						}
-					}
+				if (!(*this)(obj, attach)) {
+					return false;
 				}
+
 			}
 		}
 		return true;
@@ -41,6 +40,9 @@ struct AttachMent {
 private:
 	std::map<std::string, std::function<bool(Object* obj, rapidxml::xml_node<>* node)>> attach_ = {
 		{"Move",Move()},
-		{"CheckKey",CheckKey()}
+		{"CheckKey",CheckKey()},
+		{"SetAnime",SetAnime()},
+		{"ColisionCheck",ColisionCheck()},
+		{"Jump",Jump()}
 	};
 };

@@ -28,6 +28,7 @@ void Object::Draw(void)
 
 void Object::GravityUpdate(double delta)
 {
+	colpos_ = pos_ + size_;
 	auto window = [&](Float2& v) {
 		return (v >= Float2(0, 0) && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
 	};
@@ -105,6 +106,7 @@ void Object::GravityUpdate(double delta)
 			jumppow_ = 0;
 			time_ = 0;
 			jump_ = false;
+			//vec.y = 0;
 		}
 		flag_ = false;
 		// ƒWƒƒƒ“ƒvˆ—(—Ž‚¿‚éˆ—‚àŠÜ‚Þ)

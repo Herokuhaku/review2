@@ -15,17 +15,15 @@ struct CheckKey {
 			}
 			else if (name == "Left") {
 				tmp = obj->controller_->Press(InputID::Left);
-				if (tmp == 1) {
-					int i = 0;
-				}
 				return tmp;
 				//obj->pos_.y += std::atoi(atr->value());
 			}
 			else if (name == "Right") {
 				tmp = obj->controller_->Press(InputID::Right);	
-				if (tmp == 1) {
-					int i = 0;
-				}
+				return tmp;
+			}
+			else if (name == "Space") {
+				tmp = obj->controller_->Press(InputID::Jump);
 				return tmp;
 			}
 		}

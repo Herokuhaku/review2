@@ -20,6 +20,9 @@
 //};
 struct CheckKey;
 struct Move;
+struct SetAnime;
+struct ColisionCheck;
+struct Jump;
 
 class Object
 {
@@ -59,5 +62,8 @@ protected:
 
 	friend Move;
 	friend CheckKey;
+	friend SetAnime;
+	friend ColisionCheck;
+	friend Jump;
 };
 
