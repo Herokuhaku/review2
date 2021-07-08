@@ -48,16 +48,25 @@ protected:
 	Int2 size_;
 	// Drawの倍率
 	float mag_;
+	// 移動スピード
 	float speed_;
+	// コントローラ情報(keyboard,padなど)
 	std::unique_ptr<Controller>controller_;
-	// 
+	//  Tmxのデータ
 	std::shared_ptr<TmxObj> tmx_;
+	// アニメーション
 	std::unique_ptr<Animation> anim_;
+	// 重力
 	float gravity_;
+	// ジャンプ判定
 	bool jump_;
+	// 重力を適用するかどうか
 	bool gravitybool_;
+	// 現在のジャンプ力
 	float jumppow_;
+	// 最初の加速度
 	float v1;
+	// ジャンプしてどのくらいの時間たったか
 	double time_;
 
 	friend Move;

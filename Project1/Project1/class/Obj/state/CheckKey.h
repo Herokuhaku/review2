@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "Object.h"
-#include "../../Tiled/rapidxml.hpp"
-#include "../../Tiled/rapidxml_utils.hpp"
+#include "../Object.h"
+#include "../../../Tiled/rapidxml.hpp"
+#include "../../../Tiled/rapidxml_utils.hpp"
 
 struct CheckKey {
 	bool operator()(Object* obj, rapidxml::xml_node<>* node) {

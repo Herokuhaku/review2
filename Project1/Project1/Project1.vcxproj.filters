@@ -179,22 +179,22 @@
     <ClInclude Include="class\EndGame.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\state.h">
+    <ClInclude Include="class\Obj\state\state.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\Move.h">
+    <ClInclude Include="class\Obj\state\Move.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\CheckKey.h">
+    <ClInclude Include="class\Obj\state\CheckKey.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\SetAnime.h">
+    <ClInclude Include="class\Obj\state\SetAnime.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\ColisionCheck.h">
+    <ClInclude Include="class\Obj\state\ColisionCheck.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="class\Obj\Jump.h">
+    <ClInclude Include="class\Obj\state\Jump.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

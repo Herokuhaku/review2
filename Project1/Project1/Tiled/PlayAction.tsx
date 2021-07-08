@@ -2,15 +2,15 @@
 <objectList name = "Player">
 	<actionNode name="LR">
 			<attach name="CheckKey" state = "CntKey" key="Right">
-			<attach name ="ColisionCheck" speed="4" width="32">
+			<attach name ="ColisionCheck" speed="8" width="32">
 			<attach name="SetAnime" state = "right"/>
-			<attach name="Move" x="4" y = "0"/>
+			<attach name="Move" x="8" y = "0"/>
 			</attach
 	>	</attach>
 			<attach name="CheckKey" state = "CntKey" key="Left">
-			<attach name ="ColisionCheck" speed="-4" width="-32">
+			<attach name ="ColisionCheck" speed="-8" width="-32">
 			<attach name="SetAnime" state = "left"/>
-			<attach name="Move" x="-4" y = "0"/>
+			<attach name="Move" x="-8" y = "0"/>
 		</attach>
 	</attach>
 	</actionNode>

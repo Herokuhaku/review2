@@ -11,10 +11,7 @@ Object::Object():speed_(2)
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
-	//count_ = 0;
-	//v0 = 13;
-	//v1 = v0*3;
-	//grav_ = 0.9;
+	v1 = 30;
 }
 
 Object::~Object()
@@ -67,7 +64,7 @@ void Object::GravityUpdate(double delta)
 		}
 		else {
 			// ‰º‚è‚Í‚ä‚Á‚­‚è
-			jumppow_ = (time_ * log(time_))*5;
+			jumppow_ = (time_ * log(time_))*gravity_;
 		}
 		//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
 		
@@ -90,9 +87,9 @@ void Object::GravityUpdate(double delta)
 			//time_ = v0 / gravity_ * 2;
 			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
 			//jumppow_ = (time_ * log(time_))*5;
-
-			jumppow_ = (time_ * log(time_)) * 2;
-			vec.y = 0;
+			time_ = 1;
+			jumppow_ = (time_ * log(time_)) * gravity_;
+			vec.y += 1;
 		}
 		// ’n–Ê‚É‚Â‚¢‚½‚ç
 		flag_ = false;
@@ -123,7 +120,7 @@ void Object::GravityUpdate(double delta)
 		flag_ = true;
 		for (auto list : colvec_["down"]) {
 			check_ = colpos_ + list;
-			check_.y+=speed_ *2;
+			//check_.y +=speed_ *2;
 			flag_ &= !tmx_->GetMapDataCheck(check_);
 		}
 		if (flag_) {

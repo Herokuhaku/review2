@@ -1,7 +1,8 @@
 #include "../Vector2.h"
 #include <cmath>
 
-
+template<class T>
+const Vector2Template<T> Vector2Template<T>::ZERO = { 0,0 };
 
 template <class T>
 Vector2Template<T>::Vector2Template()

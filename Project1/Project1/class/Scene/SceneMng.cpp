@@ -11,7 +11,7 @@ void SceneMng::Run(void)
 		return;
 	}
 	// Sceneのインスタンス
-	scene_ = std::make_unique<GameScene>();
+	scene_ = std::make_unique<TitleScene>();
 	now_ = std::chrono::system_clock::now();
 
 	while (!ProcessMessage() && !finish_) {

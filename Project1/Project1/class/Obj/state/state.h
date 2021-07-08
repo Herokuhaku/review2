@@ -1,10 +1,5 @@
 #pragma once
 //#include <string>
-//#include <functional>
-//#include <map>
-//#include "Player.h"
-//#include "../../Tiled/rapidxml.hpp"
-//#include "../../Tiled/rapidxml_utils.hpp"
 #include <functional>
 #include <map>
 #include "Move.h"
@@ -12,8 +7,8 @@
 #include "SetAnime.h"
 #include "Jump.h"
 #include "ColisionCheck.h"
-#include "../common/AnimationMng.h"
-#include "../../_debug/_DebugConOut.h"
+#include "../../common/AnimationMng.h"
+#include "../../../_debug/_DebugConOut.h"
 
 struct AttachMent {
 	bool operator()(Object* obj,rapidxml::xml_node<>* node) {
