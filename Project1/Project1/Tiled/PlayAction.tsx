@@ -16,7 +16,15 @@
 	</actionNode>
 	<actionNode name="Jump">
 		<attach name ="CheckKey" key="Space">
-			<attach name="Jump" />
+			<attach name="Jump" time="0.1" />
 		</attach>
 	</actionNode>
+	<actionNode name="Command">
+		<attach name ="CheckCommand" key="btn1">
+			<attach name="Command" state="right" grace="5">
+				<attach name="Command" state="left" grace="5">
+				</attach>
+			</attach>
+		</attach>
+	</actionNode >
 </objectList>

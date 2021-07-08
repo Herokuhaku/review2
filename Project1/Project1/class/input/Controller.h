@@ -1,6 +1,8 @@
 #pragma once
 #include <array>
 #include <map>
+#include <vector>
+#include <string>
 #include "inputID.h"
 
 enum class Trg {
@@ -27,7 +29,13 @@ public:
 		}
 		return this != nullptr;
 	}
-	Controller() {};
+	Controller():maxcount_(60) {
+		keyhistroy_.resize(maxcount_);
+		for (auto& his : keyhistroy_) {
+			his = InputID::Max;
+		}
+		histroycount_ = 0;
+	};
 	virtual ~Controller() {};
 	// 初期化
 	virtual bool Init(void) = 0;
@@ -45,9 +53,16 @@ public:
 	bool Pressed(InputID id);
 	// 離した瞬間
 	bool Released(InputID id);
+	// 入力履歴と最新の位置を返す
+	std::pair<std::vector<InputID>,int> GetHistroy_(void);
 private:
 protected:
 	CntData cntData_;
 	std::map<InputID, unsigned int> keyList_ = {};
+
+	// キーボードの入力履歴
+	std::vector<InputID> keyhistroy_;
+	int histroycount_;
+	const int maxcount_;
 };
 

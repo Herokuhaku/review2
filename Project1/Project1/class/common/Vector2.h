@@ -9,6 +9,7 @@ public:
 	Vector2Template();
 	~Vector2Template();
 	Vector2Template(T x_, T y_);
+
 	Vector2Template(std::string x_,std::string y_);
 	operator Vector2Template<int>() {
 		return Vector2Template<int>(static_cast<int>(x), static_cast<int>(y));

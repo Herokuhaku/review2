@@ -45,6 +45,15 @@ void KeyInput::Update(void)
 		cntData_[id][static_cast<int>(Trg::Old)] = cntData_[id][static_cast<int>(Trg::Now)];
 		cntData_[id][static_cast<int>(Trg::Now)] = keyData_[keyList_[id]];
 	}
+	// —š—ð“ü—Í
+	for (auto&& id : InputID()) {
+		if (cntData_[id][static_cast<int>(Trg::Now)]) {
+			keyhistroy_[histroycount_++] = id;
+			if (histroycount_ == maxcount_) {
+	 			histroycount_ = 0;
+			}
+		}
+	}
 }
 
 bool KeyInput::WriteConfig(void)

@@ -105,7 +105,7 @@ bool Player::LoadAnimation(void)
 
 void Player::Update(double delta)
 {
-	delta = 0.05;
+	//delta = 0.05;
 	// キー処理
 	if (!(*controller_)()) {
 		return;
@@ -117,10 +117,8 @@ void Player::Update(double delta)
 
 	//// 当たり判定の座標位置
 	//colpos_ = pos_ + size_;
-
 	//Float2 vec(0, 0);
 	//Float2 size = size_ / 2;
-
 	//auto checkMove = [&](Float2&& moveVec) {
 	//	Raycast::Ray ray = { { pos_ + size_ }, moveVec };
 	//	_dbgDrawLine(ray.p.x, ray.p.y, ray.p.x + ray.v.x, ray.p.y + ray.v.y, 0x00ff00);
@@ -133,7 +131,6 @@ void Player::Update(double delta)
 	//	}
 	//	return true;
 	//};
-
 	//// 移動測定処理 and アニメーションの変更
 	//{
 	//	if (controller_->Press(InputID::Left)) {

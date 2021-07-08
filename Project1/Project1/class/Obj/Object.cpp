@@ -7,11 +7,11 @@
 
 Object::Object():speed_(2)
 {
-	gravity_ = 9.8f;
+	gravity_ = 4.9f;
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
-	v1 = 30;
+	v1 = 20;
 }
 
 Object::~Object()
@@ -27,7 +27,7 @@ void Object::GravityUpdate(double delta)
 {
 	colpos_ = pos_ + size_;
 	auto window = [&](Float2& v) {
-		return (v >= Float2(0, 0) && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
+		return (v >= v.ZERO && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
 	};
 
 	// 埋まった時の対応
@@ -43,7 +43,7 @@ void Object::GravityUpdate(double delta)
 			if (tmx_->GetMapDataCheck(check_)) {
 				do {
 					Int2 chip = (Int2(pos_) / tmx_->GetTileSize());
-					pos_.y = (chip * tmx_->GetTileSize()-1).y;
+					pos_.y = static_cast<float>((chip * tmx_->GetTileSize()-1).y);
 					colpos_ = pos_ + size_;
 					check_ = colpos_ + list;
 				} while (tmx_->GetMapDataCheck(check_));
@@ -60,11 +60,11 @@ void Object::GravityUpdate(double delta)
 	if (jump_) {
 		// ジャンプ上りは速く(-は上方向　( < 0))
 		if (jumppow_ < 0) {
-			jumppow_ = (time_ * log(time_)) * v1;
+			jumppow_ = static_cast<float>((time_ * log(time_)) * v1);
 		}
 		else {
 			// 下りはゆっくり
-			jumppow_ = (time_ * log(time_))*gravity_;
+			jumppow_ = static_cast<float>((time_ * log(time_))*gravity_);
 		}
 		//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
 		
@@ -88,7 +88,7 @@ void Object::GravityUpdate(double delta)
 			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
 			//jumppow_ = (time_ * log(time_))*5;
 			time_ = 1;
-			jumppow_ = (time_ * log(time_)) * gravity_;
+			jumppow_ = static_cast<float>((time_ * log(time_)) * gravity_);
 			vec.y += 1;
 		}
 		// 地面についたら
@@ -127,7 +127,7 @@ void Object::GravityUpdate(double delta)
 			//time_ = v0 / gravity_  *2;
 			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
 			time_ = 1;
-			jumppow_ = (time_ * log(time_));
+			jumppow_ = static_cast<float>((time_ * log(time_)));
 			jump_ = true;
 		}
 	}
