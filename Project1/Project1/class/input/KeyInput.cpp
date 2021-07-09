@@ -19,7 +19,6 @@ KeyInput::~KeyInput()
 
 bool KeyInput::Init(void)
 {
-	if (!ReadConfig()) {
 		keyList_.try_emplace(InputID::Up, KEY_INPUT_UP);
 		keyList_.try_emplace(InputID::Down, KEY_INPUT_DOWN);
 		keyList_.try_emplace(InputID::Left, KEY_INPUT_LEFT);
@@ -29,7 +28,6 @@ bool KeyInput::Init(void)
 		keyList_.try_emplace(InputID::Btn3, KEY_INPUT_C);
 		keyList_.try_emplace(InputID::Escape, KEY_INPUT_ESCAPE);
 		keyList_.try_emplace(InputID::Jump, KEY_INPUT_SPACE);
-	}
 	for (auto id : InputID()) {
 		cntData_[id].fill(false);
 	}
@@ -46,45 +44,10 @@ void KeyInput::Update(void)
 		cntData_[id][static_cast<int>(Trg::Now)] = keyData_[keyList_[id]];
 	}
 	// —š—ð“ü—Í
+
 	for (auto&& id : InputID()) {
 		if (cntData_[id][static_cast<int>(Trg::Now)]) {
-			keyhistroy_[histroycount_++] = id;
-			if (histroycount_ == maxcount_) {
-	 			histroycount_ = 0;
-			}
+			(*histroy_)[histroycount_++] = id;
 		}
 	}
-}
-
-bool KeyInput::WriteConfig(void)
-{
-	std::ifstream ifs("class/input/Config.txt");
-	int count_ = 0;
-	std::vector<int> num;
-	if (ifs.fail()) {
-		while (num.size() && !keyData_[KEY_INPUT_ESCAPE]) {
-			DrawFormatString(0, 0,0xffffff,"%d",num.size());
-			for (int key = 0; key < keyData_.size();key++) {
-				if (keyData_[key]) {
-					num.emplace_back(key);
-				}
-			}
-		}
-	}
-	return true;
-}
-
-bool KeyInput::ReadConfig(void)
-{
-	std::ifstream ifs("class/input/Config.txt");
-	std::string str;
-	if (ifs.fail()) {
-		return false;
-	}
-	int id = 0;
-	while (getline(ifs, str)) {
-		//keyList_.try_emplace(static_cast<InputID>(id++),);
-	}
-
-	return true;
 }

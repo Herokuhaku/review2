@@ -8,8 +8,6 @@ public:
 	~KeyInput();
 	bool Init(void)override;
 	void Update(void)override;
-	bool WriteConfig(void);
-	bool ReadConfig(void);
 	CntType GetCntType(void)override{
 		return CntType::Key;
 	}

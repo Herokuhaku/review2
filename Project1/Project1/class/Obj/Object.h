@@ -23,6 +23,8 @@ struct Move;
 struct SetAnime;
 struct ColisionCheck;
 struct Jump;
+struct CheckCommand;
+struct Command;
 
 class Object
 {
@@ -68,11 +70,14 @@ protected:
 	float v1;
 	// ƒWƒƒƒ“ƒv‚µ‚Ä‚Ç‚Ì‚­‚ç‚¢‚ÌŽžŠÔ‚½‚Á‚½‚©
 	double time_;
-
+	// 
+	int commandcount_ = 0;
 	friend Move;
 	friend CheckKey;
 	friend SetAnime;
 	friend ColisionCheck;
 	friend Jump;
+	friend CheckCommand;
+	friend Command;
 };
 

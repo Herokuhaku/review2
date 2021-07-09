@@ -7,6 +7,8 @@
 #include "SetAnime.h"
 #include "Jump.h"
 #include "ColisionCheck.h"
+#include "CheckCommand.h"
+#include "Command.h"
 #include "../../common/AnimationMng.h"
 #include "../../../_debug/_DebugConOut.h"
 
@@ -38,6 +40,8 @@ private:
 		{"CheckKey",CheckKey()},
 		{"SetAnime",SetAnime()},
 		{"ColisionCheck",ColisionCheck()},
-		{"Jump",Jump()}
+		{"Jump",Jump()},
+		{"CheckCommand",CheckCommand()},
+		{"Command",Command()}
 	};
 };

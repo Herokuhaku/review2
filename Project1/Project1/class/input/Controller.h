@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "inputID.h"
+#include "../common/RingInputID.h"
 
 enum class Trg {
 	Now,
@@ -20,6 +21,7 @@ enum class CntType {
 using TrgBool = std::array<bool, static_cast<size_t>(Trg::Max)>;
 using CntData = std::map<InputID,TrgBool>;
 
+
 class Controller
 {
 public:
@@ -29,11 +31,7 @@ public:
 		}
 		return this != nullptr;
 	}
-	Controller():maxcount_(60) {
-		keyhistroy_.resize(maxcount_);
-		for (auto& his : keyhistroy_) {
-			his = InputID::Max;
-		}
+	Controller() {
 		histroycount_ = 0;
 	};
 	virtual ~Controller() {};
@@ -54,15 +52,15 @@ public:
 	// 離した瞬間
 	bool Released(InputID id);
 	// 入力履歴と最新の位置を返す
-	std::pair<std::vector<InputID>,int> GetHistroy_(void);
+	std::pair<RingInputID*,int> GetHistroy_(void);
 private:
 protected:
 	CntData cntData_;
 	std::map<InputID, unsigned int> keyList_ = {};
 
 	// キーボードの入力履歴
-	std::vector<InputID> keyhistroy_;
 	int histroycount_;
-	const int maxcount_;
+	
+	RingInputID* histroy_;
 };
 

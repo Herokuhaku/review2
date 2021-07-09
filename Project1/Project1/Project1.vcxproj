@@ -185,13 +185,16 @@
     <ClInclude Include="class\common\detailes\Vector2.h" />
     <ClInclude Include="class\common\ImageMng.h" />
     <ClInclude Include="class\common\Raycast.h" />
+    <ClInclude Include="class\common\RingInputID.h" />
     <ClInclude Include="class\common\Vector2.h" />
     <ClInclude Include="class\EndGame.h" />
     <ClInclude Include="class\input\Controller.h" />
     <ClInclude Include="class\input\inputID.h" />
     <ClInclude Include="class\input\KeyInput.h" />
     <ClInclude Include="class\input\PadInput.h" />
+    <ClInclude Include="class\Obj\state\CheckCommand.h" />
     <ClInclude Include="class\Obj\state\ColisionCheck.h" />
+    <ClInclude Include="class\Obj\state\Command.h" />
     <ClInclude Include="class\Obj\state\Jump.h" />
     <ClInclude Include="class\Obj\state\Move.h" />
     <ClInclude Include="class\Obj\Object.h" />

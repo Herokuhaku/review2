@@ -20,9 +20,9 @@
 		</attach>
 	</actionNode>
 	<actionNode name="Command">
-		<attach name ="CheckCommand" key="btn1">
-			<attach name="Command" state="right" grace="5">
-				<attach name="Command" state="left" grace="5">
+		<attach name ="CheckCommand" commandname="beam" key="btn1" grace="1" >
+			<attach name="Command" key="right" grace="10">
+				<attach name="Command" key="left" grace="10">
 				</attach>
 			</attach>
 		</attach>
