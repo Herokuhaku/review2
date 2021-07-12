@@ -23,7 +23,9 @@ public:
 	bool Init(void);
 	bool Update(void);
 	bool Draw(Float2 pos,Int2 size,float mag = 1.0f);
+	// ó‘Ô‚ğ•Ï‰»‚³‚¹‚é
 	bool state(const std::string state);
+	// ©•ª‚ÌƒL[‚ğæ“¾‚·‚é
 	std::string GetKey(void);
 private:
 	std::string key_;

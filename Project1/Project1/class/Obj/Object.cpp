@@ -12,6 +12,8 @@ Object::Object():speed_(2)
 	jumppow_ = 0;
 	jump_ = false;
 	v1 = 20;
+	grace_ = 0;
+	commandcount_ = 0;
 }
 
 Object::~Object()

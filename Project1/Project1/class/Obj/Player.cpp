@@ -40,10 +40,11 @@ bool Player::Init(CntType cntType)
 	statenode_ = stateDoc.first_node("objectList");
 	attach_ = new AttachMent();
 
+	playcommand_ = false;
 	mag_ = 2;
 	speed_ = 5;
 	pos_ = Float2(1,0);
-	pos_.y += 20;
+	//pos_.y += 20;
 	colpos_ = Float2();
 	// 当たり判定をとるときに上下左右で使う点のオフセット
 	std::list<Float2> flist;
@@ -78,15 +79,13 @@ bool Player::LoadAnimation(void)
 	auto check = [&rtnflag](bool flag) {
 		rtnflag &= flag;
 	};
-	std::array<std::string,4> list = { "down" ,"left","up","right"};
+	std::array<std::string,5> list = { "down" ,"left","up","right","beam"};
 
 	// アニメーションクラスを作成(引数はアニメーションのキーになる)
-	anim_ = std::make_unique<Animation>("GreenPlayer");
+	anim_= std::make_unique<Animation>("GreenMove");
 	check(lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx"));
-
 	for (auto& data : list) {
 		check(lpAnimationMng.SetItem(anim_->GetKey(), data));
-
 	}
 	//// 正面のアニメーション
 	//check(lpAnimationMng.SetItem(anim_->GetKey(), "down"));
@@ -218,6 +217,7 @@ void Player::Update(double delta)
 	//	}
 	//}
 
+	
 	anim_->Update();
 	Object::GravityUpdate(delta);
 }

@@ -70,8 +70,12 @@ protected:
 	float v1;
 	// ジャンプしてどのくらいの時間たったか
 	double time_;
-	// 
-	int commandcount_ = 0;
+	// コマンドの猶予フレーム保存用
+	int grace_;
+
+	int commandcount_;
+
+	bool playcommand_;
 	friend Move;
 	friend CheckKey;
 	friend SetAnime;

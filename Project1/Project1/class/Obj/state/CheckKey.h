@@ -7,6 +7,9 @@
 
 struct CheckKey {
 	bool operator()(Object* obj, rapidxml::xml_node<>* node) {
+		if (obj->playcommand_) {
+			return false;
+		}
 		for (auto atr = node->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
 			std::string name = atr->value();
 			int tmp = 0;

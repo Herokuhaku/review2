@@ -19,10 +19,10 @@ KeyInput::~KeyInput()
 
 bool KeyInput::Init(void)
 {
-		keyList_.try_emplace(InputID::Up, KEY_INPUT_UP);
-		keyList_.try_emplace(InputID::Down, KEY_INPUT_DOWN);
-		keyList_.try_emplace(InputID::Left, KEY_INPUT_LEFT);
-		keyList_.try_emplace(InputID::Right, KEY_INPUT_RIGHT);
+		keyList_.try_emplace(InputID::Up, KEY_INPUT_W);
+		keyList_.try_emplace(InputID::Down, KEY_INPUT_S);
+		keyList_.try_emplace(InputID::Left, KEY_INPUT_A);
+		keyList_.try_emplace(InputID::Right, KEY_INPUT_D);
 		keyList_.try_emplace(InputID::Btn1, KEY_INPUT_Z);
 		keyList_.try_emplace(InputID::Btn2, KEY_INPUT_X);
 		keyList_.try_emplace(InputID::Btn3, KEY_INPUT_C);
@@ -48,6 +48,9 @@ void KeyInput::Update(void)
 	for (auto&& id : InputID()) {
 		if (cntData_[id][static_cast<int>(Trg::Now)]) {
 			(*histroy_)[histroycount_++] = id;
+			//if ((*histroy_)[histroycount_] != InputID::Max) {
+			//	int i = 0;
+			//}
 		}
 	}
 }
