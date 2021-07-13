@@ -226,12 +226,12 @@ void Player::Draw(void)
 {
 	Float2 check(colpos_);
 	anim_->Draw(pos_,size_,mag_);
-	for (auto list : colvec_) {
-		for (auto pos : colvec_[list.first]) {
-			check = colpos_ + pos;
-			DrawCircle(check.x,check.y,2,0xffffff,true);
-		}
-	}
+	//for (auto list : colvec_) {
+	//	for (auto pos : colvec_[list.first]) {
+	//		check = colpos_ + pos;
+	//		DrawCircle(check.x,check.y,2,0xffffff,true);
+	//	}
+	//}
 	//DrawCircle(colpos_.x,colpos_.y,2,0xffffff,true);
 	//Object::Draw();
 	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);

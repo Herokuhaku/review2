@@ -56,29 +56,29 @@ void GameScene::DrawOwnScreen(double delta)
 	Int2 tilesize = tmxobj_->GetTileSize();
 	unsigned int firstgid = tmxobj_->GetFirstGid();
 
-	//for (auto& map : tmxobj_.GetMapData())
-	//{
-	//	int x = 0, y = 0;
-	//	for (auto& data : map.second) {
-	//		int id = data - firstgid;
-	//		if (id >= 0) {
-	//			DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
-	//		}
-	//		x++;
-	//		if (x % area.x == 0 && x != 0) { y++;}
-	//	}
-	//}
-	
-	for (auto& map : tmxobj_->GetMapData()) {
-		for (int y = 0; y < area.y; y++) {
-			for (int x = 0; x < area.x; x++) {
-				int id = tmxobj_->GetMapData(map.first, x, y) - firstgid;
-				if (id >= 0) {
-					DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
-				}
+	for (auto& map : tmxobj_->GetMapData())
+	{
+		int x = 0, y = 0;
+		for (auto& data : map.second) {
+			int id = data - firstgid;
+			if (id >= 0) {
+				DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
 			}
+			x++;
+			if (x % area.x == 0 && x != 0) { y++;}
 		}
 	}
+	
+	//for (auto& map : tmxobj_->GetMapData()) {
+	//	for (int y = 0; y < area.y; y++) {
+	//		for (int x = 0; x < area.x; x++) {
+	//			int id = tmxobj_->GetMapData(map.first, x, y) - firstgid;
+	//			if (id >= 0) {
+	//				DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
+	//			}
+	//		}
+	//	}
+	//}
 	for (auto& obj : objlist_) {
 		obj->Draw();
 	}

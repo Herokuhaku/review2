@@ -30,7 +30,7 @@ void SceneMng::Run(void)
 		SetDrawScreen(DX_SCREEN_BACK);
 		ClsDrawScreen();
 		scene_->Draw(delta);
-
+		DrawFormatString(0, 0, 0xffff00,"%f",GetFPS());
 		ScreenFlip();
 	}
 }
