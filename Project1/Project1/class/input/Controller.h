@@ -18,21 +18,14 @@ enum class CntType {
 	Max
 };
 
-struct RingBuf {
-	InputID id;
-	RingBuf* before = nullptr;
-	RingBuf* after = nullptr;
-};
+
 
 using TrgBool = std::array<bool, static_cast<size_t>(Trg::Max)>;
 using CntData = std::map<InputID,TrgBool>;
 
-
 class Controller
 {
 public:
-
-
 	bool operator()() {
 		if (this != nullptr) {
 			Update();
@@ -65,7 +58,14 @@ public:
 	// histroy‚Ì’†g‚ð‰Šú‰»‚·‚é
 	void ResetHistroy(void) { histroy_->ClearRing(); };
 	
-	RingBuf* Create(int no);
+	struct RingBuf {
+		RingBuf Create(int no);
+		void Destroy(RingBuf* buf);
+
+		int id;
+		RingBuf* before = nullptr;
+		RingBuf* after = nullptr;
+	};
 
 private:
 protected:
@@ -77,4 +77,3 @@ protected:
 	
 	RingInputID* histroy_;
 };
-
