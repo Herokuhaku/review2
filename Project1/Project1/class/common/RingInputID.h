@@ -36,6 +36,10 @@ struct RingInputID
 	std::vector<InputID>& GetRing(void) {
 		return ringvec_;
 	};
+
+	int size(void) {
+		return ringvec_.size();
+	};
 private:
 	std::vector<InputID> ringvec_;
 	int length_;

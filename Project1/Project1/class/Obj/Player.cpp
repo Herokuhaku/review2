@@ -216,8 +216,14 @@ void Player::Update(double delta)
 	//		pos_ = pos_ + vec;
 	//	}
 	//}
+	for (auto input : InputID()) {
+		if (controller_->Pressed(input)) {
+			(*commandhis_)[hisnum_++] = input;
+		}
+	}
 
-	
+
+
 	anim_->Update();
 	Object::GravityUpdate(delta);
 }
@@ -226,6 +232,20 @@ void Player::Draw(void)
 {
 	Float2 check(colpos_);
 	anim_->Draw(pos_,size_,mag_);
+
+	int pos = 0;
+	//auto his = controller_->GetHistroy_();
+	std::string	before = "none";
+	std::string name = "none";
+	auto his = (*commandhis_);
+
+	for (int i = 0; i < his.size(); i++) {
+		name = Converter(his[i]);
+		if (name != "none") {
+			DrawFormatString(pos, 700, 0xffffff, "%s  ", name.c_str());
+			pos += GetFontSize() * name.size() + 5;
+		}
+	}
 	//for (auto list : colvec_) {
 	//	for (auto pos : colvec_[list.first]) {
 	//		check = colpos_ + pos;

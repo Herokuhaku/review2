@@ -35,7 +35,6 @@ std::pair<RingInputID*, int> Controller::GetHistroy_(void)
 //	beginB->before = nowB;
 //	nowB->after = beginB;
 //	return beginB;
-//	//return nullptr;
 //}
 //
 //void Controller::RingBuf::Destroy(RingBuf* buf)
@@ -50,33 +49,3 @@ std::pair<RingInputID*, int> Controller::GetHistroy_(void)
 //	}
 //	delete buf;
 //}
-
-RingBuf* Controller::RingBuf::Create(int no)
-{
-	int count = 0;
-	auto beginB = new RingBuf{ count, nullptr, nullptr };
-	auto beforeB = beginB;
-	auto nowB = beginB;
-	for (int i = 0; i < no; i++) {
-		count++;
-		nowB = new RingBuf{ count,beforeB,nullptr };
-		beforeB->after = nowB;
-		beforeB = nowB;
-	}
-	beginB->before = nowB;
-	nowB->after = beginB;
-	return beginB;
-}
-
-void Controller::RingBuf::Destroy(RingBuf* buf)
-{
-	if (buf->before == nullptr) {
-		return;
-	}
-	buf->before->after = nullptr;
-	while (buf->after != nullptr) {
-		buf = buf->after;
-		delete buf->before;
-	}
-	delete buf;
-}

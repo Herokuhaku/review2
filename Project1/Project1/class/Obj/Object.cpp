@@ -7,13 +7,15 @@
 
 Object::Object():speed_(2)
 {
-	gravity_ = 4.9f;
+	gravity_ = 15.0f;
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
-	v1 = 20;
+	v1 = 15;
 	grace_ = 0;
 	commandcount_ = 0;
+	commandhis_ = new RingInputID(180);
+	hisnum_ = 0;
 }
 
 Object::~Object()

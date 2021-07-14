@@ -27,6 +27,19 @@ static InputID Converter(const std::string str) {
 	return InputID::Max;
 };
 
+static std::string Converter(const InputID id) {
+	if (id == InputID::Up) { return "up"; }
+	else if (id == InputID::Down) { return "down";}
+	else if (id == InputID::Left) { return "left"; }
+	else if (id == InputID::Right) { return "right"; }
+	else if (id == InputID::Jump) { return "jump"; }
+	else if (id == InputID::Btn1) { return "btn1"; }
+	else if (id == InputID::Btn2) { return "btn2"; }
+	else if (id == InputID::Btn3) { return "btn3";}
+	else if (id == InputID::Escape) { return "Escape"; }
+	return "none";
+}
+
 static InputID begin(InputID) { return InputID::Up; };
 static InputID end(InputID) { return InputID::Max; };
 static InputID operator++(InputID& num) { return num = InputID(std::underlying_type<InputID>::type(num) + 1); };

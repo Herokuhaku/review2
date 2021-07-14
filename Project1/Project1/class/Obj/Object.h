@@ -5,6 +5,7 @@
 #include "../../Tiled/TmxObj.h"
 #include "../Animation/Animation.h"
 #include "../common/Raycast.h"
+#include "../common/RingInputID.h"
 //#include "Move.h"
 //#include "CheckKey.h"
 
@@ -70,12 +71,16 @@ protected:
 	float v1;
 	// ジャンプしてどのくらいの時間たったか
 	double time_;
+	// コマンド再生しているか
+	bool playcommand_;
 	// コマンドの猶予フレーム保存用
 	int grace_;
-
+	// コマンド確認のための位置情報
 	int commandcount_;
 
-	bool playcommand_;
+	RingInputID* commandhis_;
+	int hisnum_;
+
 	friend Move;
 	friend CheckKey;
 	friend SetAnime;

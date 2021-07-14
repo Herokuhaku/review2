@@ -23,7 +23,7 @@ struct CheckKey {
 				//obj->pos_.y += std::atoi(atr->value());
 			}
 			else if (name == "Right") {
-				tmp = obj->controller_->Press(InputID::Right);	
+				tmp = obj->controller_->Press(InputID::Right);
 				return tmp;
 			}
 			else if (name == "Space") {

@@ -19,11 +19,17 @@ struct Command {
 				key = Converter(val);
 			}
 			else if (name == "grace") {
-				for (int i = 1; i <= atoi(val.c_str()); i++) {
+				for (int i = 0; i < atoi(val.c_str()); i++) {
 					if ((*his.first)[his.second - i - obj->grace_] == key) {
 						rtnflag_ = true;
-						obj->grace_ += i;
+						while ((*his.first)[his.second-i-obj->grace_] == key) {
+							i++;
+						}
+						obj->grace_ += i-1;
 						break;
+					}
+					else if((*his.first)[his.second  - obj->grace_+1] == (*his.first)[his.second - i - obj->grace_]){
+						continue;
 					}
 					else {
 						(*obj).controller_->ResetHistroy();
