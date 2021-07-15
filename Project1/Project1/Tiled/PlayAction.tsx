@@ -16,7 +16,7 @@
 	</actionNode>
 	<actionNode name="Jump">
 		<attach name ="CheckKey" key="Space">
-			<attach name="Jump" time="0.1" />
+			<attach name="Jump" time="0.50" />
 		</attach>
 	</actionNode>
 	<actionNode name="Command">

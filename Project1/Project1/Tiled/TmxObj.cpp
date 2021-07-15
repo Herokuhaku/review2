@@ -264,9 +264,11 @@ const bool TmxObj::GetMapDataCheck(Float2 pos)
 	Int2 chip = (p / tileSize_);
 	//Int2 chip = (pos / tileSize_);
 	int point = chip.x + (worldArea_.x * chip.y);
-	
+	if (point < 0) {
+		return true;
+	}
 	for (auto map : mapdata_) {
-		if (mapdata_[map.first][point]) {
+		if (map.second.size() > point && mapdata_[map.first][point]) {
 			return true;
 		}
 	}

@@ -45,7 +45,7 @@ struct Command {
 				if (val == "clear") {
 					(*obj).anim_->state(command_);
 					(*obj).controller_->ResetHistroy();
-					(*obj).playcommand_ = true;
+					//(*obj).playcommand_ = true;
 					return true;
 				}
 			}else if (name == "commandname") {

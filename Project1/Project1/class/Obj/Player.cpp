@@ -104,7 +104,6 @@ bool Player::LoadAnimation(void)
 
 void Player::Update(double delta)
 {
-	//delta = 0.05;
 	// ƒL[ˆ—
 	if (!(*controller_)()) {
 		return;
@@ -218,14 +217,13 @@ void Player::Update(double delta)
 	//}
 	for (auto input : InputID()) {
 		if (controller_->Pressed(input)) {
-			(*commandhis_)[hisnum_++] = input;
+			commandhis_[hisnum_++] = input;
 		}
 	}
 
 
 
 	anim_->Update();
-	Object::GravityUpdate(delta);
 }
 
 void Player::Draw(void)
@@ -237,7 +235,7 @@ void Player::Draw(void)
 	//auto his = controller_->GetHistroy_();
 	std::string	before = "none";
 	std::string name = "none";
-	auto his = (*commandhis_);
+	auto his = commandhis_;
 
 	for (int i = 0; i < his.size(); i++) {
 		name = Converter(his[i]);

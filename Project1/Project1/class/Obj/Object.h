@@ -78,7 +78,7 @@ protected:
 	// コマンド確認のための位置情報
 	int commandcount_;
 
-	RingInputID* commandhis_;
+	RingInputID commandhis_;
 	int hisnum_;
 
 	friend Move;

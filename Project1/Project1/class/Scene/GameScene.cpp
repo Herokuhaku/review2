@@ -35,6 +35,7 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 
 	for (const auto& obj : objlist_) {
 		obj->Update(delta);
+		obj->GravityUpdate(delta);
 	}
 
 	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {

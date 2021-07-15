@@ -18,7 +18,14 @@ enum class CntType {
 	Max
 };
 
+struct RingBufeer {
+	RingBufeer Create(int no);
+	void Destroy(RingBufeer* buf);
 
+	int id;
+	RingBufeer* before = nullptr;
+	RingBufeer* after = nullptr;
+};
 
 using TrgBool = std::array<bool, static_cast<size_t>(Trg::Max)>;
 using CntData = std::map<InputID,TrgBool>;
@@ -36,7 +43,9 @@ public:
 		histroy_ = new RingInputID(60);
 		histroycount_ = 0;
 	};
-	virtual ~Controller() {};
+	virtual ~Controller() {
+		delete histroy_;
+	};
 	// ‰Šú‰»
 	virtual bool Init(void) = 0;
 	// XV

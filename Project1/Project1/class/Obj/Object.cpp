@@ -5,16 +5,16 @@
 #include "../input/KeyInput.h"
 #include "../input/PadInput.h"
 
-Object::Object():speed_(2)
+Object::Object():speed_(2),commandhis_(180)
 {
-	gravity_ = 15.0f;
+	v1 = 25;
+	gravity_ = v1;
 	gravitybool_ = true;
 	jumppow_ = 0;
 	jump_ = false;
-	v1 = 15;
 	grace_ = 0;
 	commandcount_ = 0;
-	commandhis_ = new RingInputID(180);
+	//commandhis_ = RingInputID(180);
 	hisnum_ = 0;
 }
 
@@ -29,10 +29,26 @@ void Object::Draw(void)
 
 void Object::GravityUpdate(double delta)
 {
+
 	colpos_ = pos_ + size_;
+	// windowのサイズに入っているかどうか
 	auto window = [&](Float2& v) {
 		return (v >= v.ZERO && v <= Float2(lpSceneMng.GetScreenSize().x, lpSceneMng.GetScreenSize().y));
 	};
+	// ベクトルの当たり判定用
+	auto checkMove = [&](Float2 moveVec) {
+		Raycast::Ray ray = { Float2(pos_.x + size_.x,pos_.y + size_.y), moveVec };
+		//_dbgDrawLine(ray.p.x, ray.p.y, ray.p.x + ray.v.x, ray.p.y + ray.v.y, 0x00ff00);
+		for (auto col : tmx_->GetColList()) {
+			//_dbgDrawBox(col.first.x, col.first.y,
+			//col.first.x + col.second.x, col.first.y + col.second.y, 0xffffff, false);
+			if (raycast_.CheckCollision(ray, col)) {
+				return false;
+			}
+		}
+		return true;
+	};
+
 
 	// 埋まった時の対応
 	Float2 check_(colpos_);
@@ -76,7 +92,7 @@ void Object::GravityUpdate(double delta)
 		vec.y += jumppow_;
 		// 頭をぶつけたら
 		bool flag_ = false;
-		for (auto list : colvec_["up"]) {
+		for (auto& list : colvec_["up"]) {
 			check_ = colpos_ + list + vec;
 			if (window(check_)) {
 				flag_ |= tmx_->GetMapDataCheck(check_);
@@ -88,10 +104,9 @@ void Object::GravityUpdate(double delta)
 		}
 		// 判定
 		if (flag_) {
-			//time_ = v0 / gravity_ * 2;
-			//jumppow_ = (0.5 * gravity_ * time_ * time_) - v0 * time_;
-			//jumppow_ = (time_ * log(time_))*5;
-			time_ = 1;
+			if (time_ < 1) {
+				time_ = 1;
+			}
 			jumppow_ = static_cast<float>((time_ * log(time_)) * gravity_);
 			vec.y += 1;
 		}
@@ -101,6 +116,8 @@ void Object::GravityUpdate(double delta)
 			check_ = colpos_ + list + vec;
 			flag_ |= tmx_->GetMapDataCheck(check_);
 		}
+
+
 		// 判定
 		if (flag_) {
 			pos_.y = ((static_cast<int>(pos_.y) / static_cast<int>(tmx_->GetTileSize().y))+1) * static_cast<int>(tmx_->GetTileSize().y);
@@ -111,9 +128,13 @@ void Object::GravityUpdate(double delta)
 		}
 		flag_ = false;
 		// ジャンプ処理(落ちる処理も含む)
-		for (auto list : colvec_["down"]) {
+		for (auto& list : colvec_["down"]) {
 			check_ = colpos_ + list + vec;
 			flag_ |= tmx_->GetMapDataCheck(check_);
+		}
+		// 落ちているか判定
+		if (time_ > 1) {
+			flag_ |= !checkMove(vec);
 		}
 		if (!flag_) {
 			pos_ += vec;
