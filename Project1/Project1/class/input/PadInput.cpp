@@ -36,7 +36,7 @@ bool PadInput::Init(void)
 }
 
 
-void PadInput::Update(void)
+void PadInput::Update(double delta)
 {
 	GetJoypadXInputState(padid_, &input_);
 

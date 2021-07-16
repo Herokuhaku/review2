@@ -11,7 +11,7 @@ struct Jump {
 		}
 		for (auto atr = node->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
 			std::string name = atr->name();
-			float tmp = std::atof(atr->value());
+			double tmp = std::atof(atr->value());
 			if (name == "time") {
 				obj->time_ = tmp;
 			}

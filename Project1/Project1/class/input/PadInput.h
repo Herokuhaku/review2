@@ -9,7 +9,7 @@ public:
 	~PadInput();
 	bool Init(void)override;
 
-	void Update(void)override;
+	void Update(double delta)override;
 	void StickUpdate(void);
 	CntType GetCntType(void)override{
 		return CntType::Pad;

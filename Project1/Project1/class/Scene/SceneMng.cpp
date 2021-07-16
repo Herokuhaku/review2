@@ -16,7 +16,7 @@ void SceneMng::Run(void)
 
 	while (!ProcessMessage() && !finish_) {
 
-		(*controller_)();
+
 
 		_dbgAddDraw();
 		// deltatimeÇÃê›íË
@@ -24,7 +24,7 @@ void SceneMng::Run(void)
 		now_ = std::chrono::system_clock::now();
 		auto delta = std::chrono::duration_cast<std::chrono::microseconds>(now_ - old_).count() / 1000000.0;
 		// 	
-
+		(*controller_)(delta);
 		//scene_->Draw(delta);
 		scene_ = scene_->Update(delta, std::move(scene_));
 		SetDrawScreen(DX_SCREEN_BACK);

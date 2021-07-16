@@ -10,14 +10,15 @@ struct RingInputID
 	RingInputID(int maxcount) {
 		ringvec_.resize(maxcount);
 		for (auto& ring : ringvec_) {
-			ring = InputID::Max;
+			ring.first = InputID::Max;
+			ring.second = 0.0;
 		}
 		//ringvec_.fill(InputID::Max); 
 		length_ = static_cast<int>(ringvec_.size());
 	};
 	~RingInputID() {};
 	
-	InputID& operator [](int count){
+	std::pair<InputID, double>& operator [](int count){
 		if (count % length_ >= 0) {
 			return ringvec_[count % length_];
 		}
@@ -29,11 +30,12 @@ struct RingInputID
 	
 	void ClearRing(void) {
 		for (auto& ring : ringvec_) {
-			ring = InputID::Max;
-	}
+			ring.first = InputID::Max;
+			ring.second = 0.0;
+		}
 	};
 
-	std::vector<InputID>& GetRing(void) {
+	std::vector<std::pair<InputID, double>>& GetRing(void) {
 		return ringvec_;
 	};
 
@@ -41,6 +43,6 @@ struct RingInputID
 		return static_cast<int>(ringvec_.size());
 	};
 private:
-	std::vector<InputID> ringvec_;
+	std::vector<std::pair<InputID,double>> ringvec_;
 	int length_;
 };

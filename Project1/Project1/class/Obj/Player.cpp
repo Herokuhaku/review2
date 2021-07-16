@@ -49,7 +49,7 @@ bool Player::Init(CntType cntType)
 	// 当たり判定をとるときに上下左右で使う点のオフセット
 	std::list<Float2> flist;
 	//size/2
-	Int2 s = (size_) / 2;
+	Float2 s = (size_) / 2;
 
 	flist.emplace_back(Float2(-s.x, -s.y));
 	flist.emplace_back(Float2(s.x,-s.y));
@@ -105,7 +105,7 @@ bool Player::LoadAnimation(void)
 void Player::Update(double delta)
 {
 	// キー処理
-	if (!(*controller_)()) {
+	if (!(*controller_)(delta)) {
 		return;
 	}
 
@@ -217,7 +217,7 @@ void Player::Update(double delta)
 	//}
 	for (auto input : InputID()) {
 		if (controller_->Pressed(input)) {
-			commandhis_[hisnum_++] = input;
+			commandhis_[hisnum_++].first = input;
 		}
 	}
 
@@ -238,10 +238,10 @@ void Player::Draw(void)
 	auto his = commandhis_;
 
 	for (int i = 0; i < his.size(); i++) {
-		name = Converter(his[i]);
+		name = Converter(his[i].first);
 		if (name != "none") {
 			DrawFormatString(pos, 700, 0xffffff, "%s  ", name.c_str());
-			pos += GetFontSize() * name.size() + 5;
+			pos += static_cast<int>(GetFontSize() * name.size()) + 5;
 		}
 	}
 	//for (auto list : colvec_) {

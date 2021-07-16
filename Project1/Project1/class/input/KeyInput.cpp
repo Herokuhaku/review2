@@ -34,7 +34,7 @@ bool KeyInput::Init(void)
 	return true;
 }
 
-void KeyInput::Update(void)
+void KeyInput::Update(double delta)
 {
 	GetHitKeyStateAll(keyData_.data());
 	// çXêV
@@ -47,12 +47,14 @@ void KeyInput::Update(void)
 	bool flag = false;
 	for (auto&& id : InputID()) {
 		if (cntData_[id][static_cast<int>(Trg::Now)]) {
-			(*histroy_)[histroycount_++] = id;
+			histroy_[histroycount_].second = delta;
+			histroy_[histroycount_++].first = id;
 			flag = true;
 		}
 	}
 	if (!flag) {
-		(*histroy_)[histroycount_++] = InputID::Neutral;
+		histroy_[histroycount_].second = delta;
+		histroy_[histroycount_++].first = InputID::Neutral;
 	}
 
 }

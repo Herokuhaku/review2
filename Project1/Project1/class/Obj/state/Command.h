@@ -18,33 +18,74 @@ struct Command {
 			if (name == "key") {
 				key = Converter(val);
 			}
-			else if (name == "grace") {
-				for (int i = 0; i < atoi(val.c_str()); i++) {
+			else if (name == "gracetime") {
+				int count = 0;
+				double time = 0;
+				double alltime = std::stod(val);
+				while (time < alltime) {
 					// 目的のキーを押していたら
-					if ((*his.first)[his.second - i - obj->grace_] == key) {
+					if (his.first[his.second - count - obj->grace_].first == key) {
 						rtnflag_ = true;
-						while ((*his.first)[his.second-i-obj->grace_] == key) {
-							i++;
+						while (his.first[his.second - count - obj->grace_].first == key) {
+							count++;
+							time += his.first[his.second - count - obj->grace_].second;
 						}
-						obj->grace_ += i;
+						obj->gracetime_ += time;
+						obj->grace_ += count;
 						break;
 					}
-					else if((*his.first)[his.second  - obj->grace_+1] == (*his.first)[his.second - i - obj->grace_]){
+					// キーとは違うが、前フレームと同じだったら
+					else if (his.first[his.second - obj->grace_ + 1].first == his.first[his.second - count - obj->grace_].first) {
+						count++;
+						time += his.first[his.second - count - obj->grace_].second;
 						continue;
 					}
-					else if ((*his.first)[his.second - i - obj->grace_] == InputID::Neutral) {
+					// ニュートラルだったら
+					else if (his.first[his.second - count - obj->grace_].first == InputID::Neutral) {
+						count++;
+						time += his.first[his.second - count - obj->grace_].second;
 						continue;
 					}
+					else if (his.first[his.second - count - obj->grace_].first == InputID::Max) {
+						break;
+					}
+					// 全く別のキーだったら履歴を消す
 					else {
 						(*obj).controller_->ResetHistroy();
 						rtnflag_ = false;
+						break;
 					}
-				}
-				if (!rtnflag_) {
-					// 猶予までになかったらコマンドを無効化する
-					(*obj).controller_->ResetHistroy();
+					count++;
+					time += his.first[his.second - count - obj->grace_].second;
 				}
 			}
+			//else if (name == "grace") {
+			//	for (int i = 0; i < atoi(val.c_str()); i++) {
+			//		// 目的のキーを押していたら
+			//		if (his.first[his.second - i - obj->grace_].first == key) {
+			//			rtnflag_ = true;
+			//			while (his.first[his.second-i-obj->grace_].first == key) {
+			//				i++;
+			//			}
+			//			obj->grace_ += i;
+			//			break;
+			//		}
+			//		else if(his.first[his.second  - obj->grace_+1].first == his.first[his.second - i - obj->grace_].first){
+			//			continue;
+			//		}
+			//		else if (his.first[his.second - i - obj->grace_].first == InputID::Neutral) {
+			//			continue;
+			//		}
+			//		else {
+			//			(*obj).controller_->ResetHistroy();
+			//			rtnflag_ = false;
+			//		}
+			//	}
+			//	if (!rtnflag_) {
+			//		// 猶予までになかったらコマンドを無効化する
+			//		(*obj).controller_->ResetHistroy();
+			//	}
+			//}
 			else if (name == "check") {
 				if (val == "clear") {
 					(*obj).anim_->state(command_);

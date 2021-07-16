@@ -13,6 +13,7 @@ Object::Object():speed_(2),commandhis_(180)
 	jumppow_ = 0;
 	jump_ = false;
 	grace_ = 0;
+	gracetime_ = 0;
 	commandcount_ = 0;
 	//commandhis_ = RingInputID(180);
 	hisnum_ = 0;

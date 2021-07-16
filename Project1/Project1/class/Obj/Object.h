@@ -75,6 +75,7 @@ protected:
 	bool playcommand_;
 	// コマンドの猶予フレーム保存用
 	int grace_;
+	double gracetime_;
 	// コマンド確認のための位置情報
 	int commandcount_;
 

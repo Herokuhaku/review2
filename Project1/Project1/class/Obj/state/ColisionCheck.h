@@ -33,10 +33,10 @@ struct ColisionCheck {
 			std::string name = atr->name();
 			std::string tmp = atr->value();
 			if (name == "speed") {
-				speed = atoi(tmp.c_str());
+				speed = static_cast<float>(atoi(tmp.c_str()));
 			}
 			if (name == "width") {
-				vec.x = atoi(tmp.c_str());
+				vec.x = static_cast<float>(atoi(tmp.c_str()));
 			}
 		}
 		if (checkMove(vec) && window(obj->pos_ + +obj->size_ + vec)) {

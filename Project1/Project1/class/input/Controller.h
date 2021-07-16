@@ -33,23 +33,21 @@ using CntData = std::map<InputID,TrgBool>;
 class Controller
 {
 public:
-	bool operator()() {
+	bool operator()(double delta) {
 		if (this != nullptr) {
-			Update();
+			Update(delta);
 		}
 		return this != nullptr;
 	}
-	Controller() {
-		histroy_ = new RingInputID(60);
+	Controller():histroy_(RingInputID(180*3)) {
 		histroycount_ = 0;
 	};
 	virtual ~Controller() {
-		delete histroy_;
 	};
 	// 初期化
 	virtual bool Init(void) = 0;
 	// 更新
-	virtual void Update(void) = 0;
+	virtual void Update(double delta) = 0;
 	// コントロールする機種
 	virtual CntType GetCntType(void) = 0;
 	// 設定したmapを格納しているcntData_を返す
@@ -63,9 +61,11 @@ public:
 	// 離した瞬間
 	bool Released(InputID id);
 	// 入力履歴と最新の位置を返す
-	std::pair<RingInputID*,int> GetHistroy_(void);
+	std::pair<RingInputID,int> GetHistroy_(void);
 	// histroyの中身を初期化する
-	void ResetHistroy(void) { histroy_->ClearRing(); };
+	void ResetHistroy(void) {
+		histroy_.ClearRing();
+	};
 	
 	struct RingBuf {
 		RingBuf Create(int no);
@@ -84,5 +84,5 @@ protected:
 	// キーボードの入力履歴
 	int histroycount_;
 	
-	RingInputID* histroy_;
+	RingInputID histroy_;
 };

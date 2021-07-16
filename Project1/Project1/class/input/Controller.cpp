@@ -15,9 +15,9 @@ bool Controller::Released(InputID id)
 	return !cntData_[id][static_cast<int>(Trg::Now)] && cntData_[id][static_cast<int>(Trg::Old)];
 }
 
-std::pair<RingInputID*, int> Controller::GetHistroy_(void)
+std::pair<RingInputID, int> Controller::GetHistroy_(void)
 {
-	return std::pair<RingInputID*,int>(histroy_,histroycount_-1);
+	return std::pair<RingInputID,int>(histroy_,histroycount_-1);
 }
 
 //RingBuf* Controller::RingBuf::Create(int no)
