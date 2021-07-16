@@ -44,13 +44,15 @@ void KeyInput::Update(void)
 		cntData_[id][static_cast<int>(Trg::Now)] = keyData_[keyList_[id]];
 	}
 	// —š—ð“ü—Í
-
+	bool flag = false;
 	for (auto&& id : InputID()) {
 		if (cntData_[id][static_cast<int>(Trg::Now)]) {
 			(*histroy_)[histroycount_++] = id;
-			if ((*histroy_)[histroycount_] != InputID::Max) {
-				int i = 0;
-			}
+			flag = true;
 		}
 	}
+	if (!flag) {
+		(*histroy_)[histroycount_++] = InputID::Neutral;
+	}
+
 }

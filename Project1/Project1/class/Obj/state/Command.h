@@ -20,15 +20,19 @@ struct Command {
 			}
 			else if (name == "grace") {
 				for (int i = 0; i < atoi(val.c_str()); i++) {
+					// –Ú“I‚ÌƒL[‚ð‰Ÿ‚µ‚Ä‚¢‚½‚ç
 					if ((*his.first)[his.second - i - obj->grace_] == key) {
 						rtnflag_ = true;
 						while ((*his.first)[his.second-i-obj->grace_] == key) {
 							i++;
 						}
-						obj->grace_ += i-1;
+						obj->grace_ += i;
 						break;
 					}
 					else if((*his.first)[his.second  - obj->grace_+1] == (*his.first)[his.second - i - obj->grace_]){
+						continue;
+					}
+					else if ((*his.first)[his.second - i - obj->grace_] == InputID::Neutral) {
 						continue;
 					}
 					else {

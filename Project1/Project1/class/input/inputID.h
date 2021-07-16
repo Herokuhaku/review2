@@ -11,6 +11,7 @@ enum class InputID {
 	Btn2,
 	Btn3,
 	Escape,
+	Neutral,
 	Max
 };
 
@@ -24,6 +25,7 @@ static InputID Converter(const std::string str) {
 	else if (str == "btn2") { return InputID::Btn2; }
 	else if (str == "btn3") { return InputID::Btn3; }
 	else if (str == "escape") { return InputID::Escape; }
+	else if (str == "neutral") { return InputID::Neutral; }
 	return InputID::Max;
 };
 
@@ -36,7 +38,8 @@ static std::string Converter(const InputID id) {
 	else if (id == InputID::Btn1) { return "btn1"; }
 	else if (id == InputID::Btn2) { return "btn2"; }
 	else if (id == InputID::Btn3) { return "btn3";}
-	else if (id == InputID::Escape) { return "Escape"; }
+	else if (id == InputID::Escape) { return "escape"; }
+	else if (id == InputID::Neutral) { return "neutral"; }
 	return "none";
 }
 

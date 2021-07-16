@@ -38,7 +38,7 @@ struct RingInputID
 	};
 
 	int size(void) {
-		return ringvec_.size();
+		return static_cast<int>(ringvec_.size());
 	};
 private:
 	std::vector<InputID> ringvec_;
