@@ -49,8 +49,18 @@ void PadInput::Update(double delta)
 	// スティックの更新
 	StickUpdate();
 
-	if (cntData_[InputID::Btn3][static_cast<int>(Trg::Old)] == 1) {
-		int i = 0;
+	// 履歴入力
+	bool flag = false;
+	for (auto&& id : InputID()) {
+		if (cntData_[id][static_cast<int>(Trg::Now)]) {
+			(*histroy_)[histroycount_].second = delta;
+			(*histroy_)[histroycount_++].first = id;
+			flag = true;
+		}
+	}
+	if (!flag) {
+		(*histroy_)[histroycount_].second = delta;
+		(*histroy_)[histroycount_++].first = InputID::Neutral;
 	}
 }
 

@@ -18,7 +18,7 @@ struct ColisionCheck {
 		float speed = 0;
 		auto checkMove = [&](Float2 moveVec) {
 			Raycast::Ray ray = { { obj->pos_ + obj->size_ }, moveVec };
-			//_dbgDrawLine(ray.p.x, ray.p.y, ray.p.x + ray.v.x, ray.p.y + ray.v.y, 0x00ff00);
+			_dbgDrawLine(ray.p.x, ray.p.y, ray.p.x + ray.v.x, ray.p.y + ray.v.y, 0x00ff00);
 			for (auto col : obj->tmx_->GetColList()) {
 				//_dbgDrawBox(col.first.x, col.first.y,
 				//col.first.x + col.second.x, col.first.y + col.second.y, 0xffffff, false);
@@ -33,13 +33,15 @@ struct ColisionCheck {
 			std::string name = atr->name();
 			std::string tmp = atr->value();
 			if (name == "speed") {
-				speed = static_cast<float>(atoi(tmp.c_str()));
+				//speed = static_cast<float>(atoi(tmp.c_str()));
 			}
 			if (name == "width") {
 				vec.x = static_cast<float>(atoi(tmp.c_str()));
+				
 			}
 		}
-		if (checkMove(vec) && window(obj->pos_ + +obj->size_ + vec)) {
+		//vec.x += speed;
+		if (checkMove(vec) && window(obj->pos_ + obj->size_ + vec)) {
 			return true;
 		}
 		return false;

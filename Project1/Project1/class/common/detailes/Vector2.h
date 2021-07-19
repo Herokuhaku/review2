@@ -21,8 +21,8 @@ Vector2Template<T>::Vector2Template(T x_, T y_)
 template<class T>
 Vector2Template<T>::Vector2Template(std::string x_, std::string y_)
 {
-	x = std::atoi(x_.c_str());
-	y = std::atoi(y_.c_str());
+	x = static_cast<T>(std::atoi(x_.c_str()));
+	y = static_cast<T>(std::atoi(y_.c_str()));
 }
 
 template <class T>

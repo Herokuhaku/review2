@@ -8,9 +8,6 @@ const VecInt& ImageMng::GetID(std::string key)
 
 const VecInt& ImageMng::GetID(std::string f_name, std::string key)
 {
-	if (key == "GreenMove") {
-		int i = 0;
-	}
 	if (imageMap_.find(key) == imageMap_.end()){
 		imageMap_[key].resize(1);
 		imageMap_[key][0] = LoadGraph(f_name.c_str());
@@ -20,9 +17,6 @@ const VecInt& ImageMng::GetID(std::string f_name, std::string key)
 
 const VecInt& ImageMng::GetID(std::string f_name, std::string key, Int2 divSize, Int2 divCnt)
 {
-	if (key == "GreenMove") {
-		int i = 0;
-	}
 	if (imageMap_.find(key) == imageMap_.end()){
 		imageMap_[key].resize(static_cast<__int64>(divCnt.x) * divCnt.y);
 

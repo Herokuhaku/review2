@@ -19,7 +19,7 @@ struct CheckCommand {
 			}
 			else if (name == "key") {
 				auto his = obj->controller_->GetHistroy_();
-				if (his.first[his.second].first == Converter(val)) {
+				if ((*his.first)[his.second].first == Converter(val)) {
 					obj->commandcount_ = obj->grace_;
 					return true;
 				}

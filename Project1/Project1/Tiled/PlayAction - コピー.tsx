@@ -21,10 +21,6 @@
 	</actionNode>
 	<actionNode name="Command">
 		<attach name ="CheckCommand" commandname="beam" key="btn1" gracetime="0.2">
-			<attach name="Command" commandname = "beam" check="clear">
-			</attach>
-		</attach>
-		<attach name ="CheckCommand" commandname="beam" key="btn2" gracetime="0.2">
 			<attach name="Command" key="right" gracetime="0.1" check="continue">
 				<attach name="Command" key="left"gracetime="0.1" check="continue">
 					<attach name="Command" commandname = "beam" check="clear">

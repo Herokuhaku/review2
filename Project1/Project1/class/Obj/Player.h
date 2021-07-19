@@ -12,7 +12,7 @@ class Player :
 {
 public:
 	Player();
-	Player(CntType cntType, std::shared_ptr<TmxObj> tmx);
+	Player(CntType cntType, std::shared_ptr<TmxObj> tmx,size_t objno);
 	~Player();
 	void Update(double delta)override;
 	void Draw(void);

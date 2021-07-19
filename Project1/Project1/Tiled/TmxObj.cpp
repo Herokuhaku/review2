@@ -258,8 +258,8 @@ const int TmxObj::GetMapData(std::string lay, Float2 pos)
 const bool TmxObj::GetMapDataCheck(Float2 pos)
 {
 	Int2 p;
-	p.x = pos.x;
-	p.y = pos.y;
+	p.x = static_cast<int>(pos.x);
+	p.y = static_cast<int>(pos.y);
 
 	Int2 chip = (p / tileSize_);
 	//Int2 chip = (pos / tileSize_);
@@ -267,7 +267,7 @@ const bool TmxObj::GetMapDataCheck(Float2 pos)
 	if (point < 0) {
 		return true;
 	}
-	for (auto map : mapdata_) {
+	for (auto& map : mapdata_) {
 		if (map.second.size() > point && mapdata_[map.first][point]) {
 			return true;
 		}

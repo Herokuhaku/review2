@@ -14,10 +14,8 @@ void SceneMng::Run(void)
 	scene_ = std::make_unique<TitleScene>();
 	now_ = std::chrono::system_clock::now();
 
+	double nextdeltatime = GetNowCount();
 	while (!ProcessMessage() && !finish_) {
-
-
-
 		_dbgAddDraw();
 		// deltatimeの設定
 		old_ = now_;
@@ -32,6 +30,14 @@ void SceneMng::Run(void)
 		scene_->Draw(delta);
 		DrawFormatString(0, 0, 0xffff00,"%f",GetFPS());
 		ScreenFlip();
+
+		// 1フレーム16.66ms足す
+		nextdeltatime += 16.66;
+		// 1フレームの限界値 16.66ms (1秒間に60フレームの場合) よりも早くここに到達していたらその分待つ
+		if (nextdeltatime > GetNowCount()) {
+			WaitTimer(static_cast<int>(nextdeltatime) - GetNowCount());
+		}
+
 	}
 }
 

@@ -5,7 +5,7 @@
 #include "../input/KeyInput.h"
 #include "../input/PadInput.h"
 
-Object::Object():speed_(2),commandhis_(180)
+Object::Object():speed_(2),commandhis_(new RingInputID(180))
 {
 	v1 = 25;
 	gravity_ = v1;
@@ -21,6 +21,7 @@ Object::Object():speed_(2),commandhis_(180)
 
 Object::~Object()
 {
+	delete commandhis_;
 }
 
 void Object::Draw(void)
@@ -106,7 +107,7 @@ void Object::GravityUpdate(double delta)
 		// ”»’è
 		if (flag_) {
 			if (time_ < 1) {
-				time_ = 1;
+				time_ = 1.1;
 			}
 			jumppow_ = static_cast<float>((time_ * log(time_)) * gravity_);
 			vec.y += 1;
@@ -121,7 +122,7 @@ void Object::GravityUpdate(double delta)
 
 		// ”»’è
 		if (flag_) {
-			pos_.y = ((static_cast<int>(pos_.y) / static_cast<int>(tmx_->GetTileSize().y))+1) * static_cast<int>(tmx_->GetTileSize().y);
+			pos_.y = static_cast<float>(((static_cast<int>(pos_.y) / static_cast<int>(tmx_->GetTileSize().y))+1) * static_cast<int>(tmx_->GetTileSize().y));
 			jumppow_ = 0;
 			time_ = 0;
 			jump_ = false;
@@ -138,7 +139,7 @@ void Object::GravityUpdate(double delta)
 			flag_ |= !checkMove(vec);
 		}
 		if (!flag_) {
-			pos_ += vec;
+ 			pos_ += vec;
 		}
 	}
 	else {
@@ -156,5 +157,8 @@ void Object::GravityUpdate(double delta)
 			jumppow_ = static_cast<float>((time_ * log(time_)));
 			jump_ = true;
 		}
+	}
+	if (vec.y > lpSceneMng.GetScreenSize().y) {
+		time_ = 1;
 	}
 }

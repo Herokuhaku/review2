@@ -21,8 +21,8 @@ bool GameScene::Init(void)
 {
 	tmxobj_ = std::make_shared<TmxObj>();
 	tmxobj_->LoadTmx("Tiled/stage001.tmx");
-	objlist_.emplace_back(std::make_unique<Player>(CntType::Key,tmxobj_));
-	//objlist_.emplace_back(std::make_unique<Player>(CntType::Pad));
+	objlist_.emplace_back(std::make_unique<Player>(CntType::Key, tmxobj_, objlist_.size()));
+	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad,tmxobj_, objlist_.size()));
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }

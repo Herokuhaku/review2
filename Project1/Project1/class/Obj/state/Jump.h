@@ -16,7 +16,6 @@ struct Jump {
 				obj->time_ = tmp;
 			}
 		}
-		//if (!obj->jump_) {
 		{
 		obj->jump_ = true;
 			return true;

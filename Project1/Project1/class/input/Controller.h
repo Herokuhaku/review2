@@ -39,10 +39,11 @@ public:
 		}
 		return this != nullptr;
 	}
-	Controller():histroy_(RingInputID(180*3)) {
+	Controller():histroy_(new RingInputID(180*3)) {
 		histroycount_ = 0;
 	};
 	virtual ~Controller() {
+		delete histroy_;
 	};
 	// 初期化
 	virtual bool Init(void) = 0;
@@ -61,10 +62,10 @@ public:
 	// 離した瞬間
 	bool Released(InputID id);
 	// 入力履歴と最新の位置を返す
-	std::pair<RingInputID,int> GetHistroy_(void);
+	std::pair<RingInputID*,int> GetHistroy_(void);
 	// histroyの中身を初期化する
 	void ResetHistroy(void) {
-		histroy_.ClearRing();
+		histroy_->ClearRing();
 	};
 	
 	struct RingBuf {
@@ -84,5 +85,5 @@ protected:
 	// キーボードの入力履歴
 	int histroycount_;
 	
-	RingInputID histroy_;
+	RingInputID* histroy_;
 };

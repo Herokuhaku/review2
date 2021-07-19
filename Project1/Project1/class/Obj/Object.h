@@ -39,9 +39,13 @@ public:
 	// 描画
 	virtual void Draw(void);
 	virtual void GravityUpdate(double delta);
+
 protected:
 	//TmxObj tmx_;
 	//XmlItem xmlitem_;
+	// 生成番号(0から)
+	int objectnumber_;
+	// 視線
 	Raycast raycast_;
 	// 座標
 	Float2 pos_;
@@ -74,12 +78,14 @@ protected:
 	// コマンド再生しているか
 	bool playcommand_;
 	// コマンドの猶予フレーム保存用
-	int grace_;
-	double gracetime_;
+	int grace_;				// フレーム
+	double gracetime_;		// 秒
 	// コマンド確認のための位置情報
 	int commandcount_;
 
-	RingInputID commandhis_;
+	// コマンドを記録
+	RingInputID* commandhis_;
+	// コマンドを記録する位置情報
 	int hisnum_;
 
 	friend Move;

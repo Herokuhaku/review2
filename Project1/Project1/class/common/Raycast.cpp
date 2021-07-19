@@ -47,7 +47,7 @@ bool Raycast::CheckCollision(Ray ray, Collision col)
 	
 	bool flag = false;
 
-	for (auto l : line) {
+	for (auto& l : line) {
 		flag |= CheckRay(ray,l);
 	}
 	return flag;

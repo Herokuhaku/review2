@@ -47,14 +47,14 @@ void KeyInput::Update(double delta)
 	bool flag = false;
 	for (auto&& id : InputID()) {
 		if (cntData_[id][static_cast<int>(Trg::Now)]) {
-			histroy_[histroycount_].second = delta;
-			histroy_[histroycount_++].first = id;
+			(*histroy_)[histroycount_].second = delta;
+			(*histroy_)[histroycount_++].first = id;
 			flag = true;
 		}
 	}
 	if (!flag) {
-		histroy_[histroycount_].second = delta;
-		histroy_[histroycount_++].first = InputID::Neutral;
+		(*histroy_)[histroycount_].second = delta;
+		(*histroy_)[histroycount_++].first = InputID::Neutral;
 	}
 
 }

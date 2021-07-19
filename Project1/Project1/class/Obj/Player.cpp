@@ -11,14 +11,16 @@ Player::Player()
 {
 }
 
-Player::Player(CntType cntType,std::shared_ptr<TmxObj> tmx)
+Player::Player(CntType cntType,std::shared_ptr<TmxObj> tmx, size_t objno)
 {
 	Init(cntType);
 	tmx_ = tmx;
+	objectnumber_ = static_cast<int>(objno);
 }
 
 Player::~Player()
 {
+	delete attach_;
 }
 
 bool Player::Init(CntType cntType)
@@ -70,6 +72,7 @@ bool Player::Init(CntType cntType)
 	flist.emplace_back(Float2 (-s.x,-s.y));
 	colvec_.try_emplace("left", flist);
 	flist.clear();
+
 	return true;
 }
 
@@ -217,7 +220,7 @@ void Player::Update(double delta)
 	//}
 	for (auto input : InputID()) {
 		if (controller_->Pressed(input)) {
-			commandhis_[hisnum_++].first = input;
+			(*commandhis_)[hisnum_++].first = input;
 		}
 	}
 
@@ -235,7 +238,7 @@ void Player::Draw(void)
 	//auto his = controller_->GetHistroy_();
 	std::string	before = "none";
 	std::string name = "none";
-	auto his = commandhis_;
+	auto& his = (*commandhis_);
 
 	for (int i = 0; i < his.size(); i++) {
 		name = Converter(his[i].first);
@@ -244,6 +247,7 @@ void Player::Draw(void)
 			pos += static_cast<int>(GetFontSize() * name.size()) + 5;
 		}
 	}
+	//DrawCircle(pos_.x + size_.x, pos_.y + size_.y, 3, 0xffffff, true);
 	//for (auto list : colvec_) {
 	//	for (auto pos : colvec_[list.first]) {
 	//		check = colpos_ + pos;
