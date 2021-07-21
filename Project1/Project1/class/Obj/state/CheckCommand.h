@@ -11,6 +11,7 @@ struct CheckCommand {
 		std::string command_;
 		obj->grace_ = 1;
 		obj->gracetime_ = 1;
+		bool rtnflag = false;
 		for (auto atr = node->first_attribute(); atr != nullptr; atr = atr->next_attribute()) {
 			std::string name = atr->name();
 			std::string val = atr->value();
@@ -21,11 +22,16 @@ struct CheckCommand {
 				auto his = obj->controller_->GetHistroy_();
 				if ((*his.first)[his.second].first == Converter(val)) {
 					obj->commandcount_ = obj->grace_;
-					return true;
+					rtnflag = true;
+				}
+			}
+			else if (name == "gracetime") {
+				if (stod(val) <= 0) {
+					rtnflag = false;
 				}
 			}
 		}
-		return false;
+		return rtnflag;
 	}
 private:
 };

@@ -54,7 +54,7 @@ public:
 	// posからmapdataの位置を計算してそこにblockがあるかを返す
 	const bool GetMapDataCheck(Float2 pos);
 	// 縦横サイズ(チップ)を返す
-	const Int2& GetWorldArea(void)const {return worldArea_;};
+	const Int2& GetWorldArea(void)const{return worldArea_;};
 	// 縦横サイズ(チップ1つのサイズ)
 	const Int2& GetTileSize(void)const {return tileSize_;};
 	// マップチップの開始番号を返す

@@ -43,19 +43,15 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 	}
 	return std::move(own);
 }
-//
-//void GameScene::Draw(double delta)
-//{
-//}
 
 void GameScene::DrawOwnScreen(double delta)
 {
 	SetDrawScreen(screen_);
 	ClsDrawScreen();
 	//DrawGraph(0, 0, lpImageMng.GetID("Game")[0], true);
-	Int2 area = tmxobj_->GetWorldArea();
-	Int2 tilesize = tmxobj_->GetTileSize();
-	unsigned int firstgid = tmxobj_->GetFirstGid();
+	const Int2& area = tmxobj_->GetWorldArea();
+	const Int2& tilesize = tmxobj_->GetTileSize();
+	const unsigned int firstgid = tmxobj_->GetFirstGid();
 
 	for (auto& map : tmxobj_->GetMapData())
 	{
