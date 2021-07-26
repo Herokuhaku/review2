@@ -19,6 +19,12 @@
 //	DOWN,
 //	MAX
 //};
+enum class PlayerType {
+	RunAway,	// 逃げる人
+	Ogre,		// 鬼
+	Non
+};
+
 struct CheckKey;
 struct Move;
 struct SetAnime;
@@ -38,11 +44,24 @@ public:
 	virtual void Update(double delta) = 0;
 	// 描画
 	virtual void Draw(void);
+	// 重力の処理(gravitybool_ が falseだと処理をしない)
 	virtual void GravityUpdate(double delta);
+	// プレイヤーの種類を返す
+	PlayerType GetPlayerType(void);
+	// 今流れているアニメーションの名前を取る
+	std::string GetNowAnimationName(void);
+	// 自分の生成番号を返す
+	int GetObjectNum(void);
+	// 自分の位置情報を返す
+	Float2 GetPos(void);
+	// 自分のサイズを返す
+	Float2 GetSize(void);
+	// 捕獲状況を変える
+	void SetCatch(int num);
+	// 現在の捕獲状況を返す
+	int GetCatch(void);
 
 protected:
-	//TmxObj tmx_;
-	//XmlItem xmlitem_;
 	// 生成番号(0から)
 	int objectnumber_;
 	// 視線
@@ -87,6 +106,11 @@ protected:
 	RingInputID* commandhis_;
 	// コマンドを記録する位置情報
 	int hisnum_;
+	// プレイヤーの種類
+	PlayerType pltype_;
+
+	// 0: 鬼 1 : 捕まっていない 2 : 捕まえられた 
+	int catchflag_;
 
 	friend Move;
 	friend CheckKey;

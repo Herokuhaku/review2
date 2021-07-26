@@ -12,10 +12,11 @@ class Player :
 {
 public:
 	Player();
-	Player(CntType cntType, std::shared_ptr<TmxObj> tmx,size_t objno);
+	Player(CntType cntType, std::shared_ptr<TmxObj> tmx,size_t objno,Float2 pos);
 	~Player();
 	void Update(double delta)override;
 	void Draw(void);
+	
 private:
 	bool Init(CntType cntType)override;
 

@@ -21,8 +21,8 @@ bool GameScene::Init(void)
 {
 	tmxobj_ = std::make_shared<TmxObj>();
 	tmxobj_->LoadTmx("Tiled/stage001.tmx");
-	objlist_.emplace_back(std::make_unique<Player>(CntType::Key, tmxobj_, objlist_.size()));
-	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad,tmxobj_, objlist_.size()));
+	objlist_.emplace_back(std::make_unique<Player>(CntType::Key, tmxobj_, objlist_.size(),Float2(1,1)));
+	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad,tmxobj_, objlist_.size(), Float2(lpSceneMng.GetScreenSize().x-65, 1)));
 	lpImageMng.GetID("image/no_002.png", "Game");
 	return true;
 }
@@ -38,6 +38,23 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 		obj->GravityUpdate(delta);
 	}
 
+	for (auto& obj : objlist_) {
+		if (obj->GetPlayerType() == PlayerType::Ogre && (obj->GetNowAnimationName() == "beam")) {
+			for (auto& checkobj : objlist_) {
+				Float2 opos = obj->GetPos();
+				Float2 cpos = checkobj->GetPos();
+				float a = (opos.x - cpos.x);
+				float b = (opos.y - cpos.y);
+				float c = hypot(pow(a,2),pow(b,2));
+				// é©ï™Ç∂Ç·Ç»Ç¢èÍçá && ìñÇΩÇËîªíËÇéÊÇ¡ÇƒìñÇΩÇ¡ÇƒÇ¢ÇÈÇ©
+				if (obj->GetObjectNum() != checkobj->GetObjectNum() &&
+					c <= obj->GetSize().x + checkobj->GetSize().x) {
+					checkobj->SetCatch(2);
+				}
+			}
+		}
+	}
+
 	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {
 		return std::make_unique<MenuScene>(std::move(own));
 	}
@@ -48,7 +65,7 @@ void GameScene::DrawOwnScreen(double delta)
 {
 	SetDrawScreen(screen_);
 	ClsDrawScreen();
-	//DrawGraph(0, 0, lpImageMng.GetID("Game")[0], true);
+
 	const Int2& area = tmxobj_->GetWorldArea();
 	const Int2& tilesize = tmxobj_->GetTileSize();
 	const unsigned int firstgid = tmxobj_->GetFirstGid();
@@ -65,18 +82,17 @@ void GameScene::DrawOwnScreen(double delta)
 			if (x % area.x == 0 && x != 0) { y++;}
 		}
 	}
-	
-	//for (auto& map : tmxobj_->GetMapData()) {
-	//	for (int y = 0; y < area.y; y++) {
-	//		for (int x = 0; x < area.x; x++) {
-	//			int id = tmxobj_->GetMapData(map.first, x, y) - firstgid;
-	//			if (id >= 0) {
-	//				DrawGraph((x % area.x) * tilesize.x, (y % area.y) * tilesize.y, lpImageMng.GetID("map")[id], true);
-	//			}
-	//		}
-	//	}
-	//}
+
+	for (auto obj = objlist_.rbegin(); obj != objlist_.rend(); obj++) {
+		(*obj)->Draw();
+	}
+	bool flag_ = false;
 	for (auto& obj : objlist_) {
-		obj->Draw();
+		if (obj->GetCatch() == 2) {
+			flag_ = true;
+		}
+	}
+	if(flag_){
+		DrawString(400, 400, "ãSÇÃèüÇøÅIÅIÅI", 0xffffff);
 	}
 }

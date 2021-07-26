@@ -27,15 +27,12 @@ public:
 	bool state(const std::string state);
 	// 自分のキーを取得する
 	std::string GetKey(void);
+	std::string GetState(void);
 private:
 	std::string key_;
 	std::string state_;
 
 	int animframe_;			// フレーム数
 	int animcount_;			// 何回まわったか
-	//std::map<STATE, AnimVector>animMap_;// アニメーションのマップ
-
-	//unsigned int animframe_;			// フレーム数
-	//unsigned int animcount_;			// 何回まわったか
 };
 

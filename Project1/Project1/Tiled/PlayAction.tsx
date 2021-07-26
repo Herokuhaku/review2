@@ -2,13 +2,13 @@
 <objectList name = "Player">
 	<actionNode name="LR">
 			<attach name="CheckKey" state = "CntKey" key="Right">
-			<attach name ="ColisionCheck" speed="5" width="32">
+			<attach name ="ColisionCheck" speed="5" width="24">
 			<attach name="SetAnime" state = "right"/>
 			<attach name="Move" x="5" y = "0"/>
 			</attach
 	>	</attach>
 			<attach name="CheckKey" state = "CntKey" key="Left">
-			<attach name ="ColisionCheck" speed="-5" width="-32">
+			<attach name ="ColisionCheck" speed="-5" width="-24">
 			<attach name="SetAnime" state = "left"/>
 			<attach name="Move" x="-5" y = "0"/>
 		</attach>
@@ -28,9 +28,9 @@
 				<attach name ="CheckComboPush" key1 = "btn1" key2 = "btn2" gracetime="0.5">
 				</attach>
 			</attach>
-		<attach name ="CheckCommand" commandname="beam" key="btn2" gracetime="0">
-			<attach name="Command" key="right" gracetime="0.1" check="continue">
-				<attach name="Command" key="left"gracetime="0.1" check="continue">
+		<attach name ="CheckCommand" commandname="beam" key="btn2" gracetime="0.1">
+			<attach name="Command" key="right" gracetime="0.5" check="continue">
+				<attach name="Command" key="left"gracetime="0.5" check="continue">
 					<attach name="Command" commandname = "beam" check="clear">
 					</attach>
 				</attach>

@@ -7,6 +7,7 @@
 
 Object::Object():speed_(2),commandhis_(new RingInputID(180))
 {
+	pltype_ = PlayerType::Non;
 	v1 = 25;
 	gravity_ = v1;
 	gravitybool_ = true;
@@ -161,4 +162,39 @@ void Object::GravityUpdate(double delta)
 	if (vec.y > lpSceneMng.GetScreenSize().y) {
 		time_ = 1;
 	}
+}
+
+PlayerType Object::GetPlayerType(void)
+{
+	return pltype_;
+}
+
+std::string Object::GetNowAnimationName(void)
+{
+	return anim_->GetState();
+}
+
+int Object::GetObjectNum(void)
+{
+	return objectnumber_;
+}
+
+Float2 Object::GetPos(void)
+{
+	return pos_;
+}
+
+Float2 Object::GetSize(void)
+{
+	return size_;
+}
+
+void Object::SetCatch(int num)
+{
+	catchflag_ = num;
+}
+
+int Object::GetCatch(void)
+{
+	return catchflag_;
 }

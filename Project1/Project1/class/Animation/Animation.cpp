@@ -56,7 +56,6 @@ bool Animation::Draw(Float2 pos,Int2 size,float mag)
 {
 	size = size * mag;
 	DrawRotaGraph(pos.x + (size.x/2),pos.y + (size.y/2),mag,0.0f, lpAnimationMng.GetAnimID(key_, state_, animframe_),true);
-	//DrawGraph(pos.x, pos.y,lpImageMng.GetAnimID(key_, state_,animframe_), true);
 	return true;
 }
 
@@ -78,4 +77,9 @@ bool Animation::state(const std::string state)
 std::string Animation::GetKey(void)
 {
 	return key_;
+}
+
+std::string Animation::GetState(void)
+{
+	return state_;
 }

@@ -30,6 +30,7 @@ Vector2Template<T>::~Vector2Template()
 {
 }
 
+
 template<class T>
 Vector2Template<T>& Vector2Template<T>::operator=(const Vector2Template<int>& vec)
 {
@@ -264,6 +265,19 @@ Vector2Template<T> Vector2Template<T>::Normalized() const
 	Vector2Template<T> ret = { x,y };
 	ret.Normalize();
 	return ret;
+}
+
+template<class T>
+double Vector2Template<T>::pow(void)
+{
+	double t = 1;
+	if (y == 0) {
+		return 1;
+	}
+	for (int i = 0; i < y; i++) {
+		t = t * x;
+	}
+	return t;
 }
 
 template<class T>

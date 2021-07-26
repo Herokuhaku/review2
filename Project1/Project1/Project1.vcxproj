@@ -158,6 +158,7 @@
     <ClCompile Include="class\common\AnimationMng.cpp" />
     <ClCompile Include="class\common\ImageMng.cpp" />
     <ClCompile Include="class\common\Raycast.cpp" />
+    <ClCompile Include="class\common\Vector2.cpp" />
     <ClCompile Include="class\EndGame.cpp" />
     <ClCompile Include="class\input\Controller.cpp" />
     <ClCompile Include="class\input\PadInput.cpp" />

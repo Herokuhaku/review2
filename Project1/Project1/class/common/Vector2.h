@@ -73,6 +73,8 @@ public:
 	// ³‹K‰»‚µ‚½‚à‚Ì‚ğ•Ô‚·
 	Vector2Template Normalized()const;
 
+	double pow(void);
+
 	static const Vector2Template<T> ZERO;
 };
 
