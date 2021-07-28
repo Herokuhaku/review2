@@ -48,12 +48,16 @@ public:
 	virtual void GravityUpdate(double delta);
 	// プレイヤーの種類を返す
 	PlayerType GetPlayerType(void);
+	
+	void SetAnimationState(std::string str);
 	// 今流れているアニメーションの名前を取る
 	std::string GetNowAnimationName(void);
 	// 自分の生成番号を返す
 	int GetObjectNum(void);
 	// 自分の位置情報を返す
 	Float2 GetPos(void);
+	// 自分の位置情報を返す
+	void SetPos(Float2 pos);
 	// 自分のサイズを返す
 	Float2 GetSize(void);
 	// 捕獲状況を変える

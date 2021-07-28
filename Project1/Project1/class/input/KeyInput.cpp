@@ -50,9 +50,6 @@ void KeyInput::Update(double delta)
 			(*histroy_)[histroycount_].second = delta;
 			(*histroy_)[histroycount_++].first = id;
 			flag = true;
-			if (histroycount_ >= 1000) {
-				int i = 0;
-			}
 		}
 	}
 

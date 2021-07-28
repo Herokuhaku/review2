@@ -169,6 +169,11 @@ PlayerType Object::GetPlayerType(void)
 	return pltype_;
 }
 
+void Object::SetAnimationState(std::string str)
+{
+	anim_->state(str);
+}
+
 std::string Object::GetNowAnimationName(void)
 {
 	return anim_->GetState();
@@ -182,6 +187,11 @@ int Object::GetObjectNum(void)
 Float2 Object::GetPos(void)
 {
 	return pos_;
+}
+
+void Object::SetPos(Float2 pos)
+{
+	pos_ = pos;
 }
 
 Float2 Object::GetSize(void)
