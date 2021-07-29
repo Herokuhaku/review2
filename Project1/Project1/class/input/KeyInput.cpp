@@ -6,8 +6,6 @@
 #include <vector>
 #include "../input/KeyInput.h"
 
-#define HEX_CH   6  //16i•¶š—ñ‚Ì—v‘f”
-
 KeyInput::KeyInput()
 {
 	Init();

@@ -30,6 +30,10 @@ void Object::Draw(void)
 	//(pos_.x, pos_.y,lpImageMng.GetAnimID(state_,animframe_), true);
 }
 
+void Object::Draw(float mag)
+{
+}
+
 void Object::GravityUpdate(double delta)
 {
 
@@ -207,4 +211,9 @@ void Object::SetCatch(int num)
 int Object::GetCatch(void)
 {
 	return catchflag_;
+}
+
+void Object::ClearCommandHistory(void)
+{
+	commandhis_->ClearRing();
 }

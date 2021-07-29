@@ -62,7 +62,12 @@ struct Command {
 			}
 			else if (name == "check") {
 				if (val == "clear") {
-					(*obj).anim_->state(command_);
+					if (command_ == "beam") {
+						(*obj).anim_->state(command_);
+					}
+					else if (command_ == "bullet") {
+
+					}
 					(*obj).controller_->ResetHistroy();
 					//(*obj).playcommand_ = true;
 					return true;

@@ -179,3 +179,9 @@ void Player::Draw(void)
 	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);
 	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[(*itr_).first], true);
 }
+
+void Player::Draw(float mag)
+{
+	Float2 check(pos_.x - (size_.x * mag) / 2, pos_.y);
+	anim_->Draw(check, size_, mag);
+}

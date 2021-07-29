@@ -44,6 +44,7 @@ public:
 	virtual void Update(double delta) = 0;
 	// 描画
 	virtual void Draw(void);
+	virtual void Draw(float mag);
 	// 重力の処理(gravitybool_ が falseだと処理をしない)
 	virtual void GravityUpdate(double delta);
 	// プレイヤーの種類を返す
@@ -64,6 +65,7 @@ public:
 	void SetCatch(int num);
 	// 現在の捕獲状況を返す
 	int GetCatch(void);
+	void ClearCommandHistory(void);
 
 protected:
 	// 生成番号(0から)

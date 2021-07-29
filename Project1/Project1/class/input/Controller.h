@@ -18,14 +18,14 @@ enum class CntType {
 	Max
 };
 
-struct RingBufeer {
-	RingBufeer Create(int no);
-	void Destroy(RingBufeer* buf);
-
-	int id;
-	RingBufeer* before = nullptr;
-	RingBufeer* after = nullptr;
-};
+//struct RingBufeer {
+//	RingBufeer Create(int no);
+//	void Destroy(RingBufeer* buf);
+//
+//	int id;
+//	RingBufeer* before = nullptr;
+//	RingBufeer* after = nullptr;
+//};
 
 using TrgBool = std::array<bool, static_cast<size_t>(Trg::Max)>;
 using CntData = std::map<InputID,TrgBool>;
@@ -61,6 +61,9 @@ public:
 	bool Pressed(InputID id);
 	// 離した瞬間
 	bool Released(InputID id);
+	// 特定のボタンだけを押しているかどうか
+	bool SpecificPress(InputID id);
+
 	// 入力履歴と最新の位置を返す
 	std::pair<RingInputID*,int> GetHistroy_(void);
 	// histroyの中身を初期化する
@@ -68,14 +71,14 @@ public:
 		histroy_->ClearRing();
 	};
 	
-	struct RingBuf {
-		RingBuf Create(int no);
-		void Destroy(RingBuf* buf);
+	//struct RingBuf {
+	//	RingBuf Create(int no);
+	//	void Destroy(RingBuf* buf);
 
-		int id;
-		RingBuf* before = nullptr;
-		RingBuf* after = nullptr;
-	};
+	//	int id;
+	//	RingBuf* before = nullptr;
+	//	RingBuf* after = nullptr;
+	//};
 
 private:
 protected:

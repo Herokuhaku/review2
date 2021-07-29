@@ -20,7 +20,8 @@ struct CheckCommand {
 			}
 			else if (name == "key") {
 				auto his = obj->controller_->GetHistroy_();
-				if ((*his.first)[his.second].first == Converter(val)) {
+				auto key = Converter(val);
+				if (obj->controller_->SpecificPress(key) && (*his.first)[his.second].first == key) {
 					obj->commandcount_ = obj->grace_;
 					rtnflag = true;
 				}
