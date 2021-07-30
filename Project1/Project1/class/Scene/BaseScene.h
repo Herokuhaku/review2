@@ -10,6 +10,7 @@ enum class Scene {
 	Title,
 	Game,
 	Menu,
+	GameSet,
 	Max
 };
 

@@ -17,4 +17,5 @@ int main() {
 	std::cout << *itr << std::endl;
 	num.insert(++num.begin(), 4);
 	std::cout << *itr << std::endl;
+
 }

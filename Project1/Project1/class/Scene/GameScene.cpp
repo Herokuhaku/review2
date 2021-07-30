@@ -1,7 +1,9 @@
 #include "GameScene.h"
+
 #include <DxLib.h>
 #include "TitleScene.h"
 #include "MenuScene.h"
+#include "GameSetScene.h"
 #include "SceneMng.h"
 #include "Transition/CrossOverScene.h"
 #include "../common/ImageMng.h"
@@ -41,20 +43,34 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 	for (auto& obj : objlist_) {
 		if (obj->GetPlayerType() == PlayerType::Ogre && (obj->GetNowAnimationName() == "beam")) {
 			for (auto& checkobj : objlist_) {
-				Float2 opos = obj->GetPos();
-				Float2 cpos = checkobj->GetPos();
-				float a = (opos.x - cpos.x);
-				float b = (opos.y - cpos.y);
-				float c = hypot(pow(a,2),pow(b,2));
+				Float2 circle = obj->GetPos() - checkobj->GetPos();
+				auto val = sqrt((circle.x * circle.x) + (circle.y * circle.y));
+
 				// Ž©•ª‚¶‚á‚È‚¢ê‡ && “–‚½‚è”»’è‚ðŽæ‚Á‚Ä“–‚½‚Á‚Ä‚¢‚é‚©
 				if (obj->GetObjectNum() != checkobj->GetObjectNum() &&
-					c <= obj->GetSize().x + checkobj->GetSize().x) {
+					val <= obj->GetSize().x + checkobj->GetSize().x) {
 					checkobj->SetCatch(2);
 				}
 			}
 		}
 	}
+	// ‘Sˆõ‚Â‚©‚Ü‚Á‚Ä‚¢‚é‚©”»’è true ‘Sˆõ•ß‚Ü‚Á‚Ä‚¢‚é false ˆêlˆÈã•ß‚Ü‚Á‚Ä‚¢‚È‚¢
+	bool flag = false;
+	int cat = 0;
+	for (auto& obj : objlist_) {
+		cat = obj->GetCatch();
 
+		if (cat == 1) {
+			flag = false;
+			break;
+		}
+		else if(cat == 2){
+			flag = true;
+		}
+	}
+	if (flag) {
+		return std::make_unique<GameSetScene>(std::move(objlist_),0);
+	}
 	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {
 		return std::make_unique<MenuScene>(std::move(own));
 	}

@@ -27,6 +27,16 @@ Player::~Player()
 
 bool Player::Init(CntType cntType)
 {
+	if (objectnumber_ == 0) {
+		pltype_ = PlayerType::Ogre;
+		catchflag_ = 0;
+	}
+	else {
+		pltype_ = PlayerType::RunAway;
+
+		catchflag_ = 1;
+	}
+
 	if (!LoadAnimation()) {
 		return false;
 	}
@@ -37,14 +47,7 @@ bool Player::Init(CntType cntType)
 		controller_ = std::make_unique<PadInput>();
 	}
 
-	if (objectnumber_ == 0) {
-		pltype_ = PlayerType::Ogre;
-		catchflag_ = 0;
-	}
-	else {
-		pltype_ = PlayerType::RunAway;
-		catchflag_ = 1;
-	}
+
 
 	// キャラ動作読み込み
 	rapidxml::file<> attach = "Tiled/PlayAction.tsx";
@@ -82,7 +85,7 @@ bool Player::Init(CntType cntType)
 	flist.clear();
 
 
-	lpImageMng.GetID("image/batu.png","failed");
+	//lpImageMng.GetID("image/batu.png","failed");
 	return true;
 }
 
@@ -96,8 +99,16 @@ bool Player::LoadAnimation(void)
 	std::array<std::string,5> list = { "down" ,"left","up","right","beam"};
 
 	// アニメーションクラスを作成(引数はアニメーションのキーになる)
-	anim_= std::make_unique<Animation>("GreenMove");
-	check(lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx"));
+
+	//check(lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx"));
+	if (pltype_ == PlayerType::Ogre) {
+		anim_ = std::make_unique<Animation>("GreenMove_demon");
+		check(lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage_demon.tsx"));
+	}
+	else {
+		anim_ = std::make_unique<Animation>("GreenMove");
+		check(lpAnimationMng.SetXml(anim_->GetKey(), "Tiled/AnimImage.tsx"));
+	}
 	for (auto& data : list) {
 		check(lpAnimationMng.SetItem(anim_->GetKey(), data));
 	}
@@ -167,4 +178,10 @@ void Player::Draw(void)
 	//Object::Draw();
 	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);
 	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[(*itr_).first], true);
+}
+
+void Player::Draw(float mag)
+{
+	Float2 check(pos_.x - (size_.x * mag) / 2, pos_.y);
+	anim_->Draw(check, size_, mag);
 }

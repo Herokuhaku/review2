@@ -15,6 +15,21 @@ bool Controller::Released(InputID id)
 	return !cntData_[id][static_cast<int>(Trg::Now)] && cntData_[id][static_cast<int>(Trg::Old)];
 }
 
+bool Controller::SpecificPress(InputID id)
+{
+	if (!cntData_[id][static_cast<int>(Trg::Now)]) {
+		return false;
+	}
+	for (auto cntid : cntData_) {
+		if (id != cntid.first) {
+			if (cntData_[cntid.first][static_cast<int>(Trg::Now)]) {
+				return false;
+			};
+		}
+	}
+	return true;
+}
+
 std::pair<RingInputID*, int> Controller::GetHistroy_(void)
 {
 	return std::pair<RingInputID*,int>(histroy_,histroycount_-1);

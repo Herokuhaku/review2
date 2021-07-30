@@ -30,6 +30,10 @@ void Object::Draw(void)
 	//(pos_.x, pos_.y,lpImageMng.GetAnimID(state_,animframe_), true);
 }
 
+void Object::Draw(float mag)
+{
+}
+
 void Object::GravityUpdate(double delta)
 {
 
@@ -169,6 +173,11 @@ PlayerType Object::GetPlayerType(void)
 	return pltype_;
 }
 
+void Object::SetAnimationState(std::string str)
+{
+	anim_->state(str);
+}
+
 std::string Object::GetNowAnimationName(void)
 {
 	return anim_->GetState();
@@ -184,6 +193,11 @@ Float2 Object::GetPos(void)
 	return pos_;
 }
 
+void Object::SetPos(Float2 pos)
+{
+	pos_ = pos;
+}
+
 Float2 Object::GetSize(void)
 {
 	return size_;
@@ -197,4 +211,9 @@ void Object::SetCatch(int num)
 int Object::GetCatch(void)
 {
 	return catchflag_;
+}
+
+void Object::ClearCommandHistory(void)
+{
+	commandhis_->ClearRing();
 }
