@@ -19,7 +19,7 @@ TitleScene::~TitleScene()
 
 bool TitleScene::Init(void)
 {
-	lpImageMng.GetID("image/no_001.png","Title");
+	lpImageMng.GetID("image/title.png","Title");
 	//image_ = LoadGraph("image/no_001.png");
 	return true;
 }

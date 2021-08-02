@@ -22,5 +22,7 @@ private:
 
 	std::shared_ptr<TmxObj> tmxobj_;
 	std::list<std::unique_ptr<Object>> objlist_;
+
+	float finishtime_;
 };
 

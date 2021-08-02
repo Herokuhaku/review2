@@ -42,6 +42,7 @@ private:
 	const Int2 screenSize_;
 	// ゲーム終了
 	bool finish_;
+	int frame_;
 	// システムで管理しているコントローラー
 	std::shared_ptr<Controller> controller_;
 };

@@ -174,10 +174,6 @@ void Player::Draw(void)
 	//		DrawCircle(check.x,check.y,2,0xffffff,true);
 	//	}
 	//}
-	//DrawCircle(colpos_.x,colpos_.y,2,0xffffff,true);
-	//Object::Draw();
-	//DrawGraph(pos_.x, pos_.y,animMap_[state_][animframe_].first, true);
-	//DrawGraph(pos_.x,pos_.y, lpImageMng.GetID("GreenPlayer")[(*itr_).first], true);
 }
 
 void Player::Draw(float mag)

@@ -26,6 +26,7 @@ bool GameScene::Init(void)
 	objlist_.emplace_back(std::make_unique<Player>(CntType::Key, tmxobj_, objlist_.size(),Float2(1,1)));
 	objlist_.emplace_back(std::make_unique<Player>(CntType::Pad,tmxobj_, objlist_.size(), Float2(lpSceneMng.GetScreenSize().x-65, 1)));
 	lpImageMng.GetID("image/no_002.png", "Game");
+	finishtime_ = 10; // 300ïbÇ≈ÉQÅ[ÉÄèIóπ
 	return true;
 }
 
@@ -74,6 +75,10 @@ UniqueScene GameScene::Update(double delta, UniqueScene own)
 	if (lpSceneMng.GetController()->Pressed(InputID::Escape)) {
 		return std::make_unique<MenuScene>(std::move(own));
 	}
+	finishtime_ -= delta;
+	if (finishtime_ <= 0) {
+		return std::make_unique<GameSetScene>(std::move(objlist_), 1);
+	}
 	return std::move(own);
 }
 
@@ -111,4 +116,5 @@ void GameScene::DrawOwnScreen(double delta)
 	if(flag_){
 		DrawString(400, 400, "ãSÇÃèüÇøÅIÅIÅI", 0xffffff);
 	}
+	DrawFormatString(0,0,0xffffff,"écÇË %d ïb",static_cast<int>(finishtime_));
 }

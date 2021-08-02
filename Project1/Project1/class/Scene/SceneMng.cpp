@@ -13,8 +13,9 @@ void SceneMng::Run(void)
 	// Sceneのインスタンス
 	scene_ = std::make_unique<TitleScene>();
 	now_ = std::chrono::system_clock::now();
-
+	frame_ = 0;
 	double nextdeltatime = GetNowCount();
+	Int2 strsize_ = Int2(screenSize_.x / 3 + 30, screenSize_.y / 3 * 2);
 	while (!ProcessMessage() && !finish_) {
 		_dbgAddDraw();
 		// deltatimeの設定
@@ -28,8 +29,7 @@ void SceneMng::Run(void)
 		SetDrawScreen(DX_SCREEN_BACK);
 		ClsDrawScreen();
 		scene_->Draw(delta);
-		DrawFormatString(0, 0, 0xffff00,"%f",GetFPS());
-		ScreenFlip();
+		//DrawFormatString(0, 0, 0xffff00,"%f",GetFPS());
 
 		// 1フレーム16.66ms足す
 		nextdeltatime += 16.66;
@@ -37,7 +37,12 @@ void SceneMng::Run(void)
 		if (nextdeltatime > GetNowCount()) {
 			WaitTimer(static_cast<int>(nextdeltatime) - GetNowCount());
 		}
+		if (scene_->GetSceneID() != Scene::Game && frame_++/30 % 2 == 0)
+		{
+			DrawString(strsize_.x,strsize_.y,"左クリックで次のシーンへ進む",0xffffff);
+		}
 
+		ScreenFlip();
 	}
 }
 
